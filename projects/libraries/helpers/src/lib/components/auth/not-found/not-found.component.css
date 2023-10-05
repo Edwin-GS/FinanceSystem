@@ -1,0 +1,33 @@
+/* not-found.component.css */
+
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+h1 {
+  font-size: 4rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+p {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+a:hover {
+  text-decoration: underline;
+}

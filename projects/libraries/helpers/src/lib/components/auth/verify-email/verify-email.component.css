@@ -1,0 +1,23 @@
+html, body {
+  margin: 0;
+}
+
+.div_paren {
+  background: rgb(245, 247, 250);
+  height: 100vh;
+}
+
+.div_child {
+  width: 600px;
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -250px;
+}
+
+.letter-type {
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-size: 40px;
+}
