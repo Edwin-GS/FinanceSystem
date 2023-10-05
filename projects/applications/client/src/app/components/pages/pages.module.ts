@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import { UserComponent } from './users/user.component';
-import {USER_ROUTES} from "./users-ms.routes";
+import {USER_ROUTES} from "./pages.routes";
 
 
 
@@ -14,5 +14,5 @@ import {USER_ROUTES} from "./users-ms.routes";
     USER_ROUTES
   ]
 })
-export class UserMsModule {
+export class PagesModule {
 }

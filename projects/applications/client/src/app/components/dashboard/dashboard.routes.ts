@@ -18,7 +18,7 @@ const DashboardRoutes: Routes = [
   {
     path: 'users/:user/:user_id',
     loadChildren: () =>
-      import('../user-ms/user-ms.module').then(m => m.UserMsModule)
+      import('../pages/pages.module').then(m => m.PagesModule)
   }
 ];
 
