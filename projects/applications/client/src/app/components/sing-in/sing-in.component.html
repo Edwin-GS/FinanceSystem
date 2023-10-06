@@ -7,7 +7,7 @@
         </div>
         <!--Agregado-->
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-          <h3 class="mb-4">Inicio de Sesión</h3>
+          <h2 class="mb-4">Inicio de Sesión</h2>
           <div class="w-100">
               <div class="social-media d-flex justify-content-end">
                   <a href="#" class="social-icon d-flex align-items-center justify-content-center">
@@ -18,25 +18,38 @@
                   </a>
               </div>
           </div>
-          <form (ngSubmit)="onSubmit(singIn)" #singIn="ngForm">
+          <form (ngSubmit)="onSubmit()" [formGroup] = "singIn">
             <!-- Email input -->
             <div class="form-outline mb-4">
               <label class="form-label" for="email">Correo electronico</label>
-              <input type="email" id="email" class="form-control form-control-lg" required />
-            </div>
+              <input type="email" id="email" class="form-control form-control-lg" required  formControlName="email"/>
+
+              <!--Validamos que el campo sea requerido y tambien que tenga un minimo de caracteres -->
+              <div *ngIf="singIn.get('email')?.touched  && singIn.get('email')?.errors?.['required']"
+                class="alert alert-danger">Este campo es obligatorio</div>
+              <div *ngIf="singIn.get('email')?.touched  && singIn.get('email')?.errors?.['minlength']"
+                class="alert alert-danger">Su correo debe tener más de {{singIn.get('email')?.errors?.['minlength'].requiredLength}} caracteres.</div>
+                <div *ngIf="singIn.get('email')?.touched  && singIn.get('email')?.errors?.['pattern']"
+                class="alert alert-danger">El formato del correo electrónico no es válido.</div>
   
             <!-- Password input -->
             <div class="form-outline mb-4">
-              <label class="form-label" for="Password">Contraseña</label>
-              <input type="password" id="password" class="form-control form-control-lg" required />
-            
+              <label class="form-label" for="password">Contraseña</label>
+              <input type="password" id="password" class="form-control form-control-lg" required formControlName="password" />
+              <div *ngIf="singIn.get('password')?.touched  && singIn.get('password')?.errors?.['required']"
+              class="alert alert-danger">Este campo es obligatorio</div>
+              <div *ngIf="singIn.get('password')?.touched  && singIn.get('password')?.errors?.['minlength']"
+                class="alert alert-danger">La contraseña debe tener al menos {{singIn.get('password')?.errors?.['minlength'].requiredLength}} caracteres.</div>
+                <div *ngIf="singIn.get('password')?.touched  && singIn.get('password')?.errors?.['missinguppercase']"
+                class="alert alert-danger">La contraseña debe incluir al menos una letra mayúscula, una letra minúscula y un número.</div>
+            </div>
             </div>
   
             <div class="d-flex justify-content-around align-items-center mb-4">
               <!-- Checkbox -->
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                <label class="form-check-label" for="form1Example3"> Recordar usuario </label>
+                <input class="form-check-input" type="checkbox" value="false"  id="rememberMe" checked />
+                <label class="form-check-label" for="rememberMe"> Recordar usuario </label>
               </div>
               <a href="#!">Olvidaste tu contraseña?</a>
             </div>
@@ -44,14 +57,17 @@
             <!-- Submit button -
             <button type="submit" class="btn btn-primary btn-lg btn-block">Ingresar</button> -->
             
-              <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
-              
+              <button type="submit" class="form-control btn btn-primary rounded submit px-3">Iniciar sesión</button>
+              <div class="alert alert-danger" *ngIf="showAlert">
+                Acceso inválido. Por favor, inténtelo otra vez.
+              </div>
   
-            <div class="divider d-flex align-items-center my-4">
-              <p class="text-center fw-bold mx-3 mb-0 text-muted">¿No esta registrado? Click en Registrarse</p>
-            </div>
-            <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!"
-              role="button">Registrarse</a>
+              <div class="divider d-flex align-items-center my-4">
+                <p class="text-center fw-bold mx-3 mb-0 text-muted">¿No esta registrado? Click en Registrarse</p>
+             </div>
+              <a class="form-control btn btn-primary rounded  px-3 " style="background-color: #198a3b" href="#!"
+                role="button">Registrarse
+              </a>
           </form>
         </div>
       </div>
