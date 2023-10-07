@@ -13,25 +13,23 @@
             <!-- Email input -->
             <div class="form-outline mb-4">
               <label class="form-label" for="email">Correo electronico</label>
-              <input type="email" id="email" class="form-control form-control-lg" required  formControlName="email"/>
+              <input type="email" id="email" class="form-control form-control-lg" name="email" required formControlName="email"/>
 
               <!--Validamos que el campo sea requerido y tambien que tenga un minimo de caracteres -->
               <div *ngIf="loginForm.get('email')?.touched  && loginForm.get('email')?.errors?.['required']"
                 class="alert alert-danger">Este campo es obligatorio</div>
-              <div *ngIf="loginForm.get('email')?.touched  && loginForm.get('email')?.errors?.['minlength']"
-                class="alert alert-danger">Su correo debe tener más de {{loginForm.get('email')?.errors?.['minlength'].requiredLength}} caracteres.</div>
                 <div *ngIf="loginForm.get('email')?.touched  && loginForm.get('email')?.errors?.['pattern']"
                 class="alert alert-danger">El formato del correo electrónico no es válido.</div>
   
             <!-- Password input -->
             <div class="form-outline mb-4">
               <label class="form-label" for="password">Contraseña</label>
-              <input type="password" id="password" class="form-control form-control-lg" required formControlName="password" />
+              <input type="password" id="password" class="form-control form-control-lg" name="password" required formControlName="password" />
               <div *ngIf="loginForm.get('password')?.touched  && loginForm.get('password')?.errors?.['required']"
               class="alert alert-danger">Este campo es obligatorio</div>
               <div *ngIf="loginForm.get('password')?.touched  && loginForm.get('password')?.errors?.['minlength']"
                 class="alert alert-danger">La contraseña debe tener al menos {{loginForm.get('password')?.errors?.['minlength'].requiredLength}} caracteres.</div>
-                <div *ngIf="loginForm.get('password')?.touched  && loginForm.get('password')?.errors?.['missinguppercase']"
+                <div *ngIf="loginForm.get('password')?.touched  && loginForm.get('password')?.errors?.['pattern']"
                 class="alert alert-danger">La contraseña debe incluir al menos una letra mayúscula, una letra minúscula y un número.</div>
             </div>
             </div>
