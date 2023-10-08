@@ -10,26 +10,35 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  showAlert!: boolean;
+  showAlert: boolean = false;
+
+  initForm():FormGroup {
+    return this.fb.group({
+       email: ['', [Validators.required, Validators.pattern((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) )]],
+       password: ['', [Validators.required, Validators.minLength(8)]],
+     });
+ 
+   }
 
   constructor (private readonly fb:FormBuilder) {}
   ngOnInit():void {
     this.loginForm = this.initForm();
   }
 
-  onSubmit():void{
-    console.log('form ->');
+  onSubmit(values: any):void{
+    if(this.loginForm.valid){      //si el formulario es valido envia los datos
+      console.log('form ->', values);
+  
+      }else {
+        this.loginForm.markAllAsTouched();
+        this.showAlert = true;     //si no es valido manda este error y activa los campos requeridos
+      }
   }
 
-  initForm():FormGroup {
-   return this.fb.group({
-      email: ['', [Validators.required, Validators.pattern((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) )]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-    });
-
-  }
+ 
 
 }
+
 
 //ESTE CODGIO ES EL QUE ESTARA EN INTERACCION CON LA BASE DE DATOS, AUN NO TENGO MUCHO CONOCIMIENTO:
 
@@ -75,7 +84,7 @@ export class LoginComponent implements OnInit {
 //       localStorage.setItem('LEGOFT_SID_SITE', '');
 //       const user = this.loginForm.value.user;
 //       const userId = this.loginForm.value.userId;
-//       this.showAlert = false;
+//       
   
 //       // Realizamos una solicitud POST para iniciar sesión
 //       this.hs.post(user, 'users/login')

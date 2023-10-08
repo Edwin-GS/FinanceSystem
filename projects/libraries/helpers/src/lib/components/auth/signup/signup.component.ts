@@ -10,24 +10,33 @@ import { HandlerService } from '../../../services/handler.service';
 })
 export class SignupComponent {
   signupForm!: FormGroup;
+  showAlert: boolean = false;
+
+  initForm():FormGroup {
+    return this.fb.group({
+       name: ['', [Validators.required, Validators.minLength(5)]],
+       email: ['', [Validators.required, Validators.pattern((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) )]],
+       password: ['', [Validators.required, Validators.minLength(8), Validators.pattern((/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/))]],
+     });
+ 
+   }
 
   constructor (private readonly fb:FormBuilder) {}
   ngOnInit():void {
     this.signupForm = this.initForm();
   }
 
-  onSubmit():void{
-    console.log('form ->');
+  onSubmit(values: any):void{
+    if(this.signupForm.valid){      //si el formulario es valido envia los datos
+      console.log('form ->', values);
+  
+      }else {
+        this.signupForm.markAllAsTouched();
+        this.showAlert = true;     //si no es valido manda este error y activa los campos requeridos
+      }
   }
 
-  initForm():FormGroup {
-   return this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(5)]],
-      email: ['', [Validators.required, Validators.pattern((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) )]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern((/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/))]],
-    });
-
-  }
+  
 
 }
 

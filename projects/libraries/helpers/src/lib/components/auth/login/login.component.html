@@ -1,64 +1,99 @@
+<!------------------------CONTENEDOR PRINCIPAL--------------------------------->
 
-<section class="vh-100">
-    <div class="container py-5 h-100">
-      <div class="row d-flex align-items-center justify-content-center h-100">
-        <div class="col-md-8 col-lg-7 col-xl-6">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-            class="img-fluid" alt="Phone image">
-        </div>
-        <!--Agregado-->
-        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-          <h2 class="mb-4">Inicio de Sesión</h2>
-          <form (ngSubmit)="onSubmit()" [formGroup] = "loginForm">
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <label class="form-label" for="email">Correo electronico</label>
-              <input type="email" id="email" class="form-control form-control-lg" name="email" required formControlName="email"/>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
 
-              <!--Validamos que el campo sea requerido y tambien que tenga un minimo de caracteres -->
-              <div *ngIf="loginForm.get('email')?.touched  && loginForm.get('email')?.errors?.['required']"
-                class="alert alert-danger">Este campo es obligatorio</div>
-                <div *ngIf="loginForm.get('email')?.touched  && loginForm.get('email')?.errors?.['pattern']"
-                class="alert alert-danger">El formato del correo electrónico no es válido.</div>
-  
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-              <label class="form-label" for="password">Contraseña</label>
-              <input type="password" id="password" class="form-control form-control-lg" name="password" required formControlName="password" />
-              <div *ngIf="loginForm.get('password')?.touched  && loginForm.get('password')?.errors?.['required']"
-              class="alert alert-danger">Este campo es obligatorio</div>
-              <div *ngIf="loginForm.get('password')?.touched  && loginForm.get('password')?.errors?.['minlength']"
-                class="alert alert-danger">La contraseña debe tener al menos {{loginForm.get('password')?.errors?.['minlength'].requiredLength}} caracteres.</div>
-                <div *ngIf="loginForm.get('password')?.touched  && loginForm.get('password')?.errors?.['pattern']"
-                class="alert alert-danger">La contraseña debe incluir al menos una letra mayúscula, una letra minúscula y un número.</div>
-            </div>
-            </div>
-  
-            <div class="d-flex justify-content-around align-items-center mb-4">
-              <!-- Checkbox -->
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="false"  id="rememberMe" checked />
-                <label class="form-check-label" for="rememberMe"> Recordar usuario </label>
-              </div>
-              <a href="#!">Olvidaste tu contraseña?</a>
-            </div>
-  
-            <!-- Submit button -
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Ingresar</button> -->
-            
-              <button type="submit" class="form-control btn btn-primary rounded submit px-3">Iniciar sesión</button>
-              <div class="alert alert-danger" *ngIf="showAlert">
-                Acceso inválido. Por favor, inténtelo otra vez.
-              </div>
-  
-              <div class="divider d-flex align-items-center my-4">
-                <p class="text-center fw-bold mx-3 mb-0 text-muted">¿No esta registrado? Click en Registrarse</p>
-             </div>
-              <a class="form-control btn btn-primary rounded  px-3 " style="background-color: #198a3b" href="signup"
-                role="button">Registrarse
-              </a>
-          </form>
+  <!-------------------------CONTENEDOR DEL LOGIN------------------------------>
+
+  <div class="row border rounded-5 p-3 bg-white shadow box-area">
+    <!--------------------------Lef Box IZQUIERDA------------------------------>
+
+    <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
+      style="background: #314685;">
+      <div class="feature-image mb-3">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid"
+          style="width: 250px; ">
+      </div>
+      <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Verificar
+      </p>
+      <small class="text-white text-wrap text-center"
+        style="width: 17rem; font-family: 'Courier New', Courier, monospace;">Introduzca sus datos
+        correctamente.</small>
+    </div>
+
+    <!-------------------------Right BoX DERECHA---------------------------->
+
+    <div class="col-md-6 right-box">
+      <div class="row align-items-center">
+        <div class="header-text mb-4">
+          <h1>Inicio de sesión</h1>
         </div>
+        <form [formGroup]="loginForm">
+          <div class="input-group mb-3">
+            <input type="email" class="form-control form-control-lg bg-light fs-6" placeholder="Correo electronico"
+              name="email" formControlName="email" requierd />
+          </div>
+          <!--Emial validators-->
+          <div class="error-mensaje">
+            <div *ngIf="loginForm.get('email')?.touched  && loginForm.get('email')?.errors?.['required']"
+              class="text-danger">Correo obligatorio.
+            </div>
+            <div *ngIf="loginForm.get('email')?.touched  && loginForm.get('email')?.errors?.['pattern']"
+                class="text-danger">El formato del correo electrónico no es válido.</div>
+
+          </div>
+
+
+          <div class="input-group mb-1">
+            <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Contraseña"
+              name="password" formControlName="password" required />
+            <!-- <span class="eyeicon" (click)="viewpass()"><i [ngClass]="visible?'fa fa-eye':'fa fa-eye-slash'"></i>
+          </span> -->
+          </div>
+          <!--password validators-->
+          <div class="error-mensaje">
+            <div *ngIf="loginForm.get('password')?.touched  &&loginForm.get('password')?.errors?.['required']"
+              class="text-danger">Contraseña obligatoria.
+            </div>
+            <div *ngIf="loginForm.get('password')?.touched  && loginForm.get('password')?.errors?.['minlength']"
+              class="text-danger">La contraseña debe tener al menos
+              {{loginForm.get('password')?.errors?.['minlength'].requiredLength}} caracteres.
+            </div>
+          </div>
+
+
+          <div class="input-group mb-4 d-flex justify-content-between ">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="formCheck">
+              <label for="formCheck" class="form-check-label text-secondary"><small>Recordar usuario</small></label>
+            </div>
+
+            <div class="forgot">
+              <small><a href="#">¿Olvidaste la contraseña?</a></small>
+            </div>
+
+            <div class="input-group mb-3">
+              <button type="submit" (click)="onSubmit(loginForm.value)"
+                class="btn btn-lg btn-primary w-100 fs-6 mi-boton">Ingresar</button>
+            </div>
+
+            <div class="error-mensaje">
+            <div *ngIf="showAlert" class="alert alert-danger">
+              Por favor, complete todos los campos requeridos.
+            </div>
+            </div>
+
+            <!-- <div class="input-group mb-3">
+              <button class="btn btn-lg btn-light w-100 fs-6"><img src="assets/google.png" style="width:20px"
+                  class="me-2"><small>Ingresar con google</small></button>
+            </div> -->
+
+            <div class="row">
+              <small>¿No tienes cuenta? <a href="signup">Registrarse</a></small>
+            </div>
+
+          </div>
+        </form>
+        <!-- <pre>{{loginForm.value | json}}</pre> -->
       </div>
     </div>
-  </section>
+  </div>
