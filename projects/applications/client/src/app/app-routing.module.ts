@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+
 const ROUTES: Routes = [
   {
     path: '',
@@ -9,6 +10,7 @@ const ROUTES: Routes = [
         '../../../../libraries/helpers/src/lib/components/auth/auth.module'
       ).then((m) => m.AuthModule),
   },
+  
 ];
 
 // imports: [RouterModule.forRoot(ROUTES, {useHash: true})],

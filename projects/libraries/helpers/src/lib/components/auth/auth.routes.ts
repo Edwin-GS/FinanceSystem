@@ -7,7 +7,7 @@ import {VerifyEmailComponent} from "./verify-email/verify-email.component";
 const AuthRoutes: Routes = [
 
   {
-    path: '',
+    path: 'login',
     title: 'Finance System',
     component: LoginComponent
   },
