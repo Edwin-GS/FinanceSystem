@@ -2,15 +2,21 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import { UserComponent } from './users/user.component';
 import {USER_ROUTES} from "./pages.routes";
+import { ProfessionComponent } from './profession/profession.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CreateProfessionComponent } from '../pages/profession/create/create-profession/create-profession.component';
 
 
 
 @NgModule({
   declarations: [
-    UserComponent
+    UserComponent,
+    ProfessionComponent,
+    CreateProfessionComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     USER_ROUTES
   ]
 })

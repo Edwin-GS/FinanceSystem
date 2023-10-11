@@ -1,0 +1,15 @@
+<div class="container">
+    <div>
+        <h2>Lista de profesiones</h2>
+        <div *ngFor="let profesion of professions" class="card w-25">
+            <div class="card-body">
+                <h5 class="card-title">{{profesion.nombre}}</h5>
+                <div class="d-flex ">
+                  <a routerLink="#" class="btn btn-primary m-2">Editar</a>
+                    <button class="btn btn-primary m-2">Button</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

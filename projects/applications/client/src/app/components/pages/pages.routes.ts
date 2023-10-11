@@ -1,5 +1,7 @@
 import {RouterModule, Routes} from '@angular/router';
 import {UserComponent} from "./users/user.component";
+import { ProfessionComponent } from './profession/profession.component';
+import { CreateProfessionComponent } from './profession/create/create-profession/create-profession.component';
 
 
 /**
@@ -14,6 +16,16 @@ const UserRoutes: Routes = [
     path: '',
     component: UserComponent,
     title: 'Users'
+  },
+  {
+    path: 'profession',
+    component: ProfessionComponent,
+    title: 'Profession'
+  },
+  {
+    path: 'profession/create',
+    component: CreateProfessionComponent,
+    title: 'Crear Profesion'
   }
 ];
 
