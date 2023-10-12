@@ -1,0 +1,39 @@
+.fixed-bottom {
+    bottom: 0;
+    z-index: 1000;
+  }
+  
+  .end-0 {
+    left: 3rem;
+  }
+  
+  .alert {
+    width: 250px;
+  }
+
+  .w-10{
+    width: 10%
+}
+  .h-10{
+    height: 10%
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+	animation-duration: 4s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	45% {
+		opacity: 1;
+	}
+    100%{
+        opacity: 0;
+    }
+}

@@ -30,22 +30,14 @@
                 <svg class="bi flex-shrink-0 me w-75" fill="darkgreen" role="img" aria-label="Success:">
                     <use xlink:href="#check-circle-fill" />
                 </svg>
-                <!-- <div class="d-flex justify-content-center">
-                    <p class="text-center">
-                        ¡{{formName}} creado exitosamente!
-                    </p> 
-                </div> -->
             </div>
         </div>
         <div class=" row justify-content-center ">         
             <div *ngIf="error" class="alert alert-danger fade-in align-items-center row justify-content-center col-7 p-0"  role="alert">
-            <svg class="w-75" fill="darkred" role="img" aria-label="Danger:">
-                <use xlink:href="#exclamation-triangle-fill"/>
-            </svg>
-            <!-- <div class="d-grid justify-content-center">
-                <p class="p-0">Hubo un error </p>
-            </div> -->
-         </div> 
+                <svg class="w-75" fill="darkred" role="img" aria-label="Danger:">
+                    <use xlink:href="#exclamation-triangle-fill"/>
+                </svg>
+            </div> 
         </div>
     </form>
 </div>

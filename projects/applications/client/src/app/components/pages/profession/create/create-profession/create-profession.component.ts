@@ -23,17 +23,13 @@ export class CreateProfessionComponent {
   appID: string = '651d860e8cd11dcf78df2c7e'
   createUrl = `entities/create/${this.user}/profesiones/${this.appID}`
   backUrl = `/finance-system/users/${this.user}/${this.userID}/profession`
-  success: boolean = true
-  error: boolean = true
+  success: boolean = false
+  error: boolean = false
   
   ngOnInit(): void {
     this.contactForm = this.initForm()
   }
   onSubmit(): void{
-    const data = {
-      nombre: this.contactForm.value.nombre,
-    }
-    console.log('here', JSON.stringify(data));
     this.hs.post(this.contactForm.value, this.createUrl)
       .subscribe((resp) => {
         if ( resp['success'] == false ) {

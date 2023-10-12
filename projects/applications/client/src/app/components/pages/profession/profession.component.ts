@@ -18,42 +18,51 @@ export class ProfessionComponent {
   contactForm!: FormGroup
   formName: string = 'Profesion'
   name!: string
-  sid: string = '$2a$10$w2pNyaEEV3Dta4w5qyDJ8O6PupPXlbZdxEvsB9WaD4x1EAVB63.Mm'
+
   user: string = 'pedroacevedo' 
+  userID: number = 1
   appID: string = '651d860e8cd11dcf78df2c7e'
-  createUrl = `entities/create/${this.user}/profesiones/${this.appID}`
+  professionID!: string 
+  deleteUrl = `entities/delete/${this.user}/profesiones/${this.appID}`
   getUrl = `entities/${this.user}/profesiones/${this.appID}`
   success: boolean = false
-  error: boolean = true
+  error: boolean = false
   professions: any = []
+  showModal: string  = 'none'
 
   ngOnInit(): void {
-    this.contactForm = this.initForm()
-    localStorage.setItem('LEGOFT_SID_SITE', this.sid);
-    this.hs.get( this.getUrl )
-      .subscribe((res) => {
-        this.professions = res.data
-        console.log(this.professions);
-    })
+    this.getProfessions()
     // this.router.queryParams.subscribe((params: Params) => {
     //   this.name = params['name']
     // })
-    // this.onSetValue()
   }
-  onSubmit(): void{
-    const data = {
-      nombre: this.contactForm.value.nombre,
-    }
-    console.log('here', JSON.stringify(data));
-    this.hs.post(this.contactForm.value, this.createUrl)
+
+  getProfessions(): void{
+    this.hs.get( this.getUrl )
+    .subscribe((res) => {
+      if(!res.data) console.log('Hubo un error o no se encontraron datos');
+      else{
+        this.professions = res.data
+        console.log(this.professions);
+      }
+   })
+  }
+
+  deleteProfession(id: string): void{
+    this.professionID = id
+    console.log(this.professionID);
+    this.hs.delete(this.deleteUrl, this.professionID)
       .subscribe((resp) => {
-        if ( resp['success'] == false ) {
+        console.log(resp);
+        if(resp["success"] == false ){
           this.showErrorMessage()
-        } else {
+        } else{
           this.showSucessMessage()
+          this.getProfessions()
         }
       })
   }
+
 
   showSucessMessage(): void{
     this.success = true
