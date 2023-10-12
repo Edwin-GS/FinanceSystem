@@ -1,50 +1,70 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { HandlerService } from 'projects/libraries/helpers/src/lib/services/handler.service';
 
 @Component({
-  selector: 'app-create-profession',
-  templateUrl: './create-profession.component.html',
-  styleUrls: ['./create-profession.component.css']
+  selector: 'app-update',
+  templateUrl: './update.component.html',
+  styleUrls: ['./update.component.css']
 })
-export class CreateProfessionComponent {
-  
+export class UpdateComponent {
+
   constructor(
     private readonly fb: FormBuilder,
     private readonly hs: HandlerService,
+    private readonly router: ActivatedRoute
   ){}
   
-  registerForm!: FormGroup
+  updateForm!: FormGroup
   formName: string = 'Profesion'
   sid: string = '$2a$10$w2pNyaEEV3Dta4w5qyDJ8O6PupPXlbZdxEvsB9WaD4x1EAVB63.Mm'
   user: string = 'pedroacevedo' 
   userID: string = '1' 
   appID: string = '651d860e8cd11dcf78df2c7e'
-  createUrl = `entities/create/${this.user}/profesiones/${this.appID}`
+  professionID!: string;
+  nombreValue!: string 
+  
+  updateUrl = `entities/update/${this.user}/profesiones/${this.appID}`
+  findProfession = `entities/${this.user}/profesiones/${this.appID}`
   backUrl = `/finance-system/users/${this.user}/${this.userID}/profession`
   success: boolean = false
   error: boolean = false
   
   ngOnInit(): void {
-    this.registerForm = this.initForm()
+    this.router.params.subscribe((params) => {
+      this.professionID = params['id']
+    })
+    this.hs.get(`${this.findProfession}/${this.professionID}`)
+      .subscribe((resp) => {
+        console.log('resp', resp);
+        if(!resp.data) console.log('Hubo un error o no se encontraron datos');
+        else{
+          this.nombreValue = resp.data.nombre
+        }
+      })
+      this.updateForm = this.initForm()
   }
   
   initForm(): FormGroup{
     return this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(3)]]
+      nombre: ['', [Validators.minLength(7)]]
     })
   }
   
   onSubmit(): void{
-    this.hs.post(this.registerForm.value, this.createUrl)
-      .subscribe((resp) => {
+    console.log( this.updateForm.value );
+    this.hs.put(this.updateForm.value , `${this.updateUrl}/${this.professionID}`)
+      .subscribe((resp: any) => {
+        console.log(resp);
         if ( resp['success'] == false ) {
           this.showErrorMessage()
         } else {
+          console.log('Ok');
           this.showSucessMessage()
         }
       })
-      this.registerForm.reset()
+      this.updateForm.reset()
   }
 
   showSucessMessage(): void{

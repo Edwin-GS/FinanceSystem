@@ -40,3 +40,9 @@
         opacity: 0;
     }
 }
+
+  @media (min-width: 576px) { 
+    .custom-class {
+        display: block;
+      }
+}

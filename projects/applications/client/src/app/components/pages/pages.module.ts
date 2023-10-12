@@ -5,6 +5,7 @@ import {USER_ROUTES} from "./pages.routes";
 import { ProfessionComponent } from './profession/profession.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateProfessionComponent } from '../pages/profession/create/create-profession/create-profession.component';
+import { UpdateComponent } from './profession/update/update.component';
 
 
 
@@ -12,7 +13,8 @@ import { CreateProfessionComponent } from '../pages/profession/create/create-pro
   declarations: [
     UserComponent,
     ProfessionComponent,
-    CreateProfessionComponent
+    CreateProfessionComponent,
+    UpdateComponent
   ],
   imports: [
     CommonModule,

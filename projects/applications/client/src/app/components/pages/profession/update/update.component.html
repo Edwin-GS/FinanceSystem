@@ -1,0 +1,37 @@
+
+<div class="container pt-3">
+  <div class="d-flex flex-column gap-4">
+    <div class=" gap-4 d-flex justify-content-center">
+        <a class="btn btn-primary align-self-center" routerLink="{{this.backUrl}}"> Regresar </a>
+        <h1 class="m-0">Registrar {{formName}}</h1>
+    </div>
+    <form class="pt-3  d-flex justify-content-center" (ngSubmit)="onSubmit()" [formGroup]="updateForm">
+      <div class="d-flex flex-column">
+        <div class="mb-4 ">
+          <label for="name" class="form-label">Nombre</label>
+          <input type="text" class="form-control"  name="name" value="{{nombreValue}}" required formControlName="nombre">
+          <div *ngIf="updateForm.get('name')?.touched && updateForm.get('name')?.errors?.['required']" 
+          class="alert alert-danger">This Field is required</div>
+          <div *ngIf="updateForm.get('name')?.touched && updateForm.get('name')?.errors?.['minlength']" 
+          class="alert alert-danger">Name must be longer than {{updateForm.get('name')?.errors?.['minlength'].requiredLength}} characters</div>
+      </div>
+      <div class="d-grid gap-2 row justify-content-end pb-4">
+          <button class="btn btn-primary btn-lg col-11" [disabled]="updateForm.invalid">Crear profesion</button>
+      </div>
+      <div  class="fixed-bottom end-0">
+          <div *ngIf="error" class="alert alert-danger d-flex justify-content-center fade-in align-content-center fade show w-25">
+            <p class="fw-normal fs-6 m-0">
+              No se pudo realizar esta operación
+            </p>
+          </div>
+    
+          <div *ngIf="success" class="alert alert-success fade-in d-flex justify-content-center align-content-center">
+            <p class="fw-normal fs-6 m-0">
+              Operación realizada
+            </p>
+          </div>
+        </div>
+      </div>
+  </form>
+</div>
+</div>

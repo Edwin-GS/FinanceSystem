@@ -68,14 +68,14 @@ export class ProfessionComponent {
     this.success = true
     setTimeout(() => {
       this.success = false
-    }, 4000);
+    }, 5000);
   }
 
   showErrorMessage(): void{
     this.error = true
     setTimeout(() => {
       this.error = false
-    }, 4000);
+    }, 5000);
   }
 
   initForm(): FormGroup{
