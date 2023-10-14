@@ -1,22 +1,24 @@
 import { CanActivateFn, Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 export const isloggedGuard: CanActivateFn = (route, state) => {
   let dashboard = 'finance-system/client/:user/:user_id';
   const router = new Router();
 
-  const userString = localStorage.getItem('USER');
+  const userString = new UserService(router).getLocalStorage();
 
   if (
     !localStorage.getItem('LEGOFT_SID_SITE') &&
+    !localStorage.getItem('USER') &&
     !localStorage.getItem('USER')
   ) {
     return true;
   }
 
   if (userString) {
-    const user = JSON.parse(userString);
-    const username = user.user;
-    const userId = user.id;
+    const username = userString.name;
+    const userId = userString.id;
+
     const updatedDashboard = dashboard
       .replace(':user', userId)
       .replace(':user_id', username);

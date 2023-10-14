@@ -9,35 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  // loginForm!: FormGroup;
-  // showAlert: boolean = false;
-
-  // initForm():FormGroup {
-  //   return this.fb.group({
-  //      email: ['', [Validators.required, Validators.pattern((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) )]],
-  //      password: ['', [Validators.required, Validators.minLength(8)]],
-  //    });
-
-  //  }
-
-  // constructor (private readonly fb:FormBuilder) {}
-  // ngOnInit():void {
-  //   this.loginForm = this.initForm();
-  // }
-
-  // onSubmit(values: any):void{
-  //   if(this.loginForm.valid){      //si el formulario es valido envia los datos
-  //     console.log('form ->', values);
-
-  //     }else {
-  //       this.loginForm.markAllAsTouched();
-  //       this.showAlert = true;     //si no es valido manda este error y activa los campos requeridos
-  //     }
-  // }
-
   appName = 'Legoft';
   logoUrl = 'assets/logo/Legoft-Logo-OK-01-HIGH.png';
-  dashboard = 'finance-system/client/:user/:user_id';
+  myApps = 'finance-system/users/:user/:user_id/my-apps';
 
   //@Input() const isAdmin = false;
 
@@ -93,11 +67,11 @@ export class LoginComponent implements OnInit {
               JSON.stringify({ id: resp.data.id, name: resp.data.user })
             );
             this.isLoggedin = true;
-            const updatedDashboard = this.dashboard
+            const updatedMyapp = this.myApps
               .replace(':user', user)
               .replace(':user_id', userId);
             // Redirigimos al usuario a su panel de control después de iniciar sesión
-            this.router.navigate([updatedDashboard, { user, userId }]);
+            this.router.navigate([updatedMyapp, { user, userId }]);
           }
         },
         (err) => {
