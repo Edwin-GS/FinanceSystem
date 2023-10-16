@@ -1,23 +1,35 @@
 <!------------------------CONTENEDOR PRINCIPAL--------------------------------->
 
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
-
+<div
+  class="container d-flex justify-content-center align-items-center min-vh-100"
+>
   <!-------------------------CONTENEDOR DEL LOGIN------------------------------>
 
   <div class="row border rounded-5 p-3 bg-white shadow box-area">
     <!--------------------------Lef Box IZQUIERDA------------------------------>
 
-    <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
-      style="background: #314685;">
+    <div
+      class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
+      style="background: #314685"
+    >
       <div class="feature-image mb-3">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid"
-          style="width: 250px; ">
+        <img
+          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+          class="img-fluid"
+          style="width: 250px"
+        />
       </div>
-      <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Verificar
+      <p
+        class="text-white fs-2"
+        style="font-family: 'Courier New', Courier, monospace; font-weight: 600"
+      >
+        Verificar
       </p>
-      <small class="text-white text-wrap text-center"
-        style="width: 17rem; font-family: 'Courier New', Courier, monospace;">Introduzca sus datos
-        correctamente.</small>
+      <small
+        class="text-white text-wrap text-center"
+        style="width: 17rem; font-family: 'Courier New', Courier, monospace"
+        >Introduzca sus datos correctamente.</small
+      >
     </div>
 
     <!-------------------------Right BoX DERECHA---------------------------->
@@ -27,87 +39,158 @@
         <div class="header-text mb-4">
           <h1>Registro de usuarios</h1>
         </div>
-        <form [formGroup]="signupForm">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Nombre usuario"
-              name="name" formControlName="name" requierd />
+        <form (ngSubmit)="onSubmit()" [formGroup]="signupForm">
+          <div class="input-group mb-3" formGroupName="user">
+            <input
+              type="text"
+              class="form-control form-control-lg bg-light fs-6"
+              placeholder="Nombre usuario"
+              name="user"
+              formControlName="user"
+              requierd
+            />
           </div>
           <!--name validators-->
           <div class="error-mensaje">
-            <div *ngIf="signupForm.get('name')?.touched  && signupForm.get('name')?.errors?.['required']"
-              class="text-danger">Nombre usuario obligatorio. 
+            <div
+              *ngIf="signupForm.get('name')?.touched  && signupForm.get('name')?.errors?.['required']"
+              class="text-danger"
+            >
+              Nombre usuario obligatorio.
             </div>
-            <div *ngIf="signupForm.get('name')?.touched  && signupForm.get('name')?.errors?.['minlength']"
-              class="text-danger">El nombre debe tener al menos
-              {{signupForm.get('name')?.errors?.['minlength'].requiredLength}} caracteres.
+            <div
+              *ngIf="signupForm.get('name')?.touched  && signupForm.get('name')?.errors?.['minlength']"
+              class="text-danger"
+            >
+              El nombre debe tener al menos
+              {{signupForm.get('name')?.errors?.['minlength'].requiredLength}}
+              caracteres.
             </div>
           </div>
-            
 
-          <div class="input-group mb-3">
-            <input type="email" class="form-control form-control-lg bg-light fs-6" placeholder="Correo electronico"
-              name="email" formControlName="email" requierd />
+          <div class="input-group mb-3" formGroupName="user">
+            <input
+              type="email"
+              class="form-control form-control-lg bg-light fs-6"
+              placeholder="Correo electronico"
+              name="email"
+              formControlName="email"
+              requierd
+            />
           </div>
           <!--Emial validators-->
           <div class="error-mensaje">
-            <div *ngIf="signupForm.get('email')?.touched  && signupForm.get('email')?.errors?.['required']"
-              class="text-danger">Correo obligatorio.
+            <div
+              *ngIf="signupForm.get('email')?.touched  && signupForm.get('email')?.errors?.['required']"
+              class="text-danger"
+            >
+              Correo obligatorio.
             </div>
-            <div *ngIf="signupForm.get('email')?.touched  && signupForm.get('email')?.errors?.['pattern']"
-                class="text-danger">El formato del correo electrónico no es válido.</div>
+            <div
+              *ngIf="signupForm.get('email')?.touched  && signupForm.get('email')?.errors?.['pattern']"
+              class="text-danger"
+            >
+              El formato del correo electrónico no es válido.
+            </div>
           </div>
 
-
-          <div class="input-group mb-1">
-            <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Contraseña"
-              name="password" formControlName="password" required />
+          <div class="input-group mb-1" formGroupName="user">
+            <input
+              type="password"
+              class="form-control form-control-lg bg-light fs-6"
+              placeholder="Contraseña"
+              name="password"
+              formControlName="password"
+              required
+            />
             <!-- <span class="eyeicon" (click)="viewpass()"><i [ngClass]="visible?'fa fa-eye':'fa fa-eye-slash'"></i>
           </span> -->
           </div>
           <!--password validators-->
           <div class="error-mensaje">
-            <div *ngIf="signupForm.get('password')?.touched  &&signupForm.get('password')?.errors?.['required']"
-              class="text-danger">Contraseña obligatoria.
+            <div
+              *ngIf="signupForm.get('password')?.touched  &&signupForm.get('password')?.errors?.['required']"
+              class="text-danger"
+            >
+              Contraseña obligatoria.
             </div>
-            <div *ngIf="signupForm.get('password')?.touched  && signupForm.get('password')?.errors?.['minlength']"
-              class="text-danger">La contraseña debe tener al menos
-              {{signupForm.get('password')?.errors?.['minlength'].requiredLength}} caracteres.
+            <div
+              *ngIf="signupForm.get('password')?.touched  && signupForm.get('password')?.errors?.['minlength']"
+              class="text-danger"
+            >
+              La contraseña debe tener al menos
+              {{signupForm.get('password')?.errors?.['minlength'].requiredLength}}
+              caracteres.
             </div>
-            <div *ngIf="signupForm.get('password')?.touched  && signupForm.get('password')?.errors?.['pattern']"
-                class="text-danger">La contraseña debe incluir al menos una letra mayúscula, una letra minúscula y un número.</div>
+            <div
+              *ngIf="signupForm.get('password')?.touched  && signupForm.get('password')?.errors?.['pattern']"
+              class="text-danger"
+            >
+              La contraseña debe incluir al menos una letra mayúscula, una letra
+              minúscula y un número.
+            </div>
           </div>
 
+          <!-- <div class="input-group mb-4 d-flex justify-content-between"> -->
+          <!-- <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="formCheck"
+                name="formCheck"
+                formControlName="formCheck"
+              />
+              <label for="formCheck" class="form-check-label text-secondary"
+                ><small>
+                  Aceptar <a href="#!">terminos y servicios.</a>
+                </small></label
+              >
+            </div> -->
 
-          <div class="input-group mb-4 d-flex justify-content-between ">
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="formCheck" name="formCheck" formControlName="formCheck">
-              <label for="formCheck" class="form-check-label text-secondary"><small> Aceptar <a href="#!">terminos y servicios.</a> </small></label>
-            </div>
+          <div class="input-group my-3">
+            <button
+              type="submit"
+              class="btn btn-lg btn-primary w-100 fs-6 mi-boton"
+            >
+              Registrarse
+            </button>
+          </div>
 
-        
-            <div class="input-group mb-3">
-              <button type="submit" (click)="onSubmit(signupForm.value)"
-                class="btn btn-lg btn-primary w-100 fs-6 mi-boton">Registrarse</button>
-            </div>
+          <!-- <div class="error-mensaje">
+              <div *ngIf="showAlert" class="alert alert-danger">
+                Por favor, complete todos los campos requeridos.
+              </div>
+            </div> -->
 
-            <div class="error-mensaje">
-            <div *ngIf="showAlert" class="alert alert-danger">
-              Por favor, complete todos los campos requeridos.
-            </div>
-            </div>
-
-            <!-- <div class="input-group mb-3">
+          <!-- <div class="input-group mb-3">
               <button class="btn btn-lg btn-light w-100 fs-6"><img src="assets/google.png" style="width:20px"
                   class="me-2"><small>Ingresar con google</small></button>
             </div> -->
 
-            <div class="row">
-              <small>¿Presenta algun problema con el registro <a href="#!">Contactos</a></small>
-            </div>
-
-          </div>
+          <!-- <div class="row">
+              <small
+                >¿Presenta algun problema con el registro
+                <a href="#!">Contactos</a></small
+              >
+            </div> -->
+          <!-- </div> -->
         </form>
-        <pre>{{signupForm.value | json}}</pre>
+        <div *ngIf="signupForm.value.notifier" class="notifier-dialog">
+          <div class="notifier-dialog-header">
+            <h2>Check your email</h2>
+          </div>
+          <div class="notifier-dialog-body">
+            <p>
+              Please check your email ({{ signupForm.value.user.email }}) to
+              verify your account.
+            </p>
+          </div>
+          <div class="notifier-dialog-footer">
+            <button type="button" (click)="closeDialog()">Close</button>
+          </div>
+        </div>
+        <p>Already have an account? <a routerLink="/login">Login here</a></p>
       </div>
     </div>
   </div>
+</div>

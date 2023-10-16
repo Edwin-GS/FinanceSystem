@@ -1,6 +1,21 @@
-<div class="text-center vh-100 mt-5">
-  <button (click)="createUser()" type="button" class="btn btn-primary">Verify Email </button>
+<div class="div_parent" style="display: flex">
+  <div
+    class="div_child"
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      flex-direction: column;
+    "
+  >
+    <img src="{{ logoUrl }}" alt="Legoft logo" style="width: 100%" />
+    <button
+      (click)="createUser()"
+      type="button"
+      class="btn btn-verify-email"
+      style="width: 100%"
+    >
+      Verify Email ✉️
+    </button>
+  </div>
 </div>
-
-
-

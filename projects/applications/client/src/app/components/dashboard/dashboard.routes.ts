@@ -1,6 +1,5 @@
-import {RouterModule, Routes} from '@angular/router';
-import {DashboardComponent} from "./dashboard.component";
-
+import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './dashboard.component';
 
 /**
  * Base route information
@@ -18,8 +17,8 @@ const DashboardRoutes: Routes = [
   {
     path: 'users/:user/:user_id',
     loadChildren: () =>
-      import('../pages/pages.module').then(m => m.PagesModule)
-  }
+      import('../pages/pages.module').then((m) => m.PagesModule),
+  },
 ];
 
 export const DASHBOARD_ROUTES = RouterModule.forChild(DashboardRoutes);

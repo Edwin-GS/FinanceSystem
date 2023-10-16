@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateProfessionComponent } from '../pages/profession/create/create-profession/create-profession.component';
 import { UpdateComponent } from './profession/update/update.component';
 import { CreateUpdateComponentComponent } from './profession/create-update-component/create-update-component.component';
+import { MiAppsComponent } from './mi-apps/mi-apps.component';
 
 
 
@@ -16,7 +17,8 @@ import { CreateUpdateComponentComponent } from './profession/create-update-compo
     ProfessionComponent,
     CreateProfessionComponent,
     UpdateComponent,
-    CreateUpdateComponentComponent
+    CreateUpdateComponentComponent,
+    MiAppsComponent
   ],
   imports: [
     CommonModule,
