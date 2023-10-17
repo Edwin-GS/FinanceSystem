@@ -15,6 +15,7 @@ export class SignupComponent {
 
   signupForm: FormGroup;
   notifier = false;
+  showAlert = false; // Variable para mostrar/ocultar la alerta
 
   constructor(private formBuilder: FormBuilder, private hs: HandlerService) {
     this.signupForm = this.formBuilder.group({
@@ -23,7 +24,7 @@ export class SignupComponent {
           '',
           [
             Validators.required,
-            Validators.minLength(5),
+            Validators.pattern(/^(?=.*[A-Z]).{5,}$/),
             Validators.maxLength(25),
           ],
         ],
@@ -31,7 +32,7 @@ export class SignupComponent {
           '',
           [
             Validators.required,
-            Validators.minLength(1),
+            Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/),
             Validators.maxLength(150),
           ],
         ],
@@ -91,6 +92,9 @@ export class SignupComponent {
       (err: string) => {
         console.error('Error creating user: ' + err);
       };
+    }else {
+      this.signupForm.markAllAsTouched();
+      this.showAlert = true;
     }
   }
 

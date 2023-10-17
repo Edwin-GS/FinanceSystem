@@ -19,17 +19,17 @@
           style="width: 250px"
         />
       </div>
-      <!-- <p
+      <p
         class="text-white fs-2"
         style="font-family: 'Courier New', Courier, monospace; font-weight: 600"
       >
-        Verificar
+        Ingrese a su cuenta
       </p>
       <small
         class="text-white text-wrap text-center"
         style="width: 17rem; font-family: 'Courier New', Courier, monospace"
         >Introduzca sus datos correctamente.</small
-      > -->
+      >
     </div>
 
     <!-------------------------Right BoX DERECHA---------------------------->
@@ -39,12 +39,18 @@
         <div class="header-text mb-4">
           <h1>Inicio de sesión</h1>
         </div>
+        <div class="error-mensaje">
+          <div *ngIf="showAlert" class="alert alert-danger">
+            Por favor, complete todos los campos requeridos.
+          </div>
+        </div>
+
         <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-          <div class="input-group mb-3" formGroupName="user">
+          <div class="input-group mb-2" formGroupName="user">
             <input
               type="email"
               class="form-control form-control-lg bg-light fs-6"
-              placeholder="Correo electronico"
+              placeholder="Usuario o correo electrónico"
               name="userOrEmail"
               formControlName="userOrEmail"
             />
@@ -52,20 +58,23 @@
           <!--Emial validators-->
           <div class="error-mensaje">
             <div
-              *ngIf="loginForm.get('email')?.touched  && loginForm.get('email')?.errors?.['required']"
+              *ngIf="loginForm.get('user.userOrEmail')?.touched  && loginForm.get('user.userOrEmail')?.errors?.['required']"
               class="text-danger"
             >
-              Correo obligatorio.
+              Correo o nombre de usuario obligatorio.
             </div>
-            <div
-              *ngIf="loginForm.get('email')?.touched  && loginForm.get('email')?.errors?.['pattern']"
+            <div 
+              *ngIf="loginForm.get('user.userOrEmail')?.touched  && loginForm.get('user.userOrEmail')?.errors?.['minlength']"
               class="text-danger"
-            >
-              El formato del correo electrónico no es válido.
-            </div>
+              >
+              El usuario debe tener al menos
+              {{loginForm.get('user.userOrEmail')?.errors?.['minlength'].requiredLength}}
+              caracteres.
+          </div>
+  
           </div>
 
-          <div class="input-group mb-1" formGroupName="user">
+          <div class="input-group mb-2" formGroupName="user">
             <input
               type="password"
               class="form-control form-control-lg bg-light fs-6"
@@ -79,17 +88,17 @@
           <!--password validators-->
           <div class="error-mensaje">
             <div
-              *ngIf="loginForm.get('password')?.touched  && loginForm.get('password')?.errors?.['required']"
+              *ngIf="loginForm.get('user.password')?.touched  && loginForm.get('user.password')?.errors?.['required']"
               class="text-danger"
             >
               Contraseña obligatoria.
             </div>
             <div
-              *ngIf="loginForm.get('password')?.touched  && loginForm.get('password')?.errors?.['minlength']"
+              *ngIf="loginForm.get('user.password')?.touched  && loginForm.get('user.password')?.errors?.['minlength']"
               class="text-danger"
             >
               La contraseña debe tener al menos
-              {{loginForm.get('password')?.errors?.['minlength'].requiredLength}}
+              {{loginForm.get('user.password')?.errors?.['minlength'].requiredLength}}
               caracteres.
             </div>
           </div>
@@ -115,12 +124,7 @@
               </button>
             </div>
 
-            <div class="error-mensaje">
-              <div *ngIf="showAlert" class="alert alert-danger">
-                Por favor, complete todos los campos requeridos.
-              </div>
-            </div>
-
+            
             <!-- <div class="input-group mb-3">
               <button class="btn btn-lg btn-light w-100 fs-6"><img src="assets/google.png" style="width:20px"
                   class="me-2"><small>Ingresar con google</small></button>
