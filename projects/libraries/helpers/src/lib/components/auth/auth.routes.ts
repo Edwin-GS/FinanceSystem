@@ -10,13 +10,13 @@ const AuthRoutes: Routes = [
     path: 'login',
     title: 'Finance System',
     component: LoginComponent,
-    canActivate: [isloggedGuard],
+    //canActivate: [isloggedGuard],
   },
   {
     path: 'signup',
     title: 'Finance System',
     component: SignupComponent,
-    canActivate: [isloggedGuard],
+    //canActivate: [isloggedGuard],
   },
   {
     path: 'not-found',
