@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
         (resp) => {
           if (resp['success'] === false) {
             console.log('Error al iniciar sesión'); // Mensaje de error al iniciar sesión
-            this.showAlert = true;
+            this.showAlert=true;
           } else {
             console.log(resp, 'Esto es la respuesta');
             localStorage.setItem(
@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
         },
         (err) => {
           console.error('Error al iniciar sesión: ' + err); // Mensaje de error en la solicitud de inicio de sesión
-          //this.showAlert = true;
+          
         }
       );
       } else {

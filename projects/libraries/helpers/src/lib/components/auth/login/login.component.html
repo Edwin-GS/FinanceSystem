@@ -41,7 +41,7 @@
         </div>
         <div class="error-mensaje">
           <div *ngIf="showAlert" class="alert alert-danger">
-            Por favor, complete todos los campos requeridos.
+            Acceso inválido. Por favor, inténtelo otra vez.
           </div>
         </div>
 
@@ -119,6 +119,7 @@
               <button
                 type="submit"
                 class="btn btn-lg btn-primary w-100 fs-6 mi-boton"
+                [disabled]="loginForm.invalid"
               >
                 Ingresar
               </button>
