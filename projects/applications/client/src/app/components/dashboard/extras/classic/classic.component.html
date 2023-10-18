@@ -1,310 +1,177 @@
-    <div class="wrapper">
-      <div class="body-overlay"></div>
-      <!-- Sidebar  -->
-      <nav id="sidebar">
-        <div class="sidebar-header">
-          <h3>
-            <img src="../../../../../assets/motologo.png" class="img-fluid" /><span
-              >FINANCESYSTEM</span
-            >
-          </h3>
-        </div>
-        <ul class="list-unstyled components">
-          <li class="active">
-            <a href="#" class="dashboard"
-              ><i class="material-icons">dashboard</i><span>Dashboard</span></a
-            >
-          </li>
+<div
+  class="container-fluid"
+  [ngClass]="[showSideBar ? 'toggle-sidebar-btn' : 'toggle-sidebar']"
+>
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <span class="logo d-flex align-items-center">
+        <img src="../../../../../assets/Legoft-Logo.png" alt="" />
+        <span class="d-none d-lg-block">Finance System</span>
+      </span>
+      <i
+        class="bi bi-list toggle-sidebar-btn"
+        (click)="showSideBar = !showSideBar"
+      ></i>
+    </div>
+    <!-- End Logo -->
 
-          <div class="small-screen navbar-display">
-            <li class="dropdown d-lg-none d-md-block d-xl-none d-sm-block">
-              <a
-                href="#homeSubmenu0"
-                data-toggle="collapse"
-                aria-expanded="false"
-                class="dropdown-toggle"
-              >
-                <i class="material-icons">notifications</i
-                ><span> 4 notification</span></a
-              >
-              <ul class="collapse list-unstyled menu" id="homeSubmenu0">
-                <li>
-                  <a href="#">You have 5 new messages</a>
-                </li>
-                <li>
-                  <a href="#">You're now friend with Mike</a>
-                </li>
-                <li>
-                  <a href="#">Wish Mary on her birthday!</a>
-                </li>
-                <li>
-                  <a href="#">5 warnings in Server Console</a>
-                </li>
-              </ul>
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+        <li class="nav-item dropdown pe-3">
+          <a
+            class="nav-link nav-profile d-flex align-items-center pe-0"
+            data-bs-toggle="dropdown"
+          >
+            <img
+              src="https://ui-avatars.com/api/?name=F5?background=random"
+              alt="Profile"
+              class="rounded-circle"
+              (click)="showDropDown = !showDropDown"
+            />
+            <span
+              class="d-none d-md-block dropdown-toggle ps-2 show"
+              (click)="showDropDown = !showDropDown"
+              >Unidad F5</span
+            > </a
+          ><!-- End Profile Iamge Icon -->
+
+          <ul
+            [ngClass]="[
+              showDropDown
+                ? 'showdropdown dropdown-menu dropdown-menu-end dropdown-menu-arrow profile show'
+                : 'dropdown-menu dropdown-menu-end dropdown-menu-arrow profile'
+            ]"
+          >
+            <li class="dropdown-header">
+              <h6>Unidad F5</h6>
+              <span>Con los mejores del mundo</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
             </li>
 
-            <li class="d-lg-none d-md-block d-xl-none d-sm-block">
-              <a href="#"
-                ><i class="material-icons">apps</i><span>apps</span></a
-              >
+            <li>
+              <a class="dropdown-item d-flex align-items-center">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
             </li>
+          </ul>
+          <!-- End Profile Dropdown Items -->
+        </li>
+        <!-- End Profile Nav -->
+      </ul>
+    </nav>
+    <!-- End Icons Navigation -->
+  </header>
+  <!-- End Header -->
 
-            <li class="d-lg-none d-md-block d-xl-none d-sm-block">
-              <a href="#"
-                ><i class="material-icons">person</i><span>user</span></a
-              >
-            </li>
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link collapsed">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <!-- End Dashboard Nav -->
 
-            <li class="d-lg-none d-md-block d-xl-none d-sm-block">
-              <a href="#"
-                ><i class="material-icons">settings</i><span>setting</span></a
-              >
-            </li>
-          </div>
-
-          <li class="dropdown">
-            <a
-              href="#homeSubmenu1"
-              data-toggle="collapse"
-              aria-expanded="false"
-              class="dropdown-toggle"
-            >
-              <i class="material-icons">aspect_ratio</i><span>Layouts</span></a
-            >
-            <ul class="collapse list-unstyled menu" id="homeSubmenu1">
-              <li>
-                <a href="#">Home 1</a>
-              </li>
-              <li>
-                <a href="#">Home 2</a>
-              </li>
-              <li>
-                <a href="#">Home 3</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-            <a
-              href="#pageSubmenu2"
-              data-toggle="collapse"
-              aria-expanded="false"
-              class="dropdown-toggle"
-            >
-              <i class="material-icons">apps</i><span>widgets</span></a
-            >
-            <ul class="collapse list-unstyled menu" id="pageSubmenu2">
-              <li>
-                <a href="#">Page 1</a>
-              </li>
-              <li>
-                <a href="#">Page 2</a>
-              </li>
-              <li>
-                <a href="#">Page 3</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-            <a
-              href="#pageSubmenu3"
-              data-toggle="collapse"
-              aria-expanded="false"
-              class="dropdown-toggle"
-            >
-              <i class="material-icons">equalizer</i>
-
-              <span>chart</span></a
-            >
-            <ul class="collapse list-unstyled menu" id="pageSubmenu3">
-              <li>
-                <a href="#">Page 1</a>
-              </li>
-              <li>
-                <a href="#">Page 2</a>
-              </li>
-              <li>
-                <a href="#">Page 3</a>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a
-              href="#pageSubmenu4"
-              data-toggle="collapse"
-              aria-expanded="false"
-              class="dropdown-toggle"
-            >
-              <i class="material-icons">extension</i><span>ui element</span></a
-            >
-            <ul class="collapse list-unstyled menu" id="pageSubmenu4">
-              <li>
-                <a href="#">Page 1</a>
-              </li>
-              <li>
-                <a href="#">Page 2</a>
-              </li>
-              <li>
-                <a href="#">Page 3</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-            <a
-              href="#pageSubmenu5"
-              data-toggle="collapse"
-              aria-expanded="false"
-              class="dropdown-toggle"
-            >
-              <i class="material-icons">border_color</i><span>forms</span></a
-            >
-            <ul class="collapse list-unstyled menu" id="pageSubmenu5">
-              <li>
-                <a href="#">Page 1</a>
-              </li>
-              <li>
-                <a href="#">Page 2</a>
-              </li>
-              <li>
-                <a href="#">Page 3</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-            <a
-              href="#pageSubmenu6"
-              data-toggle="collapse"
-              aria-expanded="false"
-              class="dropdown-toggle"
-            >
-              <i class="material-icons">grid_on</i><span>tables</span></a
-            >
-            <ul class="collapse list-unstyled menu" id="pageSubmenu6">
-              <li>
-                <a href="#">Page 1</a>
-              </li>
-              <li>
-                <a href="#">Page 2</a>
-              </li>
-              <li>
-                <a href="#">Page 3</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-            <a
-              href="#pageSubmenu7"
-              data-toggle="collapse"
-              aria-expanded="false"
-              class="dropdown-toggle"
-            >
-              <i class="material-icons">content_copy</i><span>Pages</span></a
-            >
-            <ul class="collapse list-unstyled menu" id="pageSubmenu7">
-              <li>
-                <a href="#">Page 1</a>
-              </li>
-              <li>
-                <a href="#">Page 2</a>
-              </li>
-              <li>
-                <a href="#">Page 3</a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="">
-            <a href="#"
-              ><i class="material-icons">date_range</i><span>copy</span></a
-            >
-          </li>
-
-          <li class="">
-            <a href="#"
-              ><i class="material-icons">library_books</i
-              ><span>Calender</span></a
-            >
+      <li class="nav-item">
+        <a
+          [ngClass]="[!showDropDownMenu ? 'nav-link' : 'nav-link collapsed']"
+          [attr.aria-expanded]="showDropDownMenu ? 'true' : 'false'"
+          (click)="showDropDownMenu = !showDropDownMenu"
+        >
+          <i class="bi bi-gem"></i><span>Icons</span
+          ><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul
+          id="icons-nav"
+          [ngClass]="[
+            showDropDownMenu
+              ? 'nav-content collapse show'
+              : 'nav-content collapse'
+          ]"
+        >
+          <li>
+            <a> <i class="bi bi-circle"></i><span>Bootstrap Icons</span> </a>
           </li>
         </ul>
-      </nav>
+      </li>
 
-      <!-- Page Content  -->
-      <div id="content">
-        <div class="top-navbar">
-          <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-              <button
-                type="button"
-                id="sidebarCollapse"
-                class="d-xl-block d-lg-block d-md-mone d-none"
-              >
-                <span class="material-icons">arrow_back_ios</span>
-              </button>
+      <!-- End Icons Nav -->
 
-              <a class="navbar-brand" href="#"> Dashboard </a>
+      <li class="nav-item">
+        <a class="nav-link collapsed" routerLink="brand">
+          <i class="bi bi-alphabet-uppercase"></i>
+          <span>Marcas</span>
+        </a>
+      </li>
+      <!-- End Profile Page Nav -->
 
-              <button
-                class="d-inline-block d-lg-none ml-auto more-button"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span class="material-icons">more_vert</span>
-              </button>
+      <li class="nav-item">
+        <a class="nav-link collapsed">
+          <i class="bi bi-question-circle"></i>
+          <span>F.A.Q</span>
+        </a>
+      </li>
+      <!-- End F.A.Q Page Nav -->
 
-              <div
-                class="collapse navbar-collapse d-lg-block d-xl-block d-sm-none d-md-none d-none"
-                id="navbarSupportedContent"
-              >
-                <ul class="nav navbar-nav ml-auto">
-                  <li class="dropdown nav-item active">
-                    <a href="#" class="nav-link" data-toggle="dropdown">
-                      <span class="material-icons">notifications</span>
-                      <span class="notification">4</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li>
-                        <a href="#">You have 5 new messages</a>
-                      </li>
-                      <li>
-                        <a href="#">You're now friend with Mike</a>
-                      </li>
-                      <li>
-                        <a href="#">Wish Mary on her birthday!</a>
-                      </li>
-                      <li>
-                        <a href="#">5 warnings in Server Console</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                      <span class="material-icons">apps</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                      <span class="material-icons">person</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                      <span class="material-icons">settings</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-        </div>
+      <li class="nav-item">
+        <a class="nav-link collapsed">
+          <i class="bi bi-envelope"></i>
+          <span>Contact</span>
+        </a>
+      </li>
+      <!-- End Contact Page Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link collapsed">
+          <i class="bi bi-card-list"></i>
+          <span>Register</span>
+        </a>
+      </li>
+      <!-- End Register Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed">
+          <i class="bi bi-box-arrow-in-right"></i>
+          <span>Login</span>
+        </a>
+      </li>
+      <!-- End Login Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed">
+          <i class="bi bi-dash-circle"></i>
+          <span>Error 404</span>
+        </a>
+      </li>
+      <!-- End Error 404 Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link">
+          <i class="bi bi-file-earmark"></i>
+          <span>Blank</span>
+        </a>
+      </li>
+      <!-- End Blank Page Nav -->
+    </ul>
+  </aside>
+  <!-- End Sidebar-->
+
+  <main id="main" class="main">
+    <!-- <div class="pagetitle">
+      <h1>Blank Page</h1>
+    </div> -->
+    <!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <router-outlet></router-outlet>
       </div>
-    </div>
-
+    </section>
+  </main>
+  <!-- End #main -->
+</div>
