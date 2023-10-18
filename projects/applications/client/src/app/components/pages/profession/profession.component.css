@@ -3,10 +3,6 @@
     z-index: 1000;
   }
   
-  .end-0 {
-    left: 3rem;
-  }
-  
   .alert {
     width: 250px;
   }
@@ -39,4 +35,52 @@
     100%{
         opacity: 0;
     }
+}
+
+
+.content{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-around;
+}
+
+.rep{
+  display: grid;
+  grid-template-columns: repeat(
+    minmax( 150px, 1fr)
+  );
+}
+
+@media (max-width: 340px) { 
+  .cardStyle {
+    width: 18rem;
+    height: 8rem;
+  }
+
+  .notificationMSG {
+    width: 10rem;
+  }
+
+  .small-button{
+    padding: .3rem;
+  }
+
+  .notifContainer {
+    left: 1.5rem;
+  }
+}
+
+@media (min-width: 330px) { 
+  .cardStyle {
+    width: 13rem;
+    height: 7rem;
+  }
+  
+  .notifContainer {
+    left: 3rem;
+  }
+
+  .notificationMSG {
+    width: 20rem;
+  }
 }

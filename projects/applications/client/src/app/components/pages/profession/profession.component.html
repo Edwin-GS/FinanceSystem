@@ -1,35 +1,39 @@
+<!-- <app-spinner></app-spinner> -->
 <div class="container">
     <div class="pt-2">
-        <div class="d-flex justify-content-center align-items-center gap-5 pb-1">
-          <h1 class="p-0 m-0 align-self-end">Lista de profesiones</h1>
+        <div class="d-flex justify-content-center align-items-center gap-5 pb-1" (click)="clearValues()">
+          <h1 class="p-0 m-0 align-self-end">Profesiones</h1>
           <!-- <a class="btn btn-primary" routerLink="/finance-system/users/{{user}}/{{this.userID}}/profession/create">Registrar Profesion</a> -->
           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
               Crear profesion
           </button>
         </div>
-        <div class="d-grid  justify-content-center p-4">
-          <div class="d-flex gap-2 flex-wrap align-content-start"> 
-        <div *ngFor="let profesion of professions" class="card ">
-            <div class="card-body">
-                <h3 class="card-title">{{profesion.nombre}}</h3>
-                <div class="row gap-1 justify-content-center">
-                  <a routerLink="/finance-system/users/{{user}}/{{this.userID}}/profession/update/{{profesion['_id']}}" class="btn btn-primary col ">Editar</a>
-                    <button 
-                      class="btn btn-danger col" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <div class="w-100  justify-content-center p-4" >
+          <div class="d-flex flex-wrap gap-2 "> 
+          <div *ngFor="let profesion of professions"  (click)="selectProfession(profesion)" class="card cardStyle">
+            <div class="card-body pb-0 col">
+                <h3 class="card-title">{{profesion?.nombre | titlecase}}</h3>
+                <div class="d-flex gap-1 justify-content-center" >
+                  <button *ngIf="profesion?._id === selection?._id"
+                   class="btn btn-primary col small-button"  data-bs-toggle="modal" data-bs-target="#createModal">
+                    Actualizar
+                  </button>  
+                  <button *ngIf="profesion?._id === selection?._id"
+                      class="btn btn-danger col small-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         Eliminar
-                    </button>
+                  </button>
                 </div>
             </div>
             <div  class="modal fade" id="exampleModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">¿Desea eliminar {{profesion.nombre}}?</h1>
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">¿Desea eliminar {{selection?.nombre}}?</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer d-flex justify-content-end">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)='deleteProfession(profesion["_id"])'>Confirmar</button>
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)='deleteProfession(selection._id)'>Confirmar</button>
                     </div>
                   </div>
                 </div>
@@ -38,35 +42,21 @@
         </div>
         </div>
     </div>
-    <div  class="fixed-bottom end-0">
-      <div *ngIf="error" class="alert alert-danger d-flex justify-content-center align-content-center fade show w-25">
+    <div  class="fixed-bottom notifContainer">
+      <div *ngIf="error" class="alert alert-danger d-flex justify-content-center align-content-center fade show notificationMSG">
         <p class="fw-normal fs-6 m-0">
           No se pudo realizar esta operación
         </p>
       </div>
-
-      <div *ngIf="success" class="alert alert-success fade-in d-flex justify-content-center align-content-center">
+      <div *ngIf="success" class="alert alert-success fade-in d-flex justify-content-center align-content-center notificationMSG">
         <p class="fw-normal fs-6 m-0">
           Operación realizada
         </p>
       </div>
     </div>
 
-    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-create-update-component 
+    (createProfEmitter)="createProf($event)"
+    (updateProfEmitter)="updateProf($event)"
+    [selection]="selection" [action]="action" ></app-create-update-component>
 </div>
