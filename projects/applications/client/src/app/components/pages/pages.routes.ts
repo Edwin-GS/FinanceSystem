@@ -4,6 +4,8 @@ import { ProfessionComponent } from './profession/profession.component';
 import { CreateProfessionComponent } from './profession/create/create-profession/create-profession.component';
 import { UpdateComponent } from './profession/update/update.component';
 import { MiAppsComponent } from './mi-apps/mi-apps.component';
+import { ClassicComponent } from '../dashboard/extras/classic/classic.component';
+import { MarcaComponent } from './marca/marca.component';
 
 /**
  * Base route information
@@ -34,6 +36,11 @@ const UserRoutes: Routes = [
     title: 'Actualizar Profesion'
   },
   { path: 'my-apps', component: MiAppsComponent, title: 'My-apps' },
+  {
+    path: '',
+    component: ClassicComponent,
+    children: [{ path: 'brand', component: MarcaComponent, title: 'Brands' }],
+  },
 ];
 
 export const USER_ROUTES = RouterModule.forChild(UserRoutes);

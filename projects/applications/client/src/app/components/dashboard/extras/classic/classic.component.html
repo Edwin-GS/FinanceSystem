@@ -1,1 +1,177 @@
-<p>classic works!</p>
+<div
+  class="container-fluid"
+  [ngClass]="[showSideBar ? 'toggle-sidebar-btn' : 'toggle-sidebar']"
+>
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <span class="logo d-flex align-items-center">
+        <img src="../../../../../assets/Legoft-Logo.png" alt="" />
+        <span class="d-none d-lg-block">Finance System</span>
+      </span>
+      <i
+        class="bi bi-list toggle-sidebar-btn"
+        (click)="showSideBar = !showSideBar"
+      ></i>
+    </div>
+    <!-- End Logo -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+        <li class="nav-item dropdown pe-3">
+          <a
+            class="nav-link nav-profile d-flex align-items-center pe-0"
+            data-bs-toggle="dropdown"
+          >
+            <img
+              src="https://ui-avatars.com/api/?name=F5?background=random"
+              alt="Profile"
+              class="rounded-circle"
+              (click)="showDropDown = !showDropDown"
+            />
+            <span
+              class="d-none d-md-block dropdown-toggle ps-2 show"
+              (click)="showDropDown = !showDropDown"
+              >Unidad F5</span
+            > </a
+          ><!-- End Profile Iamge Icon -->
+
+          <ul
+            [ngClass]="[
+              showDropDown
+                ? 'showdropdown dropdown-menu dropdown-menu-end dropdown-menu-arrow profile show'
+                : 'dropdown-menu dropdown-menu-end dropdown-menu-arrow profile'
+            ]"
+          >
+            <li class="dropdown-header">
+              <h6>Unidad F5</h6>
+              <span>Con los mejores del mundo</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+          </ul>
+          <!-- End Profile Dropdown Items -->
+        </li>
+        <!-- End Profile Nav -->
+      </ul>
+    </nav>
+    <!-- End Icons Navigation -->
+  </header>
+  <!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link collapsed">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a
+          [ngClass]="[!showDropDownMenu ? 'nav-link' : 'nav-link collapsed']"
+          [attr.aria-expanded]="showDropDownMenu ? 'true' : 'false'"
+          (click)="showDropDownMenu = !showDropDownMenu"
+        >
+          <i class="bi bi-gem"></i><span>Icons</span
+          ><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul
+          id="icons-nav"
+          [ngClass]="[
+            showDropDownMenu
+              ? 'nav-content collapse show'
+              : 'nav-content collapse'
+          ]"
+        >
+          <li>
+            <a> <i class="bi bi-circle"></i><span>Bootstrap Icons</span> </a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- End Icons Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" routerLink="brand">
+          <i class="bi bi-alphabet-uppercase"></i>
+          <span>Marcas</span>
+        </a>
+      </li>
+      <!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed">
+          <i class="bi bi-question-circle"></i>
+          <span>F.A.Q</span>
+        </a>
+      </li>
+      <!-- End F.A.Q Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed">
+          <i class="bi bi-envelope"></i>
+          <span>Contact</span>
+        </a>
+      </li>
+      <!-- End Contact Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed">
+          <i class="bi bi-card-list"></i>
+          <span>Register</span>
+        </a>
+      </li>
+      <!-- End Register Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed">
+          <i class="bi bi-box-arrow-in-right"></i>
+          <span>Login</span>
+        </a>
+      </li>
+      <!-- End Login Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed">
+          <i class="bi bi-dash-circle"></i>
+          <span>Error 404</span>
+        </a>
+      </li>
+      <!-- End Error 404 Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link">
+          <i class="bi bi-file-earmark"></i>
+          <span>Blank</span>
+        </a>
+      </li>
+      <!-- End Blank Page Nav -->
+    </ul>
+  </aside>
+  <!-- End Sidebar-->
+
+  <main id="main" class="main">
+    <!-- <div class="pagetitle">
+      <h1>Blank Page</h1>
+    </div> -->
+    <!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <router-outlet></router-outlet>
+      </div>
+    </section>
+  </main>
+  <!-- End #main -->
+</div>
