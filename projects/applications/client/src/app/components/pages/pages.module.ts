@@ -4,7 +4,9 @@ import { UserComponent } from './users/user.component';
 import {USER_ROUTES} from "./pages.routes";
 import { ProfessionComponent } from './profession/profession.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CreateProfessionComponent } from '../pages/profession/create/create-profession/create-profession.component';
+import { CreateUpdateComponentComponent } from './profession/create-update-component/create-update-component.component';
+import { MiAppsComponent } from './mi-apps/mi-apps.component';
+import { MarcaComponent } from './marca/marca.component';
 
 
 
@@ -12,13 +14,16 @@ import { CreateProfessionComponent } from '../pages/profession/create/create-pro
   declarations: [
     UserComponent,
     ProfessionComponent,
-    CreateProfessionComponent
+    CreateUpdateComponentComponent,
+    MiAppsComponent,
+    MarcaComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     USER_ROUTES
-  ]
+  ],
+ 
 })
 export class PagesModule {
 }

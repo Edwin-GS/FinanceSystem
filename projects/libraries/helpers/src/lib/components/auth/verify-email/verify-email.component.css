@@ -1,23 +1,28 @@
-html, body {
-  margin: 0;
-}
-
 .div_paren {
   background: rgb(245, 247, 250);
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .div_child {
   width: 600px;
   height: 300px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -100px;
-  margin-left: -250px;
+  margin: 0 auto;
 }
 
 .letter-type {
-  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-size: 40px;
+}
+
+.btn-verify-email {
+  background-color: #007bff;
+  color: white;
+  padding: 20px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 24px;
+  cursor: pointer;
 }

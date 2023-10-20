@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HandlerService } from '../../../services/handler.service';
+import { environment } from 'projects/applications/client/src/environments/environment.development';
 
 @Component({
   selector: 'lib-signup',
@@ -9,98 +10,92 @@ import { HandlerService } from '../../../services/handler.service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-  signupForm!: FormGroup;
-  showAlert: boolean = false;
+  appName = 'Legoft';
+  logoUrl = 'assets/logo/Legoft-Logo-OK-01-HIGH.png';
 
-  initForm():FormGroup {
-    return this.fb.group({
-       name: ['', [Validators.required, Validators.minLength(5)]],
-       email: ['', [Validators.required, Validators.pattern((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) )]],
-       password: ['', [Validators.required, Validators.minLength(8), Validators.pattern((/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/))]],
-     });
- 
-   }
+  signupForm: FormGroup;
+  notifier = false;
 
-  constructor (private readonly fb:FormBuilder) {}
-  ngOnInit():void {
-    this.signupForm = this.initForm();
+  constructor(private formBuilder: FormBuilder, private hs: HandlerService) {
+    this.signupForm = this.formBuilder.group({
+      user: this.formBuilder.group({
+        user: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(25),
+          ],
+        ],
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(150),
+          ],
+        ],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/),
+          ],
+        ],
+      }),
+      screen: this.formBuilder.group({
+        header: [1, [Validators.required]],
+      }),
+      notifier: [false],
+    });
   }
 
-  onSubmit(values: any):void{
-    if(this.signupForm.valid){      //si el formulario es valido envia los datos
-      console.log('form ->', values);
-  
-      }else {
-        this.signupForm.markAllAsTouched();
-        this.showAlert = true;     //si no es valido manda este error y activa los campos requeridos
-      }
+  onSubmit() {
+    if (this.signupForm.valid) {
+      const sendEmail = {
+        to: this.signupForm.value.user.email,
+        subject: 'Check your Email',
+        url: `${environment.LEGOFT_FRONTEND_URL}`,
+        msg: {
+          title: 'Check your Email',
+          text: 'To verify your email click on the link.',
+          reply: 'This is an automated email, please do not reply.',
+        },
+        user: {
+          user: this.signupForm.value.user.username,
+          email: this.signupForm.value.user.email,
+          password: this.signupForm.value.user.password,
+          screen: {
+            header: 1,
+          },
+        },
+      };
+      console.log(sendEmail);
+
+      this.hs.post(sendEmail, `notifier`).subscribe(
+        (resp) => {
+          if (resp['success'] === false) {
+            console.log('Error creating user', resp);
+          } else {
+            console.log(resp, 'Esto es la respuesta');
+            this.signupForm.patchValue({
+              notifier: true,
+            });
+          }
+        },
+        (err) => {
+          console.error('Error creating user: ' + err);
+        }
+      );
+      (err: string) => {
+        console.error('Error creating user: ' + err);
+      };
+    }
   }
 
-  
-
+  closeDialog() {
+    this.signupForm.reset();
+    this.notifier = false;
+  }
 }
-
-//ESTE CODGIO ES EL QUE ESTARA EN INTERACCION CON LA BASE DE DATOS, AUN NO TENGO MUCHO CONOCIMIENTO:
-
-//   @Input() isAdmin = false;
-
-//   signupForm!: FormGroup;
-//   isLoggedin: boolean = false;
-//   showAlert: boolean = false; // Variable para mostrar/ocultar la alerta
-  
-//   constructor(
-//     private formBuilder: FormBuilder,
-//     private router: Router,
-//     private hs: HandlerService
-//   ) {
-//     this.signupForm = this.formBuilder.group({
-//       user: this.formBuilder.group({
-//         name: ['',
-//         [Validators.required,
-//           Validators.minLength(3) // Validación de correo electrónico)]
-//         ]],
-//         email: ['',
-//       [Validators.required,
-//         Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) // Validación de correo electrónico)]
-//       ]],
-//         password: ['',
-//         [Validators.required,
-//           Validators.minLength(8)  //validacion contraseña
-//         ]],
-//       })
-//      });
-
-// }
-// ngOnInit(): void {
-
-// }
-
-// onSubmit() {
-//   if (this.signupForm.valid) {
-//     // Limpiamos el token de sesión en el almacenamiento local
-//     localStorage.setItem('LEGOFT_SID_SITE', '');
-//     const user = this.signupForm.value.user;
-//     // const userId = this.signupForm.value.userId;
-//     this.showAlert = false;
-
-//     // Realizamos una solicitud POST para iniciar sesión
-//     this.hs.post(user, 'users/signUp')
-//       .subscribe((resp) => {
-//         if (resp['success'] === false) {
-//           console.log('Error al crear usuario'); // Mensaje de error al iniciar sesión
-//           this.showAlert = true;
-//         } else {
-//           console.log(resp, 'Esto es la respuesta');
-//           this.isLoggedin = true;
-//           // Redirigimos al usuario a su panel de control después de iniciar sesión
-//           alert('Usuario creado');
-//         }
-//       }, 
-//       (err) => {
-//         console.error('Error al crear usuario: ' + err); // Mensaje de error en la solicitud de inicio de sesión
-//         //this.showAlert = true;
-//       }
-//     );
-//   }
-// }
-// }

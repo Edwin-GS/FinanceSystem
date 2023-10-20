@@ -1,0 +1,28 @@
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{ action }}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+            <form class="pt-3" (ngSubmit)="onSubmit( this.registerForm.get('nombre')?.value )" [formGroup]="registerForm">
+                <div class="mb-4">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control"  name="nombre" value="{{this.selection?.nombre}}" required formControlName="nombre">
+                    <div *ngIf="registerForm.get('nombre')?.touched && registerForm.get('nombre')?.errors?.['required']" 
+                    class="alert alert-danger">This Field is required</div>
+                    <div *ngIf="registerForm.get('nombre')?.touched && registerForm.get('nombre')?.errors?.['minlength']" 
+                    class="alert alert-danger">Name must be longer than {{registerForm.get('nombre')?.errors?.['minlength'].requiredLength}} characters</div>
+                </div>
+            </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="registerForm.reset()" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary" (click)="onSubmit( this.registerForm.get('nombre')?.value )" [disabled]="registerForm.invalid">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>

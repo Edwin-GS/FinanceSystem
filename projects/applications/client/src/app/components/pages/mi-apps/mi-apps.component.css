@@ -1,0 +1,25 @@
+.img-container {
+  position: relative;
+}
+
+.image {
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+}
+
+.overlay {
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.img-container:hover .image {
+  opacity: 0.2;
+}
+
+.img-container:hover .overlay {
+  opacity: 1;
+}

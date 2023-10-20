@@ -16,9 +16,7 @@
             "outputPath": "dist/client",
             "index": "projects/applications/client/src/index.html",
             "main": "projects/applications/client/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/applications/client/tsconfig.app.json",
             "assets": [
               "projects/applications/client/src/favicon.ico",
@@ -33,12 +31,13 @@
               "styles.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.min.css",
               "projects/applications/client/src/styles.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/@popperjs/core/dist/umd/popper.min.js"
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
@@ -95,10 +94,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/applications/client/tsconfig.spec.json",
             "assets": [
               "projects/applications/client/src/favicon.ico",
@@ -109,8 +105,7 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/applications/client/src/styles.css"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           }
         }
       }
@@ -140,10 +135,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/libraries/helpers/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         }
       }
