@@ -60,17 +60,9 @@ export class CreateUpdateComponentComponent {
     this.updateProfEmitter.emit( updateData )
   }
 
-  showSucessMessage(): void{
-    this.success = true
-    setTimeout(() => {
-      this.success = false
-    }, 5000);
-  }
-
-  showErrorMessage(): void{
-    this.error = true
-    setTimeout(() => {
-      this.error = false
-    }, 5000);
+  confirmReset(): void{
+    if(confirm("¿Desea cerrar este formulario?")){
+      this.registerForm.reset()
+    }
   }
 }
