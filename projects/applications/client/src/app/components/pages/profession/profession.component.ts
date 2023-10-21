@@ -12,26 +12,19 @@ import { HandlerService } from 'projects/libraries/helpers/src/lib/services/hand
 export class ProfessionComponent {
 
   constructor(
-    private readonly fb: FormBuilder,
     private readonly hs: HandlerService,
   ){}
   
   contactForm!: FormGroup
   formName: string = 'Profesion'
-  name!: string
   selection!: Profession
   user: string = 'pedroacevedo' 
-  userID: number = 1
   appID: string = '651d860e8cd11dcf78df2c7e'
   professionID!: string 
-  deleteUrl = `entities/delete/${this.user}/profesiones/${this.appID}`
-  createUrl = `entities/create/${this.user}/profesiones/${this.appID}`
-  updateUrl = `entities/update/${this.user}/profesiones/${this.appID}`
-  getUrl = `entities/${this.user}/profesiones/${this.appID}`
+  baseUrl: string = `${this.user}/profesiones/${this.appID}`
   success: boolean = false
   error: boolean = false
   professions: Profession[] = []
-  showModal: string  = 'none'
   action!: string
 
 
@@ -40,7 +33,7 @@ export class ProfessionComponent {
   }
 
   getProfessions(): void{
-    this.hs.get( this.getUrl )
+    this.hs.get( `entities/${this.baseUrl}` )
     .subscribe((res) => {
       if(!res.data) console.log('Hubo un error o no se encontraron datos');
       else{
@@ -49,26 +42,9 @@ export class ProfessionComponent {
    })
   }
 
-  deleteProfession(id: string): void{
-    this.professionID = id
-    console.log(this.professionID);
-    this.hs.delete(this.deleteUrl, id)
-      .subscribe((resp) => {
-        console.log(resp);
-        if(resp["success"] == false ){
-          this.showErrorMessage()
-        } else{
-          this.showSucessMessage()
-          const currentProf = this.professions.filter( prof => prof._id !== id)
-          this.professions = [...currentProf]
-          // this.getProfessions()
-        }
-      })
-  }
-
   createProf ( nombre: '' ): void {
     const data = { nombre: nombre}
-    this.hs.post(data, this.createUrl)
+    this.hs.post(data, `entities/create/${this.baseUrl}`)
       .subscribe((res) => {
         if ( res['success'] == false ) {
           this.showErrorMessage()
@@ -81,8 +57,23 @@ export class ProfessionComponent {
   
   }
 
+  deleteProfession(id: string): void{
+    this.professionID = id
+    this.hs.delete(`entities/delete/${this.baseUrl}`, id)
+      .subscribe((resp) => {
+        console.log(resp);
+        if(resp["success"] == false ){
+          this.showErrorMessage()
+        } else{
+          this.showSucessMessage()
+          const currentProf = this.professions.filter( prof => prof._id !== id)
+          this.professions = [...currentProf]
+        }
+      })
+  }
+
   updateProf( profesion: Profession ): void{
-    this.hs.put(profesion , `${this.updateUrl}/${profesion._id}`)
+    this.hs.put(profesion , `entities/update/${this.baseUrl}/${profesion._id}`)
       .subscribe((resp: any) => {
         if ( resp['success'] == false ) {
           this.showErrorMessage()
@@ -93,6 +84,11 @@ export class ProfessionComponent {
           
         }
       })
+  }
+
+  selectProfession(profession: Profession): void{
+    this.selection = profession
+    this.action = 'Actualizar profesion'
   }
 
   showSucessMessage(): void{
@@ -109,23 +105,11 @@ export class ProfessionComponent {
     }, 5000);
   }
 
-  initForm(): FormGroup{
-    return this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(7)]]
-    })
-  }
-
   clearValues(): void{
     this.selection = {
       _id: '',
       nombre: ''
     }
-
     this.action = 'Registrar profesion'
-  }
-
-  selectProfession(profession: Profession): void{
-    this.selection = profession
-    this.action = 'Actualizar profesion'
   }
 }

@@ -2,7 +2,9 @@
     bottom: 0;
     z-index: 1000;
   }
-  
+.container-shadow{
+  box-shadow: 0px -5px 20px rgba(1, 42, 112, 0.07) inset
+}
   .alert {
     width: 250px;
   }
@@ -51,6 +53,10 @@
   );
 }
 
+.notifContainer{
+  width: 0;
+}
+
 @media (max-width: 340px) { 
   .cardStyle {
     width: 18rem;
@@ -68,6 +74,10 @@
   .notifContainer {
     left: 1.5rem;
   }
+
+  .container-shadow{
+    margin: 0px 1rem;
+  }
 }
 
 @media (min-width: 330px) { 
@@ -79,8 +89,11 @@
   .notifContainer {
     left: 3rem;
   }
+  
+}
 
-  .notificationMSG {
-    width: 20rem;
+@media (min-width: 398px) { 
+  .h1-m{
+    margin: 0;
   }
 }
