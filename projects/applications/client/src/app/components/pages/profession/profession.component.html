@@ -1,0 +1,63 @@
+<div class="container container-shadow">
+    <div class="pt-2">
+        <div class="d-flex justify-content-center align-items-center gap-4 pb-1" (click)="clearValues()">
+          <h1 class="p-0 h1-m align-self-end">Profesiones</h1>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+              Crear profesion
+          </button>
+        </div>
+        <div class="w-100  justify-content-center p-4" >
+          <div class="d-flex flex-wrap justify-content-center gap-2 "> 
+          <div *ngFor="let profesion of professions"  (click)="selectProfession(profesion)" class="card cardStyle">
+            <div class="card-body pb-0 col">
+                <h3 class="card-title">{{profesion?.nombre | titlecase}}</h3>
+                <div class="d-flex gap-1 justify-content-center" >
+                  <button *ngIf="profesion?._id === selection?._id"
+                   class="btn btn-primary col small-button"  data-bs-toggle="modal" data-bs-target="#createModal">
+                    Actualizar
+                  </button>  
+                  <button *ngIf="profesion?._id === selection?._id"
+                      class="btn btn-danger col small-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Eliminar
+                  </button>
+                </div>
+            </div>
+            <div  class="modal fade " id="exampleModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog  modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">¿Desea eliminar {{selection?.nombre}}?</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-end">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)='deleteProfession(selection._id); clearValues()'>Confirmar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div  class="fixed-bottom notifContainer">
+      <div *ngIf="error" class="alert alert-danger d-flex justify-content-center align-content-center fade-in show notificationMSG">
+        <i class="bi bi-x-circle-fill">
+          <span class="fw-normal fs-6 m-0">
+          No se pudo realizar esta operación
+          </span>
+        </i> 
+      </div>
+      <div *ngIf="success" class="alert alert-success fade-in d-flex justify-content-center gap-2 align-content-center notificationMSG">
+        <i class="bi bi-check-circle-fill"></i>
+        <span class="fw-normal fs-6 m-0">
+          Operación realizada
+        </span>
+      </div>
+    </div>
+
+    <app-create-update-component 
+    (createProfEmitter)="createProf($event)"
+    (updateProfEmitter)="updateProf($event)"
+    [selection]="selection" [action]="action" ></app-create-update-component>
+</div>
