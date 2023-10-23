@@ -1,1 +1,13 @@
-<p>marca works!</p>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <app-page-title [title]="pageTitle"></app-page-title>
+  <button
+    class="btn btn-primary btn-bg-purple"
+    data-bs-toggle="modal"
+    data-bs-target="#modalCenter"
+  >
+    <i class="bi bi-plus-circle"></i>
+    {{ " " }}Nueva
+  </button>
+</div>
+<app-marca-table [marcas]="marcas"></app-marca-table>
+<app-create-update-marca></app-create-update-marca>

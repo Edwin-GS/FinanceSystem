@@ -1,0 +1,56 @@
+<div class="modal fade" id="modalCenter" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 fw-semibold m-0">Agregar Marca</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3" [formGroup]="brandForm">
+          <div class="col-md-12">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="nombre"
+                name="nombre"
+                formControlName="nombre"
+                placeholder="BMW"
+              />
+              <label for="nombre">Marca</label>
+            </div>
+            <div
+              *ngIf="brandForm.get('nombre')?.touched  && brandForm.get('nombre')?.errors?.['required']"
+              class="text-danger mt-2"
+            >
+              La marca es requida
+            </div>
+            <div
+              *ngIf="brandForm.get('nombre')?.touched  && brandForm.get('nombre')?.errors?.['minlength']"
+              class="text-danger mt-2"
+            >
+              La marca debe tener minimo 3 caracteres
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          (click)="onSubmit(brandForm.get('nombre')?.value)"
+          class="btn btn-primary"
+        >
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

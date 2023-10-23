@@ -3,6 +3,7 @@ import { UserComponent } from './users/user.component';
 import { MiAppsComponent } from './mi-apps/mi-apps.component';
 import { ClassicComponent } from '../dashboard/extras/classic/classic.component';
 import { MarcaComponent } from './marca/marca.component';
+import { CreateUpdateMarcaComponent } from './marca/create-update-marca/create-update-marca.component';
 
 /**
  * Base route information
@@ -21,7 +22,13 @@ const UserRoutes: Routes = [
   {
     path: '',
     component: ClassicComponent,
-    children: [{ path: 'brand', component: MarcaComponent, title: 'Brands' }],
+    children: [
+      {
+        path: 'brand',
+        component: MarcaComponent,
+        title: 'Brands',
+      },
+    ],
   },
 ];
 
