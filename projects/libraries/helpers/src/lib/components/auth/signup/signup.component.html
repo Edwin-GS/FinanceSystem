@@ -14,7 +14,7 @@
     >
       <div class="feature-image mb-3">
         <img
-          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+          src="https://bootstrapious.com/i/snippets/sn-registeration/illustration.svg"
           class="img-fluid"
           style="width: 250px"
         />
@@ -23,7 +23,7 @@
         class="text-white fs-2"
         style="font-family: 'Courier New', Courier, monospace; font-weight: 600"
       >
-        Verificar
+        Crea tu Cuenta
       </p>
       <small
         class="text-white text-wrap text-center"
@@ -39,8 +39,14 @@
         <div class="header-text mb-4">
           <h1>Registro de usuarios</h1>
         </div>
+        <div class="error-mensaje">
+          <div *ngIf="showAlert" class="alert alert-danger">
+            Por favor, complete todos los campos requeridos.
+          </div>
+        </div>
+
         <form (ngSubmit)="onSubmit()" [formGroup]="signupForm">
-          <div class="input-group mb-3" formGroupName="user">
+          <div class="input-group mb-2" formGroupName="user">
             <input
               type="text"
               class="form-control form-control-lg bg-light fs-6"
@@ -53,22 +59,20 @@
           <!--name validators-->
           <div class="error-mensaje">
             <div
-              *ngIf="signupForm.get('name')?.touched  && signupForm.get('name')?.errors?.['required']"
+              *ngIf="signupForm.get('user.user')?.touched  && signupForm.get('user.user')?.errors?.['required']"
               class="text-danger"
             >
               Nombre usuario obligatorio.
             </div>
             <div
-              *ngIf="signupForm.get('name')?.touched  && signupForm.get('name')?.errors?.['minlength']"
-              class="text-danger"
-            >
-              El nombre debe tener al menos
-              {{signupForm.get('name')?.errors?.['minlength'].requiredLength}}
-              caracteres.
-            </div>
+            *ngIf="signupForm.get('user.user')?.touched  && signupForm.get('user.user')?.errors?.['pattern']"
+            class="text-danger"
+          >
+            El nombre de usuario debe incluir al menos 1 letra mayuscula y tener más de 5 caracteres
+          </div>
           </div>
 
-          <div class="input-group mb-3" formGroupName="user">
+          <div class="input-group mb-2" formGroupName="user">
             <input
               type="email"
               class="form-control form-control-lg bg-light fs-6"
@@ -81,20 +85,20 @@
           <!--Emial validators-->
           <div class="error-mensaje">
             <div
-              *ngIf="signupForm.get('email')?.touched  && signupForm.get('email')?.errors?.['required']"
+              *ngIf="signupForm.get('user.email')?.touched  && signupForm.get('user.email')?.errors?.['required']"
               class="text-danger"
             >
               Correo obligatorio.
             </div>
             <div
-              *ngIf="signupForm.get('email')?.touched  && signupForm.get('email')?.errors?.['pattern']"
+              *ngIf="signupForm.get('user.email')?.touched  && signupForm.get('user.email')?.errors?.['pattern']"
               class="text-danger"
             >
               El formato del correo electrónico no es válido.
             </div>
           </div>
 
-          <div class="input-group mb-1" formGroupName="user">
+          <div class="input-group mb-2" formGroupName="user">
             <input
               type="password"
               class="form-control form-control-lg bg-light fs-6"
@@ -109,25 +113,18 @@
           <!--password validators-->
           <div class="error-mensaje">
             <div
-              *ngIf="signupForm.get('password')?.touched  &&signupForm.get('password')?.errors?.['required']"
+              *ngIf="signupForm.get('user.password')?.touched  &&signupForm.get('user.password')?.errors?.['required']"
               class="text-danger"
             >
               Contraseña obligatoria.
             </div>
+          
             <div
-              *ngIf="signupForm.get('password')?.touched  && signupForm.get('password')?.errors?.['minlength']"
-              class="text-danger"
-            >
-              La contraseña debe tener al menos
-              {{signupForm.get('password')?.errors?.['minlength'].requiredLength}}
-              caracteres.
-            </div>
-            <div
-              *ngIf="signupForm.get('password')?.touched  && signupForm.get('password')?.errors?.['pattern']"
+              *ngIf="signupForm.get('user.password')?.touched  && signupForm.get('user.password')?.errors?.['pattern']"
               class="text-danger"
             >
               La contraseña debe incluir al menos una letra mayúscula, una letra
-              minúscula y un número.
+              minúscula, un número y mas 8 caracteres.
             </div>
           </div>
 
@@ -156,12 +153,7 @@
             </button>
           </div>
 
-          <!-- <div class="error-mensaje">
-              <div *ngIf="showAlert" class="alert alert-danger">
-                Por favor, complete todos los campos requeridos.
-              </div>
-            </div> -->
-
+        
           <!-- <div class="input-group mb-3">
               <button class="btn btn-lg btn-light w-100 fs-6"><img src="assets/google.png" style="width:20px"
                   class="me-2"><small>Ingresar con google</small></button>
@@ -181,15 +173,15 @@
           </div>
           <div class="notifier-dialog-body">
             <p>
-              Please check your email ({{ signupForm.value.user.email }}) to
-              verify your account.
+              Porfavor, revise su correo electronico ({{ signupForm.value.user.email }}) para verificar su cuenta.
             </p>
           </div>
           <div class="notifier-dialog-footer">
             <button type="button" (click)="closeDialog()">Close</button>
           </div>
         </div>
-        <p>Already have an account? <a href="/login">Login here</a></p>
+        <p>
+          ¿Ya tienes una cuenta? <a routerLink="/login">Login here</a></p>
       </div>
     </div>
   </div>

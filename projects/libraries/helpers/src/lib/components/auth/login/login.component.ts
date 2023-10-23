@@ -30,14 +30,15 @@ export class LoginComponent implements OnInit {
           '',
           [
             Validators.required,
-            Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/), // Validación de correo electrónico)]
+            Validators.minLength(5)
+            
           ],
         ],
         password: [
           '',
           [
             Validators.required,
-            Validators.minLength(8), //validacion contraseña
+            Validators.minLength(8),
             Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/),
           ],
         ],
@@ -79,6 +80,11 @@ export class LoginComponent implements OnInit {
           //this.showAlert = true;
         }
       );
+      } else {
+        this.loginForm.markAllAsTouched();
+        this.showAlert = true;
+      } 
+
+      }
     }
-  }
-}
+  
