@@ -16,8 +16,8 @@ export const isloggedGuard: CanActivateFn = (route, state) => {
   }
 
   if (userString) {
-    const username = userString.name;
-    const userId = userString.id;
+    const username = userString.userdata.name;
+    const userId = userString.userdata.id;
 
     const updatedDashboard = dashboard
       .replace(':user', userId)

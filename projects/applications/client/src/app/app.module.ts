@@ -9,7 +9,6 @@ import { SpinnerInterceptor } from './components/pages/loading/interceptor/spinn
 import { LoadingModule } from './components/pages/loading/loading.module';
 
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -17,7 +16,6 @@ import { LoadingModule } from './components/pages/loading/loading.module';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    //agregado erinson
     FormsModule,
     ReactiveFormsModule,
     LoadingModule

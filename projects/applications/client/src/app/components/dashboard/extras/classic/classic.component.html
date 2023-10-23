@@ -1,5 +1,5 @@
 <div
-  class="container-fluid"
+  class="container-fluid min-vh-100 bg-page"
   [ngClass]="[showSideBar ? 'toggle-sidebar-btn' : 'toggle-sidebar']"
 >
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -51,7 +51,10 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center">
+              <a
+                class="dropdown-item d-flex align-items-center"
+                (click)="logOut()"
+              >
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>

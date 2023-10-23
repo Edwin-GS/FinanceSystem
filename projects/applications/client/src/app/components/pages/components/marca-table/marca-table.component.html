@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-body">
+    <!-- <h5 class="card-title">Default Table</h5> -->
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let marca of marcas" class="align-middle">
+          <th scope="row">#</th>
+          <td>{{ marca.nombre }}</td>
+          <td>
+            <button type="button" class="btn btn-warning btn-sm">
+              <i class="bi bi-pencil-square text-white"></i>
+            </button>
+            {{ "" }}
+            <button type="button" class="btn btn-danger btn-sm">
+              <i class="bi bi-x-octagon"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

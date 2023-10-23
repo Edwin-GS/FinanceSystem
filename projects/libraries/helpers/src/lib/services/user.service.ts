@@ -11,8 +11,10 @@ export class UserService {
 
   logout() {
     localStorage.removeItem('LEGOFT_SID_SITE');
+    localStorage.removeItem('USER');
+    localStorage.removeItem('APP');
 
-    this.router.navigate(['/auth/login']).catch(() => {
+    this.router.navigate(['/login']).catch(() => {
       // Todo: add toast notifier
       console.log('Navigating to login page failed');
     });
@@ -34,8 +36,10 @@ export class UserService {
     const userString = localStorage.getItem('USER');
 
     if (userString) {
-      const user = JSON.parse(userString);
+      const userdata = JSON.parse(userString);
+      const user = { userdata, app: localStorage.getItem('APP') };
       return user;
     }
+    return;
   }
 }

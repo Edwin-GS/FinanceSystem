@@ -21,14 +21,15 @@ export class MiAppsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.hs.get(`applications/${this.userData.name}`).subscribe((resp) => {
-      if (resp['success'] === false) {
-        console.log('Error al cargar las aplicaciones');
-      } else {
-        console.log(resp.data);
-        this.apps = [...resp.data];
-      }
-    });
+    this.hs
+      .get(`applications/${this.userData?.userdata.name}`)
+      .subscribe((resp) => {
+        if (resp['success'] === false) {
+          console.log('Error al cargar las aplicaciones');
+        } else {
+          this.apps = [...resp.data];
+        }
+      });
   }
 
   onSelectedApp(_id: string): void {
@@ -38,8 +39,8 @@ export class MiAppsComponent implements OnInit {
 
     localStorage.setItem('APP', _id);
 
-    const user = this.userData.name;
-    const userId = this.userData.id;
+    const user = this.userData?.userdata.name;
+    const userId = this.userData?.userdata.id;
 
     const updatedDashboard = this.dashboard
       .replace(':user', user)
