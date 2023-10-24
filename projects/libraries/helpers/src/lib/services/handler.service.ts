@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { UserService } from 'projects/libraries/helpers/src/lib/services/user.service';
-import { environment } from '../../../../../applications/client/src/environments/environment';
+import { environmentProd } from '../../../../../applications/client/src/environments/environmentprod';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,7 @@ export class HandlerService {
       .set('Authorization', `${this.sid}`);
 
     return this.httpClient
-      .get(`${environment.LEGOFT_BACKEND_URL}${this.route}`, { headers })
+      .get(`${environmentProd.LEGOFT_BACKEND_URL}${this.route}`, { headers })
       .pipe(
         map((d) => {
           return this.response(d);
@@ -38,7 +38,9 @@ export class HandlerService {
       .set('Authorization', `${this.sid}`);
 
     return this.httpClient
-      .post(`${environment.LEGOFT_BACKEND_URL}${this.route}`, data, { headers })
+      .post(`${environmentProd.LEGOFT_BACKEND_URL}${this.route}`, data, {
+        headers,
+      })
       .pipe(
         map((d) => {
           return this.response(d);
@@ -54,7 +56,9 @@ export class HandlerService {
       .set('Authorization', `${this.sid}`);
 
     return this.httpClient
-      .put(`${environment.LEGOFT_BACKEND_URL}${this.route}`, data, { headers })
+      .put(`${environmentProd.LEGOFT_BACKEND_URL}${this.route}`, data, {
+        headers,
+      })
       .pipe(
         map((d) => {
           return this.response(d);
@@ -70,7 +74,7 @@ export class HandlerService {
       .set('Authorization', `${this.sid}`);
 
     return this.httpClient
-      .delete(`${environment.LEGOFT_BACKEND_URL}${this.route}`, { headers })
+      .delete(`${environmentProd.LEGOFT_BACKEND_URL}${this.route}`, { headers })
       .pipe(
         map((d) => {
           return this.response(d);
@@ -91,8 +95,8 @@ export class HandlerService {
   }
 
   response(data: any) {
-    if (data['sid'] !== 'open-auth' && data['sid'] !== 'handler-auth') {
-      this.sid = data['sid'];
+    this.sid = data['sid'];
+    if (data['sid']) {
       localStorage.setItem('LEGOFT_SID_SITE', this.sid);
     }
     return data['resp'];
