@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
 import { Profession } from 'projects/libraries/helpers/src/lib/models/profession.doc';
 import { HandlerService } from 'projects/libraries/helpers/src/lib/services/handler.service';
+import { UserService } from 'projects/libraries/helpers/src/lib/services/user.service';
 
 @Component({
   selector: 'app-profession',
@@ -13,23 +13,33 @@ export class ProfessionComponent {
 
   constructor(
     private readonly hs: HandlerService,
+    private usr: UserService,
+    private readonly fb: FormBuilder,
+
   ){}
   
-  contactForm!: FormGroup
+  userData = this.usr.getLocalStorage();
+  baseUrl: string = `${this.userData?.userdata.name}/profesiones/${this.userData?.app}`
   formName: string = 'Profesion'
-  selection!: Profession
+  selection!: Profession | undefined
   user: string = 'pedroacevedo' 
   appID: string = '651d860e8cd11dcf78df2c7e'
   professionID!: string 
-  baseUrl: string = `${this.user}/profesiones/${this.appID}`
   success: boolean = false
   error: boolean = false
-  professions: Profession[] = []
+  professions: (Profession | undefined)[] = []
   action!: string
-
+  registerForm!: FormGroup
 
   ngOnInit(): void {
     this.getProfessions()
+    this.registerForm = this.initForm()
+  }
+
+  initForm(): FormGroup{
+    return this.fb.group({
+      nombre: [this.selection?.nombre, [Validators.required, Validators.minLength(7)]]
+    })
   }
 
   getProfessions(): void{
@@ -51,14 +61,13 @@ export class ProfessionComponent {
         } else {
           this.showSucessMessage()
           const resp: Profession = { _id: res.data._id, nombre: nombre }
-          this.professions.push(resp)
+          this.professions?.push(resp)
         }
       })
   
   }
 
-  deleteProfession(id: string): void{
-    this.professionID = id
+  deleteProfession(id: string | undefined): void{
     this.hs.delete(`entities/delete/${this.baseUrl}`, id)
       .subscribe((resp) => {
         console.log(resp);
@@ -66,27 +75,29 @@ export class ProfessionComponent {
           this.showErrorMessage()
         } else{
           this.showSucessMessage()
-          const currentProf = this.professions.filter( prof => prof._id !== id)
-          this.professions = [...currentProf]
+
+          const currentProf = this.professions?.filter((prof) => prof?._id !== id )
+          this.professions = [ ...currentProf ]
         }
       })
   }
 
-  updateProf( profesion: Profession ): void{
-    this.hs.put(profesion , `entities/update/${this.baseUrl}/${profesion._id}`)
+  updateProf( profesion: Profession | undefined ): void{
+    this.hs.put(profesion , `entities/update/${this.baseUrl}/${profesion?._id}`)
       .subscribe((resp: any) => {
         if ( resp['success'] == false ) {
           this.showErrorMessage()
         } else {
-          const currentProf = this.professions.filter((items) => items._id !== profesion._id)
-          this.professions = [...currentProf, profesion]
+          const currentProf = this.professions?.filter((items) => items?._id !== profesion?._id)
+          this.professions = [ ...currentProf ]
+          this.professions.unshift( profesion )
           this.showSucessMessage()
-          
         }
       })
   }
 
-  selectProfession(profession: Profession): void{
+  selectProfession(profession: Profession | undefined ): void{
+    this.registerForm = this.initForm()
     this.selection = profession
     this.action = 'Actualizar profesion'
   }

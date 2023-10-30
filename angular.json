@@ -65,8 +65,8 @@
               "namedChunks": true,
               "fileReplacements": [
                 {
-                  "replace": "projects/applications/client/src/environments/environment.ts",
-                  "with": "projects/applications/client/src/environments/environment.development.ts"
+                  "replace": "projects/applications/client/src/environments/environmentprod.ts",
+                  "with": "projects/applications/client/src/environments/environmentprod.ts"
                 }
               ]
             }
