@@ -10,6 +10,10 @@ import { PageTitleComponent } from './components/page-title/page-title.component
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { BrandComponent } from './brand/brand.component';
 import { CreateUpdateBrandComponent } from './brand/create-update-brand/create-update-brand.component';
+import { PropiedadesComponent } from './propiedades/propiedades.component';
+import { PropsTableComponent } from './components/prop-table/prop-table.component';
+import { CreateUpdatePropsComponent } from './propiedades/create-update-propiedades/create-update-propiedades.component';
+import { LimitStringPipe } from './pipes/limit-string.pipe';
 import { provideHotToastConfig } from '@ngneat/hot-toast';
 
 @NgModule({
@@ -22,6 +26,10 @@ import { provideHotToastConfig } from '@ngneat/hot-toast';
     ConfirmModalComponent,
     BrandComponent,
     CreateUpdateBrandComponent,
+    CreateUpdatePropsComponent,
+    PropiedadesComponent,
+    PropsTableComponent,
+    LimitStringPipe,
   ],
 
   imports: [CommonModule, ReactiveFormsModule, USER_ROUTES],

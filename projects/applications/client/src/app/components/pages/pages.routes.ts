@@ -6,6 +6,7 @@ import { ProfessionComponent } from './profession/profession.component';
 import { MiAppsComponent } from './mi-apps/mi-apps.component';
 import { ClassicComponent } from '../dashboard/extras/classic/classic.component';
 import { BrandComponent } from './brand/brand.component';
+import { PropiedadesComponent } from './propiedades/propiedades.component';
 
 /**
  * Base route information
@@ -26,10 +27,16 @@ const UserRoutes: Routes = [
     component: ClassicComponent,
     children: [
       { path: 'brand', component: BrandComponent, title: 'Brands' },
+
       {
         path: 'profession',
         component: ProfessionComponent,
         title: 'Profession',
+      },
+      {
+        path: 'properties',
+        component: PropiedadesComponent,
+        title: 'Properties',
       },
     ],
   },

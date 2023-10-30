@@ -1,4 +1,4 @@
 export interface IProfession {
-    _id: string,
+    _id: string | undefined,
     nombre: string
 }

@@ -9,6 +9,7 @@
         class="btn btn-primary"
         data-bs-toggle="modal"
         data-bs-target="#createModal"
+        (click)="this.registerForm.reset()"
       >
         Crear profesion
       </button>
@@ -17,10 +18,9 @@
       <div class="d-flex flex-wrap justify-content-center gap-2">
         <div
           *ngFor="let profesion of professions"
-          (click)="selectProfession(profesion)"
           class="card cardStyle"
         >
-          <div class="card-body pb-0 col">
+          <div class="card-body pb-0 col" (click)="selectProfession(profesion)">
             <h3 class="card-title">{{ profesion?.nombre | titlecase }}</h3>
             <div class="d-flex gap-1 justify-content-center">
               <button
@@ -73,7 +73,7 @@
                     type="button"
                     class="btn btn-danger"
                     data-bs-dismiss="modal"
-                    (click)="deleteProfession(selection._id); clearValues()"
+                    (click)="deleteProfession(selection?._id); clearValues()"
                   >
                     Confirmar
                   </button>
@@ -110,5 +110,6 @@
     (updateProfEmitter)="updateProf($event)"
     [selection]="selection"
     [action]="action"
+    [registerForm]="registerForm"
   ></app-create-update-component>
 </div>
