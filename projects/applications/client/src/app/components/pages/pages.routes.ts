@@ -27,9 +27,17 @@ const UserRoutes: Routes = [
     path: '',
     component: ClassicComponent,
     children: [
-      { path: 'profession', component: ProfessionComponent, title: 'Profession' },
-      { path: 'properties', component: PropiedadesComponent, title: 'Properties' },
-      { path: 'clients', component: ClientComponent, title: 'Clients' }
+      {
+        path: 'profession',
+        component: ProfessionComponent,
+        title: 'Profession',
+      },
+      {
+        path: 'properties',
+        component: PropiedadesComponent,
+        title: 'Properties',
+      },
+      { path: 'clients', component: ClientComponent, title: 'Clients' },
       { path: 'brand', component: BrandComponent, title: 'Brands' },
 
       {
