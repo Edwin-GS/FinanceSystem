@@ -14,6 +14,9 @@ import { PropiedadesComponent } from './propiedades/propiedades.component';
 import { PropsTableComponent } from './components/prop-table/prop-table.component';
 import { CreateUpdatePropsComponent } from './propiedades/create-update-propiedades/create-update-propiedades.component';
 import { LimitStringPipe } from './pipes/limit-string.pipe';
+import { ClientComponent } from './client/client.component';
+import { CreateUpdateClientComponent } from './client/create-update-client/create-update-client.component';
+import { ClientCardComponent } from './components/client-card/client-table.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +29,12 @@ import { LimitStringPipe } from './pipes/limit-string.pipe';
     PageTitleComponent,
     CreateUpdateMarcaComponent,
     CreateUpdatePropsComponent,
+    CreateUpdateClientComponent,
     PropiedadesComponent,
     PropsTableComponent,
-    LimitStringPipe
+    LimitStringPipe,
+    ClientComponent,
+    ClientCardComponent
   ],
 
   imports: [CommonModule, ReactiveFormsModule, USER_ROUTES],

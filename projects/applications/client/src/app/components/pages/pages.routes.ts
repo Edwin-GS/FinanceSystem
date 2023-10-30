@@ -8,6 +8,7 @@ import { ClassicComponent } from '../dashboard/extras/classic/classic.component'
 import { MarcaComponent } from './marca/marca.component';
 import { CreateUpdateMarcaComponent } from './marca/create-update-marca/create-update-marca.component';
 import { PropiedadesComponent } from './propiedades/propiedades.component';
+import { ClientComponent } from './client/client.component';
 
 /**
  * Base route information
@@ -29,7 +30,8 @@ const UserRoutes: Routes = [
     children: [
       { path: 'brand', component: MarcaComponent, title: 'Brands' },
       { path: 'profession', component: ProfessionComponent, title: 'Profession' },
-      { path: 'properties', component: PropiedadesComponent, title: 'Properties' }
+      { path: 'properties', component: PropiedadesComponent, title: 'Properties' },
+      { path: 'clients', component: ClientComponent, title: 'Clients' }
     ],
   },
 ];
