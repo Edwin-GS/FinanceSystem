@@ -57,12 +57,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         (resp) => {
           if (resp['success'] === false) {
             console.log('Error al iniciar sesión'); // Mensaje de error al iniciar sesión
-<<<<<<< HEAD
-            this.showAlert=true;
-=======
             console.log(resp);
             this.showAlert = true;
->>>>>>> 3d6c563c20658df49353991a3b4b199ca987c7a0
           } else {
             console.log(resp, 'Esto es la respuesta');
             localStorage.setItem(
