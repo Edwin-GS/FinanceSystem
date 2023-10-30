@@ -10,6 +10,10 @@ import { MarcaComponent } from './marca/marca.component';
 import { MarcaTableComponent } from './components/marca-table/marca-table.component';
 import { PageTitleComponent } from './components/page-title/page-title.component';
 import { CreateUpdateMarcaComponent } from './marca/create-update-marca/create-update-marca.component';
+import { PropiedadesComponent } from './propiedades/propiedades.component';
+import { PropsTableComponent } from './components/prop-table/prop-table.component';
+import { CreateUpdatePropsComponent } from './propiedades/create-update-propiedades/create-update-propiedades.component';
+import { LimitStringPipe } from './pipes/limit-string.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +25,10 @@ import { CreateUpdateMarcaComponent } from './marca/create-update-marca/create-u
     MarcaTableComponent,
     PageTitleComponent,
     CreateUpdateMarcaComponent,
+    CreateUpdatePropsComponent,
+    PropiedadesComponent,
+    PropsTableComponent,
+    LimitStringPipe
   ],
 
   imports: [CommonModule, ReactiveFormsModule, USER_ROUTES],

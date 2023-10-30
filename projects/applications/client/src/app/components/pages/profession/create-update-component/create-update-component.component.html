@@ -7,13 +7,39 @@
         </div>
         <div class="modal-body">
             <form class="pt-3" (ngSubmit)="onSubmit( this.registerForm.get('nombre')?.value )" [formGroup]="registerForm">
-                <div class="mb-4">
+                <!-- <div class="mb-4">
                   <label for="nombre" class="form-label">Nombre</label>
                   <input type="text" class="form-control"  name="nombre" value="{{this.selection?.nombre}}" required formControlName="nombre">
                   <div *ngIf="registerForm.get('nombre')?.touched && registerForm.get('nombre')?.errors?.['required']" 
                   class="alert alert-danger mrg-10">Este campo es requerido</div>
                   <div *ngIf="registerForm.get('nombre')?.touched && registerForm.get('nombre')?.errors?.['minlength']" 
-                  class="alert alert-danger mrg-10">El nombre debe contener mas de {{registerForm.get('nombre')?.errors?.['minlength'].requiredLength}} caracteres</div>
+                  class="alert alert-danger mrg-10">El nombre debe contener mas de {{registerForm.get('nombre')?.errors?.['minlength'].requiredLength}} caracteres</div>      
+                </div> -->
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nombre"
+                      name="nombre"
+                      formControlName="nombre"
+                      placeholder="BMW"
+                      value="{{this.selection?.nombre}}"
+                    />
+                    <label for="nombre">Profesion</label>
+                  </div>
+                  <div
+                    *ngIf="registerForm.get('nombre')?.touched  && registerForm.get('nombre')?.errors?.['required']"
+                    class="text-danger mt-2"
+                  >
+                    La profesion es requida
+                  </div>
+                  <div
+                    *ngIf="registerForm.get('nombre')?.touched  && registerForm.get('nombre')?.errors?.['minlength']"
+                    class="text-danger mt-2"
+                  >
+                    El nombre debe contener mas de {{registerForm.get('nombre')?.errors?.['minlength'].requiredLength}} caracteres
+                  </div>
                 </div>
             </form>
         </div>

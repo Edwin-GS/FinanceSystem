@@ -10,14 +10,13 @@ import { Profession } from 'projects/libraries/helpers/src/lib/models/profession
 })
 export class CreateUpdateComponentComponent {
 
-  constructor(
-    private readonly fb: FormBuilder,
-  ){}
-  // @Input() action!: string
-  @Input() selection!: Profession
+  constructor(){}
+  @Input() selection!: Profession | undefined
   @Input() action!: string
-
-  registerForm!: FormGroup
+  @Input() registerForm!: FormGroup
+  @Output() createProfEmitter = new EventEmitter<''>()
+  @Output() updateProfEmitter = new EventEmitter<Profession | undefined >()
+  
   formName: string = 'Profesion'
   sid: string = '$2a$10$w2pNyaEEV3Dta4w5qyDJ8O6PupPXlbZdxEvsB9WaD4x1EAVB63.Mm'
   user: string = 'pedroacevedo' 
@@ -28,19 +27,6 @@ export class CreateUpdateComponentComponent {
   updateUrl = `entities/update/${this.user}/profesiones/${this.appID}`
   success: boolean = false
   error: boolean = false
-  // action!: string 
-
-  @Output() createProfEmitter = new EventEmitter<''>()
-  @Output() updateProfEmitter = new EventEmitter<Profession>()
-  ngOnInit(): void {
-    this.registerForm = this.initForm()
-  }
-  
-  initForm(): FormGroup{
-    return this.fb.group({
-      nombre: [this.selection, [Validators.required, Validators.minLength(7)]]
-    })
-  }
   
   onSubmit( nombre: '' ): void{
     if ( this.selection?._id == '' ){
@@ -55,8 +41,8 @@ export class CreateUpdateComponentComponent {
     this.createProfEmitter.emit(nombre)
   }
 
-  onUpdateProf( item: Profession, change: '' ): void{
-    const updateData = { _id: item._id, nombre: change}
+  onUpdateProf( item: Profession | undefined , change: '' ): void{
+    const updateData: Profession = { _id: item?._id, nombre: change}
     this.updateProfEmitter.emit( updateData )
   }
 
