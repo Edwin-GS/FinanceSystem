@@ -48,7 +48,7 @@ export class MiAppsComponent implements OnInit, OnDestroy {
       .replace(':user', user)
       .replace(':user_id', userId);
     // Redirigimos al usuario a su panel de control después de seleccionar la application
-    this.router.navigate([updatedDashboard, { user, userId }]);
+    this.router.navigate([updatedDashboard]);
   }
 
   ngOnDestroy(): void {

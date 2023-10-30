@@ -8,6 +8,7 @@
           class="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
+          (click)="brandForm.reset()"
         ></button>
       </div>
       <div class="modal-body">
@@ -21,6 +22,7 @@
                 name="nombre"
                 formControlName="nombre"
                 placeholder="BMW"
+                value="{{ this.selectedBrand?.nombre }}"
               />
               <label for="nombre">Marca</label>
             </div>
@@ -40,13 +42,28 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+          (click)="brandForm.reset()"
+        >
           Cancelar
         </button>
         <button
+          *ngIf="isCreating"
           type="button"
-          (click)="onSubmit(brandForm.get('nombre')?.value)"
           class="btn btn-primary"
+          (click)="onAddNewBrand(this.brandForm.get('nombre')?.value)"
+        >
+          Guardar
+        </button>
+        <button
+          *ngIf="!isCreating"
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="onUpdateBrand(this.brandForm.get('nombre')?.value)"
         >
           Guardar
         </button>

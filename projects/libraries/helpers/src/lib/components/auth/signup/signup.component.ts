@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HandlerService } from '../../../services/handler.service';
-import { environment } from 'projects/applications/client/src/environments/environment.development';
+import { environmentProd } from 'projects/applications/client/src/environments/environmentprod';
 
 @Component({
   selector: 'lib-signup',
@@ -57,7 +57,7 @@ export class SignupComponent {
       const sendEmail = {
         to: this.signupForm.value.user.email,
         subject: 'Check your Email',
-        url: `${environment.LEGOFT_FRONTEND_URL}`,
+        url: `${environmentProd.LEGOFT_FRONTEND_URL}`,
         msg: {
           title: 'Check your Email',
           text: 'To verify your email click on the link.',
@@ -92,7 +92,7 @@ export class SignupComponent {
       (err: string) => {
         console.error('Error creating user: ' + err);
       };
-    }else {
+    } else {
       this.signupForm.markAllAsTouched();
       this.showAlert = true;
     }
