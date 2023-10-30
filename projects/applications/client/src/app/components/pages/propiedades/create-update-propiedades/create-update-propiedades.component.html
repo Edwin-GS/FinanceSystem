@@ -1,0 +1,145 @@
+<div class="modal fade" id="modalCenter" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 fw-semibold m-0">{{ action }}</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3" (ngSubmit)="onSubmit( this.registerForm.value )" [formGroup]="registerForm">
+          <div class="col-md-12">
+            <!-- Direccion -->
+            <div class="col-md-12 pb-1">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="direccion"
+                  name="direccion"
+                  formControlName="direccion"
+                  placeholder="BMW"
+                  value="{{this.selection?.direccion}}"
+                />
+                <label for="direccion">Direccion</label>
+              </div>
+              <div
+                *ngIf="registerForm.get('direccion')?.touched  && registerForm.get('direccion')?.errors?.['required']"
+                class="text-danger mt-2"
+              >
+                La direccion es requida
+              </div>
+              <div
+                *ngIf="registerForm.get('direccion')?.touched  && registerForm.get('direccion')?.errors?.['minlength']"
+                class="text-danger mt-2"
+              >
+                Este campo debe contener mas de {{registerForm.get('direccion')?.errors?.['minlength'].requiredLength}} caracteres
+              </div>
+            </div>
+
+            <!-- Descripcion -->
+            <div class="col-md-12 pb-1">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="descripcion"
+                  name="descripcion"
+                  formControlName="descripcion"
+                  placeholder="BMW"
+                  value="{{this.selection?.descripcion}}"
+                />
+                <label for="descripcion">Descripcion</label>
+              </div>
+              <div
+                *ngIf="registerForm.get('descripcion')?.touched  && registerForm.get('descripcion')?.errors?.['required']"
+                class="text-danger mt-2"
+              >
+                La descripcion es requida
+              </div>
+              <div
+                *ngIf="registerForm.get('descripcion')?.touched  && registerForm.get('descripcion')?.errors?.['minlength']"
+                class="text-danger mt-2"
+              >
+                Este campo debe contener mas de {{registerForm.get('descripcion')?.errors?.['minlength'].requiredLength}} caracteres
+              </div>
+            </div>
+
+            <!-- Numero titulo -->
+            <div class="col-md-12 pb-1">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="numerotitulo"
+                  name="numerotitulo"
+                  formControlName="numerotitulo"
+                  placeholder="BMW"
+                  value="{{this.selection?.numerotitulo}}"
+                />
+                <label for="numerotitulo">Numero titulo</label>
+              </div>
+              <div
+                *ngIf="registerForm.get('numerotitulo')?.touched  && registerForm.get('numerotitulo')?.errors?.['required']"
+                class="text-danger mt-2"
+              >
+                El numero del titulo es requido
+              </div>
+              <div
+                *ngIf="registerForm.get('numerotitulo')?.touched  && registerForm.get('numerotitulo')?.errors?.['minlength']"
+                class="text-danger mt-2"
+              >
+                Este campo debe contener mas de {{registerForm.get('numerotitulo')?.errors?.['minlength'].requiredLength}} caracteres
+              </div>
+            </div>
+
+             <!-- Nombre propietario -->
+             <div class="col-md-12 pb-1">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombrepropietario"
+                  name="nombrepropietario"
+                  formControlName="nombrepropietario"
+                  placeholder="BMW"
+                  value="{{this.selection?.nombrepropietario}}"
+                />
+                <label for="nombrepropietario">Nombre del propietario</label>
+              </div>
+              <div
+                *ngIf="registerForm.get('nombrepropietario')?.touched  && registerForm.get('nombrepropietario')?.errors?.['required']"
+                class="text-danger mt-2"
+              >
+                El nombre del propietario es requido
+              </div>
+              <div
+                *ngIf="registerForm.get('nombrepropietario')?.touched  && registerForm.get('nombrepropietario')?.errors?.['minlength']"
+                class="text-danger mt-2"
+              >
+                Este campo debe contener mas de {{registerForm.get('nombrepropietario')?.errors?.['minlength'].requiredLength}} caracteres
+              </div>
+            </div>
+
+          </div>
+        </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onSubmit( this.registerForm.value )"
+          [disabled]="registerForm.invalid"
+          >
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

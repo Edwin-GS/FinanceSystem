@@ -1,15 +1,17 @@
 .fixed-bottom {
-    bottom: 0;
-    z-index: 1000;
-  }
-.container-shadow{
+  bottom: 0;
+  z-index: 1000;
+}
+
+  .container-shadow{
   box-shadow: 0px -5px 20px rgba(1, 42, 112, 0.07) inset
 }
-  .alert {
-    width: 250px;
-  }
 
-  .w-25{
+.alert {
+  width: 250px;
+}
+
+.w-25{
     width: 25%
 }
   .h-10{
