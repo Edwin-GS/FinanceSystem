@@ -17,14 +17,11 @@ export class PropiedadesComponent {
     private fb: FormBuilder
   ){}
   
-  // contactForm!: FormGroup
-  pageTitle = 'Propiedades';
   userData = this.usr.getLocalStorage();
+  baseUrl: string = `${this.userData?.userdata.name}/propiedades/${this.userData?.app}`
+  pageTitle = 'Propiedades';
   formName: string = 'Profesion'
   selection!: Properties
-  user: string = 'pedroacevedo' 
-  appID: string = '651d860e8cd11dcf78df2c7e'
-  baseUrl: string = `${this.user}/propiedades/${this.appID}`
   props: (Properties | undefined)[] = []
   success: boolean = false
   error: boolean = false

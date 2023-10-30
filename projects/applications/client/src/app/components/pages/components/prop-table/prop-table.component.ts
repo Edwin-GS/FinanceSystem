@@ -1,11 +1,10 @@
 import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { Properties } from 'projects/libraries/helpers/src/lib/models/properties.doc';
-import { observable } from 'rxjs';
 
 @Component({
   selector: 'app-propiedades-table',
   templateUrl: './prop-table.component.html',
-  styleUrls: ['../../components/marca-table/marca-table.component.css'],
+  styleUrls: ['./prop-table.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PropsTableComponent {

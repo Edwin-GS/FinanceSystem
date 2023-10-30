@@ -4,10 +4,11 @@
     *ngFor="let prop of props"
     class="card cardStyle"
   >
-    <div class="card-body pb-1 col" 
+    <div class="card-body pb-3 col"  
     (click)="selectProp(prop)"
     >
-      <h3 class="card-title">{{ prop?.descripcion | limitString: 25 }}</h3>
+      <h3 class="card-title">{{ prop?.descripcion | limitString: 15 }}</h3>
+      <p class="card-text">{{prop?.nombrepropietario | limitString: 15 }}</p>
       <div class="d-flex gap-1 justify-content-center">
         <button
           *ngIf="prop?._id === selection?._id"

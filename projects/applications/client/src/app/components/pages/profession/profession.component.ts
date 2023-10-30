@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Profession } from 'projects/libraries/helpers/src/lib/models/profession.doc';
 import { HandlerService } from 'projects/libraries/helpers/src/lib/services/handler.service';
+import { UserService } from 'projects/libraries/helpers/src/lib/services/user.service';
 
 @Component({
   selector: 'app-profession',
@@ -12,15 +13,18 @@ export class ProfessionComponent {
 
   constructor(
     private readonly hs: HandlerService,
+    private usr: UserService,
     private readonly fb: FormBuilder,
+
   ){}
   
+  userData = this.usr.getLocalStorage();
+  baseUrl: string = `${this.userData?.userdata.name}/profesiones/${this.userData?.app}`
   formName: string = 'Profesion'
   selection!: Profession | undefined
   user: string = 'pedroacevedo' 
   appID: string = '651d860e8cd11dcf78df2c7e'
   professionID!: string 
-  baseUrl: string = `${this.user}/profesiones/${this.appID}`
   success: boolean = false
   error: boolean = false
   professions: (Profession | undefined)[] = []

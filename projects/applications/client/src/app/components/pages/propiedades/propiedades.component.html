@@ -3,9 +3,10 @@
   >
   <app-page-title [title]="pageTitle"></app-page-title>
   <button
-  class="btn btn-primary btn-bg-purple"
-  data-bs-toggle="modal"
-      data-bs-target="#modalCenter"
+    class="btn btn-primary btn-bg-purple"
+    data-bs-toggle="modal"
+    data-bs-target="#modalCenter"
+    (click)="this.registerForm.reset()"
     >
     <i class="bi bi-plus-circle"></i>
       {{ " " }}Nueva
