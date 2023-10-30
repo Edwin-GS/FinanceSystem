@@ -1,0 +1,48 @@
+<div class="modal fade" id="confirm-modal" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 fw-semibold m-0">Eliminar registro</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div
+        class="modal-body d-flex justify-content-center flex-column align-items-center gap-2"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="48"
+          height="48"
+          fill="currentColor"
+          class="bi bi-exclamation-circle"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+          />
+          <path
+            d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"
+          />
+        </svg>
+        <p>¿Seguro que desea eliminar el registro?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+          (click)="onDeleteBrand(id)"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

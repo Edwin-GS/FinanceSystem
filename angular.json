@@ -32,6 +32,7 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.min.css",
+              "node_modules/@ngneat/hot-toast/src/styles/styles.css",
               "projects/applications/client/src/styles.css"
             ],
             "scripts": [
@@ -65,8 +66,8 @@
               "namedChunks": true,
               "fileReplacements": [
                 {
-                  "replace": "projects/applications/client/src/environments/environment.ts",
-                  "with": "projects/applications/client/src/environments/environment.development.ts"
+                  "replace": "projects/applications/client/src/environments/environment.development.ts",
+                  "with": "projects/applications/client/src/environments/environmentprod.ts"
                 }
               ]
             }
