@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-between align-items-center mb-3" 
+  (click)="clearValues()"
+  >
+  <app-page-title [title]="pageTitle"></app-page-title>
+  <button
+    class="btn btn-primary btn-bg-purple"
+    (click)="goToCreate()"
+    >
+    <i class="bi bi-plus-circle"></i>
+      {{ " " }}Nueva
+    </button>
+  </div>
+  
+  
+  <app-client-card
+    [clients]="clients"
+    [action]="action"
+    [selection]="selection"
+    (selectedActionClientEmitter)="selectProp( $event )"
+    (deleteClientEvent)="deleteClient( $event )"
+  ></app-client-card>

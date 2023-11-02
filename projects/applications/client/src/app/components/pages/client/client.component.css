@@ -1,0 +1,28 @@
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+	animation-duration: 5s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+  10% {
+    opacity: 10;
+  }
+	45% {
+		opacity: 1;
+	}
+    100%{
+        opacity: 0;
+    }
+}
+
+.notifContainer{
+    width: 175px;
+    left: 1rem;
+  }
