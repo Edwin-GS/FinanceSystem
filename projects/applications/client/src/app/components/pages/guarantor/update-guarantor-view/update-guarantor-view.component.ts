@@ -21,10 +21,10 @@ export class UpdateGuarantorViewComponent {
   id!: string
   userData = this.usr.getLocalStorage();
   profUrl: string = `${this.userData?.userdata.name}/profesiones/${this.userData?.app}`
-  baseUrl: string = `${this.userData?.userdata.name}/clientes/${this.userData?.app}`
+  baseUrl: string = `${this.userData?.userdata.name}/garantes/${this.userData?.app}`
   clients: (Client | undefined)[] = []
   isLoading !: boolean
-  schemaName = 'Client';
+  schemaName = 'Garantes';
 
   constructor(
     private readonly hs: HandlerService,
@@ -79,8 +79,8 @@ export class UpdateGuarantorViewComponent {
           );
 
         } else {
-          this.toast.success('Cliente actualizado');
-          console.log('resp', resp);
+          this.toast.success('Garante actualizado');
+          this.goBack()
         }
       })
   }

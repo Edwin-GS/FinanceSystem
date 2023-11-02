@@ -68,10 +68,7 @@ export class CreateClientComponent {
 
         } else {
           this.toast.success('Cliente registrado');
-          this.nv.navigate([
-            `/finance-system/users/${this.userData?.userdata.name}/
-            ${this.userData?.userdata._id}/clients`
-          ])
+          this.goBack()
         }
       })
   }

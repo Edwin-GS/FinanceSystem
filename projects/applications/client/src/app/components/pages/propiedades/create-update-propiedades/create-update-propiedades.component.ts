@@ -55,28 +55,4 @@ export class CreateUpdatePropsComponent {
       this.registerForm.reset()
     }
   }
-
-  // onSubmit(nombre: string) {
-  //   if (this.registerForm.valid) {
-  //     const data = { nombre: nombre };
-  //     this.hs
-  //       .post(
-  //         data,
-  //         `entities/create/${this.userData?.userdata.name}/${this.schemaName}/${this.userData?.app}`
-  //       )
-  //       .subscribe(
-  //         (resp) => {
-  //           if (resp['success'] === true) {
-  //             this.registerForm.reset();
-  //             console.log(resp);
-  //           } else {
-  //             console.log('error');
-  //           }
-  //         },
-  //         (err) => {
-  //           console.error('Error al iniciar sesión: ' + err);
-  //         }
-  //       );
-  //   }
-  // }
 }

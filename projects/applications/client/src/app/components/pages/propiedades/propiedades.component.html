@@ -13,7 +13,6 @@
     </button>
   </div>
   
-  
   <app-propiedades-table 
     [props]="props"
     [action]="action"
@@ -29,23 +28,3 @@
     (createPropEmitter)="createProp( $event )"
     (updatePropEmitter)="updateProp( $event )"
     ></app-create-update-propiedades>
-  
-    <div class="fixed-bottom notifContainer">
-      <div
-        *ngIf="error"
-        class="alert alert-danger d-flex justify-content-center align-content-center fade-in show notificationMSG"
-      >
-        <i class="bi bi-x-circle-fill">
-          <span class="fw-normal fs-6 m-0">
-            No se pudo realizar esta operación
-          </span>
-        </i>
-      </div>
-      <div
-        *ngIf="success"
-        class="alert alert-success fade-in d-flex justify-content-center gap-2 align-content-center notificationMSG"
-      >
-        <i class="bi bi-check-circle-fill"></i>
-        <span class="fw-normal fs-6 m-0"> Operación realizada </span>
-      </div>
-    </div>

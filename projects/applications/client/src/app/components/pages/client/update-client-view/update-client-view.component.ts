@@ -26,12 +26,12 @@ export class UpdateClientViewComponent {
   schemaName = 'Client';
 
   constructor(
+    private readonly router: ActivatedRoute,
     private readonly hs: HandlerService,
+    private readonly nv: Router,
+    private toast: HotToastService,
     private usr: UserService,
     private fb: FormBuilder,
-    private readonly router: ActivatedRoute,
-    private readonly nv: Router,
-    private toast: HotToastService
   ) {
   }
 
@@ -75,15 +75,12 @@ export class UpdateClientViewComponent {
         if ( resp['success'] == false ) {
           console.log('resp', resp);
           this.toast.error(
-            'Error al intentar actualizar por favor intente de nuevo'
+            'Error al intentar actualizar, por favor, intente de nuevo'
           );
 
         } else {
           this.toast.success('Cliente actualizado');
-          this.nv.navigate([
-            `/finance-system/users/${this.userData?.userdata.name}/
-            ${this.userData?.userdata._id}/clients`
-          ])
+          this.goBack()
           console.log('resp', resp);
         }
       })

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HotToastService } from '@ngneat/hot-toast';
 import { Properties } from 'projects/libraries/helpers/src/lib/models/properties.doc';
 import { HandlerService } from 'projects/libraries/helpers/src/lib/services/handler.service';
 import { UserService } from 'projects/libraries/helpers/src/lib/services/user.service';
@@ -13,6 +14,7 @@ export class PropiedadesComponent {
 
   constructor(
     private readonly hs: HandlerService,
+    private toast: HotToastService,
     private usr: UserService,
     private fb: FormBuilder
   ){}
@@ -63,10 +65,12 @@ export class PropiedadesComponent {
     this.hs.post(data, `entities/create/${this.baseUrl}`)
       .subscribe((res) => {
         if ( res['success'] == false ) {
-          this.showErrorMessage()
+          this.toast.error(
+            'Error al intentar registrar, por favor, intente de nuevo'
+          );
           console.log('Error', res);
         } else {
-          this.showSucessMessage()
+          this.toast.success('Propiedad registrada');
           console.log('OK');
           const resp: Properties = { 
             _id               : res.data._id, 
@@ -87,9 +91,11 @@ export class PropiedadesComponent {
       .subscribe((resp) => {
         if(resp["success"] == false ){
           console.log('Error', resp);
-          this.showErrorMessage()
+          this.toast.error(
+            'Error al intentar eliminar, por favor, intente de nuevo'
+          );
         } else{
-          this.showSucessMessage()
+          this.toast.success('Propiedad eliminada');
           console.log('Ok', resp);
           const currentProp = this.props.filter( props => props?._id !== id)
           this.props = [...currentProp]
@@ -102,12 +108,14 @@ export class PropiedadesComponent {
       .subscribe((resp: any) => {
         if ( resp['success'] == false ) {
           console.log('resp', resp);
-          this.showErrorMessage()
+          this.toast.error(
+            'Error al intentar actualizar, por favor, intente de nuevo'
+          );
         } else {
           console.log('resp', resp);
+          this.toast.success('Propiedad actualizada');
           const currentProps = this.props.filter((items) => items?._id !== properties?._id)
           this.props = [...currentProps, properties]
-          this.showSucessMessage()
         }
       })
   }

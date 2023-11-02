@@ -10,7 +10,6 @@ import { Client } from 'projects/libraries/helpers/src/lib/models/client.doc';
 })
 export class ClientCardComponent {
   @Input()  clients: (Client | undefined)[] = [];
-  @Input()  action!: string
   @Input()  selection!: Client | undefined
   @Output() selectedActionClientEmitter = new EventEmitter<any>();
   @Output() deleteClientEvent = new EventEmitter<string>();
