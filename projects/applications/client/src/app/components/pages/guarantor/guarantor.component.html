@@ -12,10 +12,11 @@
   </div>
   
   
-  <app-client-card
-    [clients]="clients"
+  <app-guarantor-card></app-guarantor-card>
+  
+  <!-- <app-create-update-guarantor
     [action]="action"
     [selection]="selection"
-    (selectedActionClientEmitter)="selectProp( $event )"
-    (deleteClientEvent)="deleteClient( $event )"
-  ></app-client-card>
+    [registerForm]="registerForm"
+    [professions]="professions"
+    ></app-create-update-guarantor> -->

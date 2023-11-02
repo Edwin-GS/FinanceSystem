@@ -15,9 +15,14 @@ import { PropsTableComponent } from './components/prop-table/prop-table.componen
 import { CreateUpdatePropsComponent } from './propiedades/create-update-propiedades/create-update-propiedades.component';
 import { LimitStringPipe } from './pipes/limit-string.pipe';
 import { ClientComponent } from './client/client.component';
-import { CreateUpdateClientComponent } from './client/create-update-client/create-update-client.component';
+import { CreateClientComponent } from './client/create-client/create-client.component';
 import { ClientCardComponent } from './components/client-card/client-table.component';
 import { provideHotToastConfig } from '@ngneat/hot-toast';
+import { UpdateClientViewComponent } from './client/update-client-view/update-client-view.component';
+import { GuarantorComponent } from './guarantor/guarantor.component';
+import { GuarantorCardComponent } from './components/guarantor-card/guarantor-table.component';
+import { UpdateGuarantorViewComponent } from './guarantor/update-guarantor-view/update-guarantor-view.component';
+import { CreateGuarantorComponent } from './guarantor/create-guarantor/create-guarantor.component';
 
 @NgModule({
   declarations: [
@@ -30,12 +35,19 @@ import { provideHotToastConfig } from '@ngneat/hot-toast';
     BrandComponent,
     CreateUpdateBrandComponent,
     CreateUpdatePropsComponent,
-    CreateUpdateClientComponent,
     PropiedadesComponent,
     PropsTableComponent,
     LimitStringPipe,
+    
     ClientComponent,
-    ClientCardComponent
+    ClientCardComponent,
+    CreateClientComponent,
+    UpdateClientViewComponent,
+
+    GuarantorComponent,
+    GuarantorCardComponent,
+    CreateGuarantorComponent,
+    UpdateGuarantorViewComponent,
 
   ],
 

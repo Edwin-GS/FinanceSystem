@@ -1,0 +1,274 @@
+<div class="overlay" *ngIf="isLoading">
+    <div class="lds-dual-ring"></div>
+</div>      
+
+<div class="d-flex justify-content-center" >
+  <div class=" w-75">
+    <form class="row g-3" (ngSubmit)="onSubmit( this.registerForm.value )" [formGroup]="registerForm">
+      <div class="col-md-12">
+        <!-- nombre -->
+        <div class="col-md-12 pb-2">
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="nombre"
+              name="nombre"
+              formControlName="nombre"
+              placeholder="BMW"
+              value="{{this.selection?.nombre}}"
+            />
+            <label for="nombre">Nombre</label>
+          </div>
+          <div
+          *ngIf="registerForm.get('nombre')?.touched  && registerForm.get('nombre')?.errors?.['required']"
+            class="text-danger mt-2"
+          >
+            El nombre es requido
+          </div>
+          <div
+            *ngIf="registerForm.get('nombre')?.touched  && registerForm.get('nombre')?.errors?.['minlength']"
+            class="text-danger mt-2"
+          >
+            Este campo debe contener mas de {{registerForm.get('nombre')?.errors?.['minlength'].requiredLength}} caracteres
+          </div>
+        </div>
+
+        <!-- apellidos -->
+        <div class="col-md-12 pb-2">
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="apellidos"
+              name="apellidos"
+              formControlName="apellidos"
+              placeholder="BMW"
+              value="{{this.selection?.apellidos}}"
+            />
+            <label for="apellidos">Apellido</label>
+          </div>
+          <div
+            *ngIf="registerForm.get('apellidos')?.touched  && registerForm.get('apellidos')?.errors?.['required']"
+            class="text-danger mt-2"
+          >
+            El apellido es requido
+          </div>
+          <div
+            *ngIf="registerForm.get('apellidos')?.touched  && registerForm.get('apellidos')?.errors?.['minlength']"
+            class="text-danger mt-2"
+          >
+            Este campo debe contener mas de {{registerForm.get('apellidos')?.errors?.['minlength'].requiredLength}} caracteres
+          </div>
+        </div>
+
+        <!-- tipodocumento -->
+        <div class="col-md-12 pb-2">
+          <div class="form-floating">
+            <!-- type="text" -->
+            <select 
+            class="form-control"
+              name="tipodocumento" 
+              id="tipodocumento" 
+              class="form-select form-select-sm"
+              formControlName="tipodocumento"
+              placeholder="BMW"
+                    >
+              <option selected value="{{null}}">Abrir menu</option>
+              <option value="Cedula">Cedula</option>
+              <option value="Pasaporte">Pasaporte</option>
+            </select>
+            <label for="tipodocumento">Tipo documento</label>
+          </div>
+          <div
+            *ngIf="registerForm.get('tipodocumento')?.touched  && registerForm.get('tipodocumento')?.errors?.['required']"
+            class="text-danger mt-2"
+          >
+            El tipo de documento es requido
+          </div>
+          <div
+            *ngIf="registerForm.get('tipodocumento')?.touched  && registerForm.get('tipodocumento')?.errors?.['minlength']"
+            class="text-danger mt-2"
+          >
+            Este campo debe contener mas de {{registerForm.get('tipodocumento')?.errors?.['minlength'].requiredLength}} caracteres
+          </div>
+        </div>
+
+        <!-- numerodocumento -->
+        <div class="col-md-12 pb-2">
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="numerodocumento"
+              name="numerodocumento"
+              formControlName="numerodocumento"
+              placeholder="BMW"
+              value="{{this.selection?.numerodocumento}}"
+            />
+            <label for="numerodocumento">Numero documento</label>
+          </div>
+          <div
+            *ngIf="registerForm.get('numerodocumento')?.touched  && registerForm.get('numerodocumento')?.errors?.['required']"
+            class="text-danger mt-2"
+          >
+            El numero del documento del propietario es requido
+          </div>
+          <div
+            *ngIf="registerForm.get('numerodocumento')?.touched  && registerForm.get('numerodocumento')?.errors?.['minlength']"
+            class="text-danger mt-2"
+          >
+            Este campo debe contener mas de {{registerForm.get('numerodocumento')?.errors?.['minlength'].requiredLength}} caracteres
+          </div>
+        </div>
+
+        <!-- apodo -->
+        <div class="col-md-12 pb-2">
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="apodo"
+              name="apodo"
+              formControlName="apodo"
+              placeholder="BMW"
+              value="{{this.selection?.apodo}}"
+            />
+            <label for="apodo">Apodo</label>
+          </div>
+        </div>
+
+        <!-- celular -->
+        <div class="col-md-12 pb-2">
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="celular"
+              name="celular"
+              formControlName="celular"
+              placeholder="BMW"
+              value="{{this.selection?.celular}}"
+            />
+            <label for="celular">Celular</label>
+          </div>
+          <div
+            *ngIf="registerForm.get('celular')?.touched  && registerForm.get('celular')?.errors?.['required']"
+            class="text-danger mt-2"
+          >
+            El celular es requido
+          </div>
+          <div
+            *ngIf="registerForm.get('celular')?.touched  && registerForm.get('celular')?.errors?.['minlength']"
+            class="text-danger mt-2"
+          >
+            Este campo debe contener mas de {{registerForm.get('celular')?.errors?.['minlength'].requiredLength}} caracteres
+          </div>
+        </div>
+
+        <!-- telefono -->
+        <div class="col-md-12 pb-2">
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="telefono"
+              name="telefono"
+              formControlName="telefono"
+              placeholder="BMW"
+              value="{{this.selection?.telefono}}"
+            />
+            <label for="telefono">Telefono</label>
+          </div>
+          <div
+            *ngIf="registerForm.get('telefono')?.touched  && registerForm.get('telefono')?.errors?.['required']"
+            class="text-danger mt-2"
+          >
+            El telefono es requido
+          </div>
+          <div
+            *ngIf="registerForm.get('telefono')?.touched  && registerForm.get('telefono')?.errors?.['minlength']"
+            class="text-danger mt-2"
+          >
+            Este campo debe contener mas de {{registerForm.get('telefono')?.errors?.['minlength'].requiredLength}} caracteres
+          </div>
+        </div>
+
+        <!-- direccionpersonal -->
+        <div class="col-md-12 pb-2">
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="direccionpersonal"
+              name="direccionpersonal"
+              formControlName="direccionpersonal"
+              placeholder="BMW"
+              value="{{this.selection?.direccionpersonal}}"
+            />
+            <label for="direccionpersonal">Direccion personal</label>
+          </div>
+          <div
+            *ngIf="registerForm.get('direccionpersonal')?.touched  && registerForm.get('direccionpersonal')?.errors?.['required']"
+            class="text-danger mt-2"
+          >
+            La direccion es requida
+          </div>
+          <div
+            *ngIf="registerForm.get('direccionpersonal')?.touched  && registerForm.get('direccionpersonal')?.errors?.['minlength']"
+            class="text-danger mt-2"
+          >
+            Este campo debe contener mas de {{registerForm.get('direccionpersonal')?.errors?.['minlength'].requiredLength}} caracteres
+          </div>
+        </div>
+        
+        <!-- profesiones_id -->
+        <div class="col-md-12 pb-2">
+          <div class="form-floating">
+            <!-- type="text" -->
+            <select 
+            class="form-control"
+              name="profesiones_id" 
+              id="profesiones_id" 
+              formControlName="profesiones_id"
+              class="form-select form-select-sm"
+              placeholder="BMW"
+                    >
+              <option selected value="{{null}}">Abrir menu</option>
+              <option *ngFor="let profession of professions" 
+                [value]="profession?._id"> {{profession?.nombre}}</option>
+            </select>
+            <label for="profesiones_id">Profession</label>
+          </div>
+          <div
+            *ngIf="registerForm.get('profesiones_id')?.touched  && registerForm.get('profesiones_id')?.errors?.['required']"
+            class="text-danger mt-2"
+          >
+            La profesion es requida
+          </div>
+          <div
+            *ngIf="registerForm.get('profesiones_id')?.touched  && registerForm.get('profesiones_id')?.errors?.['minlength']"
+            class="text-danger mt-2"
+          >
+            Este campo debe contener mas de {{registerForm.get('profesiones_id')?.errors?.['minlength'].requiredLength}} caracteres
+          </div>
+        </div>
+      </div>
+    </form>
+      <div class="d-flex justify-content-end gap-2 p-2" >
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+          (click)="goBack()"
+        >
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onSubmit( this.registerForm.value )"
+          [disabled]="registerForm.invalid"
+          >
+          Guardar
+        </button>
+      </div>
+    </div>
+</div>

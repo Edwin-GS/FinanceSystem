@@ -1,29 +1,26 @@
 <div class="w-100 justify-content-center p-4">
   <div class="d-flex flex-wrap justify-content-center gap-2">
     <div
-    *ngFor="let client of clients"
+    *ngFor="let guarantor of guarantors"
     class="card cardStyle"
   >
     <div class="card-body pb-3 col"  
-    (click)="selectProp(client)"
+    (click)="selectProp(guarantor)"
     >
-      <h3 class="card-title">{{ client?.nombre | limitString: 10 }} 
-        {{ client?.apellidos}}</h3>
-      <p class="card-text">{{client?.apodo | limitString: 15 }}</p>
+      <h3 class="card-title">{{ guarantor?.nombre | limitString: 10 }} 
+        {{ guarantor?.apellidos}}</h3>
+      <p class="card-text">{{guarantor?.apodo | limitString: 15 }}</p>
       <div class="d-flex gap-1 justify-content-center">
-        <!-- data-bs-toggle="modal"
-          data-bs-target="#modalCenter" -->
-          <!-- routerLink="/finance-system/users/:user/:user_id/clients" -->
           <a
-          *ngIf="client?._id === selection?._id"
+          *ngIf="guarantor?._id === selection?._id"
           class="btn btn-primary col small-button"
           routerLinkActive="active" 
-          (click)="goToUpdate( client?._id )"
+          (click)="goToUpdate( guarantor?._id )"
           >          
           Actualizar
           </a>
         <button
-          *ngIf="client?._id === selection?._id"
+          *ngIf="guarantor?._id === selection?._id"
           class="btn btn-danger col small-button"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"

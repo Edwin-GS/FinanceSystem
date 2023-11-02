@@ -7,30 +7,30 @@ import { HandlerService } from 'projects/libraries/helpers/src/lib/services/hand
 import { UserService } from 'projects/libraries/helpers/src/lib/services/user.service';
 
 @Component({
-  selector: 'app-client',
-  templateUrl: './client.component.html',
-  styleUrls: ['./client.component.css']
+  selector: 'app-guarantor',
+  templateUrl: './guarantor.component.html',
+  styleUrls: ['./guarantor.component.css']
 })
-export class ClientComponent {
+export class GuarantorComponent {
 
 
   constructor(
     private readonly hs: HandlerService,
-    private readonly router: Router,
     private usr: UserService,
     private fb: FormBuilder,
+    private readonly router: Router,
   ){}
   
-  pageTitle = 'Cliente';
+  pageTitle = 'Garante';
   formName: string = 'Profesion'
   userData = this.usr.getLocalStorage();
-  baseUrl: string = `${this.userData?.userdata.name}/clientes/${this.userData?.app}`
+  baseUrl: string = `${this.userData?.userdata.name}/garantes/${this.userData?.app}`
   
   professions: (Profession | undefined)[] = []
   profUrl: string = `${this.userData?.userdata.name}/profesiones/${this.userData?.app}`
   
   selection!: Client
-  clients: (Client | undefined)[] = []
+  guarantors: (Client | undefined)[] = []
   success: boolean = false
   error: boolean = false
   action!: string
@@ -38,7 +38,7 @@ export class ClientComponent {
 
   ngOnInit(): void {
     this.getProfessions()
-    this.getClients()
+    this.getGuarantors()
     this.registerForm = this.initForm()
   }
 
@@ -57,12 +57,12 @@ export class ClientComponent {
     })
   }
 
-  getClients(): void{
+  getGuarantors(): void{
     this.hs.get( `entities/${this.baseUrl}` )
     .subscribe((res) => {
       if(!res.data) console.log('Hubo un error o no se encontraron datos');
       else{
-        this.clients = [...res.data]
+        this.guarantors = [...res.data]
       }
    })
   }
@@ -77,18 +77,18 @@ export class ClientComponent {
    })
   }
 
-  createClient ( client: Client ): void {
+  createGuarantor ( Guarantor: Client ): void {
     const data = {
-      nombre: client.nombre,
-      apellidos: client.apellidos,
-      tipodocumento: client.tipodocumento,
-      numerodocumento: client.numerodocumento,
-      apodo: client.apodo,
-      celular: client.celular,
-      telefono: client.telefono,
-      direccionpersonal: client.direccionpersonal,
-      direccionfamiliar: client.direccionfamiliar,
-      profesiones_id: client.profesiones_id,
+      nombre: Guarantor.nombre,
+      apellidos: Guarantor.apellidos,
+      tipodocumento: Guarantor.tipodocumento,
+      numerodocumento: Guarantor.numerodocumento,
+      apodo: Guarantor.apodo,
+      celular: Guarantor.celular,
+      telefono: Guarantor.telefono,
+      direccionpersonal: Guarantor.direccionpersonal,
+      direccionfamiliar: Guarantor.direccionfamiliar,
+      profesiones_id: Guarantor.profesiones_id,
     }
     
     this.hs.post(data, `entities/create/${this.baseUrl}`)
@@ -110,8 +110,7 @@ export class ClientComponent {
             direccionfamiliar: data.direccionfamiliar,
             profesiones_id: data.profesiones_id,
           }
-          // console.log('resp', resp);
-          this.clients?.push(resp)
+          this.guarantors?.push(resp)
         }
       })
   
@@ -124,36 +123,36 @@ export class ClientComponent {
           console.log('Error', resp);
         } else{
           console.log('Ok', resp);
-          const currentClient = this.clients.filter( props => props?._id !== id)
-          this.clients = [...currentClient]
+          const currentGuarantor = this.guarantors.filter( props => props?._id !== id)
+          this.guarantors = [...currentGuarantor]
         }
       })
   }
 
-  updateClient( Client: Client | undefined ): void{
-    this.hs.put(Client , `entities/update/${this.baseUrl}/${Client?._id}`)
+  updateClient( Guarantor: Client | undefined ): void{
+    this.hs.put(Guarantor , `entities/update/${this.baseUrl}/${Guarantor?._id}`)
       .subscribe((resp: any) => {
         if ( resp['success'] == false ) {
           console.log('resp', resp);
         } else {
           console.log('resp', resp);
-          const currentProps = this.clients.filter((items) => items?._id !== Client?._id)
-          this.clients = [...currentProps, Client]
+          const currentGuarantor = this.guarantors.filter((items) => items?._id !== Guarantor?._id)
+          this.guarantors = [...currentGuarantor, Guarantor]
         }
       })
-  }
-
-  selectProp(Client: any ): void {
-    this.registerForm = this.initForm()
-    this.selection = Client.selection
-    this.action = 'Actualizar propiedad'
   }
 
   goToCreate(){
     this.router.navigate([
       `/finance-system/users/${this.userData?.userdata.name}/
-      ${this.userData?.userdata.id}/clients/create`
+      ${this.userData?.userdata.id}/garantes/create`
     ])
+  }
+
+  selectProp(Guarantor: any ): void {
+    this.registerForm = this.initForm()
+    this.selection = Guarantor.selection
+    this.action = 'Actualizar garante'
   }
 
   clearValues(): void{
@@ -170,7 +169,7 @@ export class ClientComponent {
       direccionfamiliar: '',
       profesiones_id: '',
     }
-    this.action = 'Registrar cliente'
+    this.action = 'Registrar garante'
   }
 
 }

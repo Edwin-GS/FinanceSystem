@@ -1,4 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { Client } from 'projects/libraries/helpers/src/lib/models/client.doc';
 
 @Component({
@@ -14,6 +15,8 @@ export class ClientCardComponent {
   @Output() selectedActionClientEmitter = new EventEmitter<any>();
   @Output() deleteClientEvent = new EventEmitter<string>();
   
+  constructor( private readonly router: Router ){}
+  
   selectProp(client: Client | undefined): void{
     this.selection = client
     const clientOperation = {selection: client, action: 'Actualizar cliente'}
@@ -22,5 +25,9 @@ export class ClientCardComponent {
 
   onDeleteProp(id: string | undefined): void{
     this.deleteClientEvent.emit( id )
+  }
+
+  goToUpdate( id: string | undefined ){
+    this.router.navigate(['/finance-system/users/:user/:user_id/clients', id])
   }
 }
