@@ -8,7 +8,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SpinnerInterceptor } from './components/pages/loading/interceptor/spinner.interceptor';
 import { LoadingModule } from './components/pages/loading/loading.module';
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -18,10 +17,10 @@ import { LoadingModule } from './components/pages/loading/loading.module';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    LoadingModule
+    LoadingModule,
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

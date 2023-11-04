@@ -13,6 +13,7 @@ import { GuarantorComponent } from './guarantor/guarantor.component';
 import { CreateGuarantorComponent } from './guarantor/create-guarantor/create-guarantor.component';
 import { UpdateGuarantorViewComponent } from './guarantor/update-guarantor-view/update-guarantor-view.component';
 import { CreateClientComponent } from './client/create-client/create-client.component';
+import { SolicitudPrestamosComponent } from './solicitud-prestamos/solicitud-prestamos.component';
 
 /**
  * Base route information
@@ -43,11 +44,27 @@ const UserRoutes: Routes = [
         title: 'Properties',
       },
       { path: 'clients', component: ClientComponent, title: 'Clientes' },
-      { path: 'clients/create', component: CreateClientComponent, title: 'Crear cliente' },
-      { path: 'clients/:id', component: UpdateClientViewComponent, title: 'Actualizar cliente' },
+      {
+        path: 'clients/create',
+        component: CreateClientComponent,
+        title: 'Crear cliente',
+      },
+      {
+        path: 'clients/:id',
+        component: UpdateClientViewComponent,
+        title: 'Actualizar cliente',
+      },
       { path: 'garantes', component: GuarantorComponent, title: 'Garantes' },
-      { path: 'garantes/create', component: CreateGuarantorComponent, title: 'Garantes' },
-      { path: 'garantes/:id', component: UpdateGuarantorViewComponent, title: 'Garantes' },
+      {
+        path: 'garantes/create',
+        component: CreateGuarantorComponent,
+        title: 'Garantes',
+      },
+      {
+        path: 'garantes/:id',
+        component: UpdateGuarantorViewComponent,
+        title: 'Garantes',
+      },
       { path: 'brand', component: BrandComponent, title: 'Brands' },
 
       {
@@ -59,6 +76,11 @@ const UserRoutes: Routes = [
         path: 'properties',
         component: PropiedadesComponent,
         title: 'Properties',
+      },
+      {
+        path: 'solicitud-prestamos',
+        component: SolicitudPrestamosComponent,
+        title: 'Solicitud de Prestamos',
       },
     ],
   },

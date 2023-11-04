@@ -23,6 +23,7 @@ import { GuarantorComponent } from './guarantor/guarantor.component';
 import { GuarantorCardComponent } from './components/guarantor-card/guarantor-table.component';
 import { UpdateGuarantorViewComponent } from './guarantor/update-guarantor-view/update-guarantor-view.component';
 import { CreateGuarantorComponent } from './guarantor/create-guarantor/create-guarantor.component';
+import { SolicitudPrestamosComponent } from './solicitud-prestamos/solicitud-prestamos.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { CreateGuarantorComponent } from './guarantor/create-guarantor/create-gu
     GuarantorCardComponent,
     CreateGuarantorComponent,
     UpdateGuarantorViewComponent,
+    SolicitudPrestamosComponent,
 
   ],
 
