@@ -62,7 +62,7 @@ export class ProfessionComponent {
             'Error al intentar registrar, por favor, intente de nuevo'
           );
         } else {
-          this.toast.success('Profesion eliminada');
+          this.toast.success('Profesion registrado');
           const resp: Profession = { _id: res.data._id, nombre: nombre }
           this.professions?.push(resp)
         }
