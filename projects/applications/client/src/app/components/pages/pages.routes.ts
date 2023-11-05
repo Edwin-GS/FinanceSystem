@@ -1,13 +1,12 @@
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './users/user.component';
 import { ProfessionComponent } from './profession/profession.component';
-// import { CreateProfessionComponent } from './profession/create/create-profession/create-profession.component';
-// import { UpdateComponent } from './profession/update/update.component';
 import { MiAppsComponent } from './mi-apps/mi-apps.component';
 import { ClassicComponent } from '../dashboard/extras/classic/classic.component';
 import { BrandComponent } from './brand/brand.component';
 import { PropiedadesComponent } from './propiedades/propiedades.component';
 import { ClientComponent } from './client/client.component';
+import { ModelComponent } from './model/model.component';
 
 /**
  * Base route information
@@ -39,6 +38,7 @@ const UserRoutes: Routes = [
       },
       { path: 'clients', component: ClientComponent, title: 'Clients' },
       { path: 'brand', component: BrandComponent, title: 'Brands' },
+      { path: 'model', component: ModelComponent, title: 'Models' },
 
       {
         path: 'profession',

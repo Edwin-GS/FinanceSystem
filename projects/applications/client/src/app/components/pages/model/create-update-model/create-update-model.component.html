@@ -1,0 +1,100 @@
+<div class="modal fade" id="models-modal" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 fw-semibold m-0">
+          {{ !id ? "Agregar Modelo" : "Actualizar Modelo" }}
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="onReset(); onResetId()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p *ngIf="loadingModel || loadingBrand">Obteniendo el modelo</p>
+        <form
+          *ngIf="!loadingModel && !loadingBrand"
+          class="row g-3"
+          (ngSubmit)="
+            !id ? onCreate(modelForm.value) : onUpdate(modelForm.value)
+          "
+          [formGroup]="modelForm"
+        >
+          <div class="col-md-12">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="descripcion"
+                formControlName="descripcion"
+                placeholder="M5"
+              />
+              <label for="descripcion">Modelo</label>
+            </div>
+            <div
+              *ngIf="modelForm.get('descripcion')?.touched && modelForm.get('descripcion')?.errors?.['required']"
+              class="text-danger my-2"
+            >
+              El modelo es requida
+            </div>
+            <div
+              *ngIf="modelForm.get('descripcion')?.touched  && modelForm.get('descripcion')?.errors?.['minlength']"
+              class="text-danger my-2"
+            >
+              El modelo debe tener minimo 2 caracteres
+            </div>
+            <div class="form-floating">
+              <select
+                class="form-select"
+                id="select-brand"
+                formControlName="marcas_id"
+              >
+                <option *ngFor="let brand of brands" [value]="brand._id">
+                  {{ brand.nombre }}
+                </option>
+              </select>
+              <label for="select-brand">Marcas</label>
+            </div>
+            <div
+              *ngIf="modelForm.get('marcas_id')?.touched && modelForm.get('marcas_id')?.errors?.['required']"
+              class="text-danger my-2"
+            >
+              La marca es requida
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              (click)="onReset(); onResetId()"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="modelForm.invalid"
+              *ngIf="!id"
+            >
+              Guardar
+            </button>
+            <button
+              *ngIf="id"
+              type="submit"
+              [disabled]="modelForm.invalid"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

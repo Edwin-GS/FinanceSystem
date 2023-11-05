@@ -18,6 +18,8 @@ import { ClientComponent } from './client/client.component';
 import { CreateUpdateClientComponent } from './client/create-update-client/create-update-client.component';
 import { ClientCardComponent } from './components/client-card/client-table.component';
 import { provideHotToastConfig } from '@ngneat/hot-toast';
+import { ModelComponent } from './model/model.component';
+import { CreateUpdateModelComponent } from './model/create-update-model/create-update-model.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { provideHotToastConfig } from '@ngneat/hot-toast';
     PropsTableComponent,
     LimitStringPipe,
     ClientComponent,
-    ClientCardComponent
+    ClientCardComponent,
+    ModelComponent,
+    CreateUpdateModelComponent
 
   ],
 
