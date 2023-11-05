@@ -4,8 +4,7 @@ export class PrestamoSolicitudes implements IPrestamoSolicitudes {
   constructor(
     public _id: '' | undefined,
     public numerosolicitud: '',
-    public empresadondetrabaja: '',
-    public puestocliente: '',
+    public aprobado: false,
     public ingresodiario: 0,
     public ingresosemanal: 0,
     public ingresomensual: 0,

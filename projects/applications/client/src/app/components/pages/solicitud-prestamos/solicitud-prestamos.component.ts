@@ -54,12 +54,11 @@ export class SolicitudPrestamosComponent implements OnInit {
       //Constantes del formulario de solicitud d prestamos
       _id: Prestamo?._id,
       numerosolicitud: Prestamo?.numerosolicitud,
-      empresadondetrabaja: Prestamo.empresadondetrabaja,
-      puestocliente: Prestamo.puestocliente,
       ingresodiario: Prestamo.ingresodiario,
       ingresosemanal: Prestamo.ingresosemanal,
       ingresomensual: Prestamo.ingresomensual,
       fechaverificacion: Prestamo.fechaverificacion,
+      aprobado: Prestamo.aprobado,
 
       //Informacion del solicitante
       client_id: Prestamo.client_id,
