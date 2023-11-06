@@ -8,13 +8,12 @@
     (click)="selectProp(prop)"
     >
       <h3 class="card-title">{{ prop?.descripcion | limitString: 15 }}</h3>
-      <p class="card-text">{{prop?.nombrepropietario | limitString: 15 }}</p>
+      <!-- <p class="card-text">{{prop?.nombrepropietario | limitString: 15 }}</p> -->
       <div class="d-flex gap-1 justify-content-center">
         <button
           *ngIf="prop?._id === selection?._id"
           class="btn btn-primary col small-button"
-          data-bs-toggle="modal"
-          data-bs-target="#modalCenter"
+         (click)="goToUpdate()"
         >
           Actualizar
         </button>

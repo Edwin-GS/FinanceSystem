@@ -8,7 +8,7 @@ import {
   PipeTransform,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { PrestamoSolicitudes } from 'projects/libraries/helpers/src/lib/models/prestamo-solicitudes';
 import { Client } from 'projects/libraries/helpers/src/lib/models/client.doc';
@@ -23,6 +23,9 @@ import { UserService } from 'projects/libraries/helpers/src/lib/services/user.se
 export class SolicitudPrestamosComponent implements OnInit {
   userData = this.usr.getLocalStorage();
   registerForm!: FormGroup;
+  
+  id!: string
+
 
   baseUrl: string = `${this.userData?.userdata.name}/prestamosolicitudes/${this.userData?.app}`;
 
@@ -37,12 +40,17 @@ export class SolicitudPrestamosComponent implements OnInit {
     private usr: UserService,
     private fb: FormBuilder,
     private toast: HotToastService,
-    private nv: Router
+    private nv: Router,
+    private readonly router: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
     this.getClients();
     this.registerForm = this.initForm();
+    this.router.params.subscribe((params) => {
+      this.id = params['id']
+      console.log( this.id );
+    })
   }
 
   onSubmit(changes: PrestamoSolicitudes): void {

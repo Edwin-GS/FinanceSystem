@@ -12,7 +12,7 @@ import { UserService } from 'projects/libraries/helpers/src/lib/services/user.se
   templateUrl: './update-client-view.component.html',
   styleUrls: ['./update-client-view.component.css'],
 })
-export class UpdateClientViewComponent {
+export class UpdateClientViewComponent implements OnInit{
 
   selection!: Client | undefined
   professions: (Profession | undefined)[] = []
@@ -43,7 +43,6 @@ export class UpdateClientViewComponent {
     this.getProfessions()
     this.getClient( this.id )
     this.registerForm = this.initForm()
-
   }
 
   onSubmit( changes: Client ): void{

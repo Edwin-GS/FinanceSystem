@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Properties } from 'projects/libraries/helpers/src/lib/models/properties.doc';
 import { HandlerService } from 'projects/libraries/helpers/src/lib/services/handler.service';
@@ -13,24 +14,31 @@ import { UserService } from 'projects/libraries/helpers/src/lib/services/user.se
 export class PropiedadesComponent {
 
   constructor(
+    private readonly router: ActivatedRoute,
     private readonly hs: HandlerService,
+    private readonly nv: Router,
     private toast: HotToastService,
     private usr: UserService,
     private fb: FormBuilder
   ){}
   
-  userData = this.usr.getLocalStorage();
-  baseUrl: string = `${this.userData?.userdata.name}/propiedades/${this.userData?.app}`
   pageTitle = 'Propiedades';
   formName: string = 'Profesion'
-  selection!: Properties
-  props: (Properties | undefined)[] = []
-  success: boolean = false
-  error: boolean = false
-  action!: string
   registerForm!: FormGroup
 
+  userData = this.usr.getLocalStorage();
+  baseUrl: string = `${this.userData?.userdata.name}/clientes/${this.userData?.app}`
+  
+  selection!: Properties
+  props: (Properties | undefined)[] = []
+  
+  action!: string
+  id!: string
+
   ngOnInit(): void {
+    this.router.params.subscribe((params) => {
+      this.id = params['id']
+    })
     this.getProps()
     this.registerForm = this.initForm()
   }
@@ -40,50 +48,18 @@ export class PropiedadesComponent {
       direccion: [this.selection?.direccion, [Validators.required, Validators.minLength(7)]],
       descripcion: [this.selection?.descripcion, [Validators.required, Validators.minLength(7)]],
       numerotitulo: [this.selection?.numerotitulo, [Validators.required, Validators.min(1)]],
-      nombrepropietario: [this.selection?.nombrepropietario, [Validators.required, Validators.minLength(3)]]
+      clientes_id: [this.id, [Validators.required, Validators.minLength(3)]]
     })
   }
 
   getProps(): void{
-    this.hs.get( `entities/${this.baseUrl}` )
+    this.hs.get( `entities/${this.baseUrl}/${ this.id }`)
     .subscribe((res) => {
       if(!res.data) console.log('Hubo un error o no se encontraron datos');
       else{
-        this.props = [...res.data]
+        this.props = [...res.data.propiedades]
       }
    })
-  }
-
-  createProp ( prop: Properties ): void {
-    const data = {
-      direccion         : prop.direccion,
-      descripcion       : prop.descripcion,
-      numerotitulo      : prop.numerotitulo,
-      nombrepropietario : prop.nombrepropietario
-    }
-    
-    this.hs.post(data, `entities/create/${this.baseUrl}`)
-      .subscribe((res) => {
-        if ( res['success'] == false ) {
-          this.toast.error(
-            'Error al intentar registrar, por favor, intente de nuevo'
-          );
-          console.log('Error', res);
-        } else {
-          this.toast.success('Propiedad registrada');
-          console.log('OK');
-          const resp: Properties = { 
-            _id               : res.data._id, 
-            direccion         : prop.direccion,
-            descripcion       : prop.descripcion,
-            numerotitulo      : prop.numerotitulo,
-            nombrepropietario : prop.nombrepropietario
-          }
-          // console.log('resp', resp);
-          this.props?.push(resp)
-        }
-      })
-  
   }
 
   deleteProp(id: string): void{
@@ -103,51 +79,34 @@ export class PropiedadesComponent {
       })
   }
 
-  updateProp( properties: Properties | undefined ): void{
-    this.hs.put(properties , `entities/update/${this.baseUrl}/${properties?._id}`)
-      .subscribe((resp: any) => {
-        if ( resp['success'] == false ) {
-          console.log('resp', resp);
-          this.toast.error(
-            'Error al intentar actualizar, por favor, intente de nuevo'
-          );
-        } else {
-          console.log('resp', resp);
-          this.toast.success('Propiedad actualizada');
-          const currentProps = this.props.filter((items) => items?._id !== properties?._id)
-          this.props = [...currentProps, properties]
-        }
-      })
-  }
-
   selectProp(properties: any ): void {
     this.registerForm = this.initForm()
     this.selection = properties.selection
     this.action = 'Actualizar propiedad'
   }
 
-  showSucessMessage(): void{
-    this.success = true
-    setTimeout(() => {
-      this.success = false
-    }, 5000);
+  goToCreate(){
+    this.nv.navigate([
+      `/finance-system/users/${this.userData?.userdata.name}/
+      ${this.userData?.userdata.id}/properties/${this.id}/create`
+    ])
   }
-
-  showErrorMessage(): void{
-    this.error = true
-    setTimeout(() => {
-      this.error = false
-    }, 5000);
-  }
-
+  
   clearValues(): void{
     this.selection = {
       _id: '',
       direccion: '',
       descripcion: '',
       numerotitulo: 0,
-      nombrepropietario: ''
+      clientes_id: ''
     }
     this.action = 'Registrar propiedad'
+  }
+
+  goBack(){
+    this.nv.navigate([
+      `/finance-system/users/${this.userData?.userdata.name}/
+        ${this.userData?.userdata.id}/clients/details`, this.id
+    ])
   }
 }

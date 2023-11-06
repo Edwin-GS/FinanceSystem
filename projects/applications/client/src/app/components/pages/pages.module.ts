@@ -12,7 +12,7 @@ import { BrandComponent } from './brand/brand.component';
 import { CreateUpdateBrandComponent } from './brand/create-update-brand/create-update-brand.component';
 import { PropiedadesComponent } from './propiedades/propiedades.component';
 import { PropsTableComponent } from './components/prop-table/prop-table.component';
-import { CreateUpdatePropsComponent } from './propiedades/create-update-propiedades/create-update-propiedades.component';
+import { UpdatePropsComponent } from './propiedades/update-propiedades/update-propiedades.component';
 import { LimitStringPipe } from './pipes/limit-string.pipe';
 import { ClientComponent } from './client/client.component';
 import { CreateClientComponent } from './client/create-client/create-client.component';
@@ -24,6 +24,8 @@ import { GuarantorCardComponent } from './components/guarantor-card/guarantor-ta
 import { UpdateGuarantorViewComponent } from './guarantor/update-guarantor-view/update-guarantor-view.component';
 import { CreateGuarantorComponent } from './guarantor/create-guarantor/create-guarantor.component';
 import { SolicitudPrestamosComponent } from './solicitud-prestamos/solicitud-prestamos.component';
+import { ClientDetailsComponent } from './client-details/client-details.component';
+import { CreatePropertiesComponent } from './propiedades/create-properties/create-properties.component';
 
 @NgModule({
   declarations: [
@@ -35,9 +37,11 @@ import { SolicitudPrestamosComponent } from './solicitud-prestamos/solicitud-pre
     ConfirmModalComponent,
     BrandComponent,
     CreateUpdateBrandComponent,
-    CreateUpdatePropsComponent,
+    
     PropiedadesComponent,
+    UpdatePropsComponent,
     PropsTableComponent,
+
     LimitStringPipe,
     
     ClientComponent,
@@ -50,6 +54,8 @@ import { SolicitudPrestamosComponent } from './solicitud-prestamos/solicitud-pre
     CreateGuarantorComponent,
     UpdateGuarantorViewComponent,
     SolicitudPrestamosComponent,
+    ClientDetailsComponent,
+    CreatePropertiesComponent,
 
   ],
 

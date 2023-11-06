@@ -14,6 +14,9 @@ import { CreateGuarantorComponent } from './guarantor/create-guarantor/create-gu
 import { UpdateGuarantorViewComponent } from './guarantor/update-guarantor-view/update-guarantor-view.component';
 import { CreateClientComponent } from './client/create-client/create-client.component';
 import { SolicitudPrestamosComponent } from './solicitud-prestamos/solicitud-prestamos.component';
+import { ClientDetailsComponent } from './client-details/client-details.component';
+import { CreatePropertiesComponent } from './propiedades/create-properties/create-properties.component';
+import { UpdatePropsComponent } from './propiedades/update-propiedades/update-propiedades.component';
 
 /**
  * Base route information
@@ -33,17 +36,23 @@ const UserRoutes: Routes = [
     path: '',
     component: ClassicComponent,
     children: [
-      {
-        path: 'profession',
-        component: ProfessionComponent,
-        title: 'Profession',
+      { path: 'garantes', 
+        component: GuarantorComponent, 
+        title: 'Garante' 
       },
       {
-        path: 'properties',
-        component: PropiedadesComponent,
-        title: 'Properties',
+        path: 'garantes/create',
+        component: CreateGuarantorComponent,
+        title: 'Crear garantes',
       },
-      { path: 'clients', component: ClientComponent, title: 'Clientes' },
+      {
+        path: 'garantes/:id',
+        component: UpdateGuarantorViewComponent,
+        title: 'Actualizar garante',
+      },
+      { path: 'clients', 
+        component: ClientComponent, 
+        title: 'Clientes' },
       {
         path: 'clients/create',
         component: CreateClientComponent,
@@ -54,31 +63,37 @@ const UserRoutes: Routes = [
         component: UpdateClientViewComponent,
         title: 'Actualizar cliente',
       },
-      { path: 'garantes', component: GuarantorComponent, title: 'Garantes' },
       {
-        path: 'garantes/create',
-        component: CreateGuarantorComponent,
-        title: 'Garantes',
+        path: 'clients/details/:id',
+        component: ClientDetailsComponent,
+        title: 'Detalles del cliente',
       },
-      {
-        path: 'garantes/:id',
-        component: UpdateGuarantorViewComponent,
-        title: 'Garantes',
+      { path: 'brand', 
+        component: BrandComponent, 
+        title: 'Marca' 
       },
-      { path: 'brand', component: BrandComponent, title: 'Brands' },
-
       {
         path: 'profession',
         component: ProfessionComponent,
-        title: 'Profession',
+        title: 'Profesion',
       },
       {
-        path: 'properties',
+        path: 'properties/:id',
         component: PropiedadesComponent,
-        title: 'Properties',
+        title: 'Propiedades',
       },
       {
-        path: 'solicitud-prestamos',
+        path: 'properties/:id/create',
+        component: CreatePropertiesComponent,
+        title: 'Propiedades',
+      },
+      {
+        path: 'properties/:id/update/:propID',
+        component: UpdatePropsComponent,
+        title: 'Propiedades',
+      },
+      {
+        path: 'solicitud-prestamos/:id',
         component: SolicitudPrestamosComponent,
         title: 'Solicitud de Prestamos',
       },
