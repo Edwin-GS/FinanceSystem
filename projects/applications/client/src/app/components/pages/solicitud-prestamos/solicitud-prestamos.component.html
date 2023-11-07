@@ -10,7 +10,7 @@
           type="number"
           class="form-control"
           id="numeroSolicitud"
-          formControlName="numeroSolicitud"
+          formControlName="numerosolicitud"
           required
         />
       </div>
@@ -21,7 +21,6 @@
           type="text"
           class="form-control"
           id="nombresApellidos"
-          formControlName="nombresApellidos"
           required
         />
       </div>
@@ -38,8 +37,12 @@
           class="form-control"
           id="fechaSolicitud"
           formControlName="fechaSolicitud"
+          (change)="calcularPrestamo()"
           required
         />
+        <h4>
+          Dia de la semana de inicio de solicitud: {{ diaSemanaSolicitud }}
+        </h4>
       </div>
 
       <div class="form-group">
@@ -49,24 +52,10 @@
           class="form-control"
           id="fechaInicioPago"
           formControlName="fechaInicioPago"
+          (change)="calcularPrestamo()"
           required
         />
-      </div>
-
-      <div class="form-group">
-        <label for="formaPago">Forma de pago</label>
-        <select
-          class="form-control"
-          id="formaPago"
-          formControlName="formaPago"
-          required
-        >
-          <option value="">Selecciona una opción</option>
-          <option value="Mensual">Mensual</option>
-          <option value="Trimestral">Trimestral</option>
-          <option value="Semestral">Semestral</option>
-          <option value="Anual">Anual</option>
-        </select>
+        <h4>Dia de la semana de inicio de pago: {{ diaSemanaInicioPago }}</h4>
       </div>
 
       <div class="form-group">
@@ -76,46 +65,15 @@
           class="form-control"
           id="cantidadPrestamo"
           formControlName="cantidadPrestamo"
+          (change)="calcularPrestamo()"
           required
         />
-      </div>
-
-      <div class="form-group">
-        <label for="cantidadCuotas">Cantidad de cuotas a pagar</label>
-        <input
-          type="number"
-          class="form-control"
-          id="cantidadCuotas"
-          formControlName="cantidadCuotas"
-          required
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="importeCuota">Importe a pagar en cada cuota</label>
-        <input
-          type="number"
-          class="form-control"
-          id="importeCuota"
-          formControlName="importeCuota"
-          required
-        />
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">Información de pago</div>
-    <div class="card-body">
-      <div class="form-group">
-        <label for="fechaTerminacionPagos">Fecha de terminación de pagos</label>
-        <input
-          type="date"
-          class="form-control"
-          id="fechaTerminacionPagos"
-          formControlName="fechaTerminacionPagos"
-          required
-        />
+        <h4>
+          Cantidad en préstamo al cliente:
+          {{
+            getFormattedCurrency(registerForm.get("cantidadPrestamo")?.value)
+          }}
+        </h4>
       </div>
 
       <div class="form-group">
@@ -125,8 +83,86 @@
           class="form-control"
           id="porcentajeInteres"
           formControlName="porcentajeInteres"
+          (change)="calcularPrestamo()"
           required
         />
+        <h4>
+          Porcentaje de interés aplicado:
+          {{ registerForm.get("porcentajeInteres")?.value }}%
+        </h4>
+        <h4>
+          Monto total por intereses:
+          {{ getFormattedCurrency(registerForm.get("cantidadGanada")?.value) }}
+        </h4>
+      </div>
+
+      <div class="form-group">
+        <label for="importeCuota">Cantidad de cuotas a pagar</label>
+        <input
+          type="number"
+          class="form-control"
+          id="cantidadCuotas"
+          formControlName="cantidadCuotas"
+          [(ngModel)]="cantidadCuotas"
+          (change)="calcularPrestamo()"
+          required
+        />
+        <h4>
+          Importe a pagar en cada cuota:
+          {{ getFormattedCurrency(registerForm.get("importeCuota")?.value) }}
+        </h4>
+        <h4>
+          Cantidad de cuotas a pagar:
+          {{ registerForm.get("cantidadCuotas")?.value }}
+        </h4>
+      </div>
+
+      <div class="form-group">
+        <label for="formaPago">Forma de pago</label>
+        <select
+          class="form-control"
+          id="formaPago"
+          formControlName="formaPago"
+          (change)="calcularPrestamo()"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="Diario">Diario</option>
+          <option value="Semanal">Semanal</option>
+          <option value="Quincenal">Quincenal</option>
+          <option value="Mensual">Mensual</option>
+        </select>
+        <h4 *ngIf="registerForm.get('formaPago')?.value === 'Diario'">
+          El pago se debe hacer diario
+        </h4>
+        <h4 *ngIf="registerForm.get('formaPago')?.value === 'Semanal'">
+          El pago se debe hacer semanalmente
+        </h4>
+        <h4 *ngIf="registerForm.get('formaPago')?.value === 'Quincenal'">
+          El pago se debe hacer quincenal
+        </h4>
+        <h4 *ngIf="registerForm.get('formaPago')?.value === 'Mensual'">
+          El pago se debe hacer mensualmente
+        </h4>
+      </div>
+
+      <div class="form-group">
+        <label for="fechaTerminacionPagos">Fecha de terminación de pagos</label>
+        <input
+          type="date"
+          class="form-control"
+          id="fechaTerminacionPagos"
+          formControlName="fechaTerminacionPagos"
+          (change)="calcularPrestamo()"
+          readonly
+          required
+        />
+        <h4>
+          Fecha de terminación de pagos:
+          {{
+            getFormattedDate(registerForm.get("fechaTerminacionPagos")?.value)
+          }}
+        </h4>
       </div>
 
       <div class="form-group">
@@ -135,10 +171,16 @@
           type="number"
           class="form-control"
           id="porcentajeMora"
-          formControlName="porcentajeMora"
+          formControlName="porcentajeRecargoMora"
+          [(ngModel)]="porcentajeRecargoMora"
+          (change)="calcularPrestamo()"
           required
         />
       </div>
+      <h4>
+        Porcentaje de interés aplicado en mora:
+        {{ registerForm.get("porcentajeRecargoMora")?.value }}%
+      </h4>
     </div>
   </div>
 
