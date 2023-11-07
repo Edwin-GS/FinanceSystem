@@ -1,8 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './users/user.component';
 import { ProfessionComponent } from './profession/profession.component';
-// import { CreateProfessionComponent } from './profession/create/create-profession/create-profession.component';
-// import { UpdateComponent } from './profession/update/update.component';
 import { MiAppsComponent } from './mi-apps/mi-apps.component';
 import { ClassicComponent } from '../dashboard/extras/classic/classic.component';
 import { BrandComponent } from './brand/brand.component';
@@ -17,6 +15,8 @@ import { SolicitudPrestamosComponent } from './solicitud-prestamos/solicitud-pre
 import { ClientDetailsComponent } from './client-details/client-details.component';
 import { CreatePropertiesComponent } from './propiedades/create-properties/create-properties.component';
 import { UpdatePropsComponent } from './propiedades/update-propiedades/update-propiedades.component';
+import { ModelComponent } from './model/model.component';
+import { VehicleTypeComponent } from './vehicle-type/vehicle-type.component';
 
 /**
  * Base route information
@@ -81,6 +81,19 @@ const UserRoutes: Routes = [
         path: 'properties/:id',
         component: PropiedadesComponent,
         title: 'Propiedades',
+      },
+      { path: 'brand', component: BrandComponent, title: 'Brands' },
+      { path: 'model', component: ModelComponent, title: 'Models' },
+      {
+        path: 'vehicle-types',
+        component: VehicleTypeComponent,
+        title: 'Vehicle Types',
+      },
+
+      {
+        path: 'profession',
+        component: ProfessionComponent,
+        title: 'Profession',
       },
       {
         path: 'properties/:id/create',

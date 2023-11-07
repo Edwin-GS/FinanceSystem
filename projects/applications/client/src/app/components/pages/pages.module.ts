@@ -26,6 +26,10 @@ import { CreateGuarantorComponent } from './guarantor/create-guarantor/create-gu
 import { SolicitudPrestamosComponent } from './solicitud-prestamos/solicitud-prestamos.component';
 import { ClientDetailsComponent } from './client-details/client-details.component';
 import { CreatePropertiesComponent } from './propiedades/create-properties/create-properties.component';
+import { ModelComponent } from './model/model.component';
+import { CreateUpdateModelComponent } from './model/create-update-model/create-update-model.component';
+import { VehicleTypeComponent } from './vehicle-type/vehicle-type.component';
+import { CreateUpdateVehicleTypeComponent } from './vehicle-type/create-update-vehicle-type/create-update-vehicle-type.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,7 @@ import { CreatePropertiesComponent } from './propiedades/create-properties/creat
     CreateUpdateBrandComponent,
     
     PropiedadesComponent,
+    CreatePropertiesComponent,
     UpdatePropsComponent,
     PropsTableComponent,
 
@@ -48,14 +53,20 @@ import { CreatePropertiesComponent } from './propiedades/create-properties/creat
     ClientCardComponent,
     CreateClientComponent,
     UpdateClientViewComponent,
+    ClientDetailsComponent,
 
     GuarantorComponent,
     GuarantorCardComponent,
     CreateGuarantorComponent,
     UpdateGuarantorViewComponent,
+    
     SolicitudPrestamosComponent,
-    ClientDetailsComponent,
-    CreatePropertiesComponent,
+
+    ModelComponent,
+    
+    CreateUpdateModelComponent,
+    VehicleTypeComponent,
+    CreateUpdateVehicleTypeComponent
 
   ],
 
