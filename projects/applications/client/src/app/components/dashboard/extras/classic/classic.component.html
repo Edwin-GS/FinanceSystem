@@ -3,9 +3,9 @@
   [ngClass]="[showSideBar ? 'toggle-sidebar-btn' : 'toggle-sidebar']"
 >
   <header id="header" class="header fixed-top d-flex align-items-center">
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center justify-content-center">
       <span class="logo d-flex align-items-center">
-        <img src="../../../../../assets/Legoft-Logo.png" alt="" />
+        <img src="../../../../../assets/MP-logo.png" alt="Logo Moto Prestamo" />
         <span class="d-none d-lg-block">Finance System</span>
       </span>
       <i
@@ -131,6 +131,17 @@
         <a
           class="nav-link collapsed"
           routerLinkActive="active"
+          routerLink="vehicle-types"
+        >
+          <i class="bi bi-alphabet-uppercase"></i>
+          <span>Tipos de vehiculos</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a
+          class="nav-link collapsed"
+          routerLinkActive="active"
           routerLink="profession"
         >
           <i class="bi bi-card-list"></i>
@@ -159,32 +170,6 @@
           <span>Clientes</span>
         </a>
       </li>
-
-      <!-- End Profile Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed">
-          <i class="bi bi-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </li>
-      <!-- End Contact Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed">
-          <i class="bi bi-dash-circle"></i>
-          <span>Error 404</span>
-        </a>
-      </li>
-      <!-- End Error 404 Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link">
-          <i class="bi bi-file-earmark"></i>
-          <span>Blank</span>
-        </a>
-      </li>
-      <!-- End Blank Page Nav -->
     </ul>
   </aside>
   <!-- End Sidebar-->

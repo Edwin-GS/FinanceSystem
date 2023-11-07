@@ -20,6 +20,8 @@ import { ClientCardComponent } from './components/client-card/client-table.compo
 import { provideHotToastConfig } from '@ngneat/hot-toast';
 import { ModelComponent } from './model/model.component';
 import { CreateUpdateModelComponent } from './model/create-update-model/create-update-model.component';
+import { VehicleTypeComponent } from './vehicle-type/vehicle-type.component';
+import { CreateUpdateVehicleTypeComponent } from './vehicle-type/create-update-vehicle-type/create-update-vehicle-type.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { CreateUpdateModelComponent } from './model/create-update-model/create-u
     ClientComponent,
     ClientCardComponent,
     ModelComponent,
-    CreateUpdateModelComponent
+    CreateUpdateModelComponent,
+    VehicleTypeComponent,
+    CreateUpdateVehicleTypeComponent
 
   ],
 

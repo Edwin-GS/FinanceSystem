@@ -7,6 +7,7 @@ import { BrandComponent } from './brand/brand.component';
 import { PropiedadesComponent } from './propiedades/propiedades.component';
 import { ClientComponent } from './client/client.component';
 import { ModelComponent } from './model/model.component';
+import { VehicleTypeComponent } from './vehicle-type/vehicle-type.component';
 
 /**
  * Base route information
@@ -39,6 +40,11 @@ const UserRoutes: Routes = [
       { path: 'clients', component: ClientComponent, title: 'Clients' },
       { path: 'brand', component: BrandComponent, title: 'Brands' },
       { path: 'model', component: ModelComponent, title: 'Models' },
+      {
+        path: 'vehicle-types',
+        component: VehicleTypeComponent,
+        title: 'Vehicle Types',
+      },
 
       {
         path: 'profession',

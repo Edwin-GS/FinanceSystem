@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { HotToastService } from '@ngneat/hot-toast';
-import { Model } from 'projects/libraries/helpers/src/lib/models/model.doc';
+import { VehicleType } from 'projects/libraries/helpers/src/lib/models/vehicletype.doc';
 import { HandlerService } from 'projects/libraries/helpers/src/lib/services/handler.service';
 import { UserService } from 'projects/libraries/helpers/src/lib/services/user.service';
 
 @Component({
-  selector: 'app-model',
-  templateUrl: './model.component.html',
-  styleUrls: ['./model.component.css'],
+  selector: 'app-vehicle-type',
+  templateUrl: './vehicle-type.component.html',
+  styleUrls: ['./vehicle-type.component.css'],
 })
-export class ModelComponent implements OnInit {
-  models: Model[] = [];
+export class VehicleTypeComponent implements OnInit {
+  vehicleTypes: VehicleType[] = [];
   isLoading!: boolean;
   userData = this.usr.getLocalStorage();
-  schemaName = 'modelos';
+  schemaName = 'tiposvehiculos';
   id!: string;
 
   constructor(
@@ -23,10 +23,10 @@ export class ModelComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getModels();
+    this.getVehicleTypes();
   }
 
-  getModels() {
+  getVehicleTypes() {
     this.isLoading = true;
     this.hs
       .get(
@@ -38,22 +38,22 @@ export class ModelComponent implements OnInit {
           console.log('Error al cargar los modelos');
         } else {
           this.isLoading = false;
-          this.models = [...resp.data];
+          this.vehicleTypes = [...resp.data];
         }
       });
   }
 
-  onCreate(model: Model) {
+  onCreate(vehicleType: VehicleType) {
     this.hs
       .post(
-        model,
+        vehicleType,
         `entities/create/${this.userData?.userdata.name}/${this.schemaName}/${this.userData?.app}`
       )
       .subscribe(
         (resp) => {
           if (resp['success'] === true) {
-            this.getModels();
-            this.toast.success('Modelo agregado');
+            this.getVehicleTypes();
+            this.toast.success('Tipo de vehiculo agregado');
           } else {
             this.toast.error(
               'Error al intentar agregar por favor intente de nuevo'
@@ -61,24 +61,22 @@ export class ModelComponent implements OnInit {
           }
         },
         (err) => {
-          console.error('Error al agregar el modelo: ' + err);
+          console.error('Error al agregar el tipo de vehiculo: ' + err);
         }
       );
-
-    console.log(model, 'Creating');
   }
 
-  onUpdate(model: Model) {
+  onUpdate(vehicleType: VehicleType) {
     this.hs
       .put(
-        model,
+        vehicleType,
         `entities/update/${this.userData?.userdata.name}/${this.schemaName}/${this.userData?.app}/${this.id}`
       )
       .subscribe(
         (resp) => {
           if (resp['success'] === true) {
-            this.toast.success('Modelo actualizado');
-            this.getModels();
+            this.toast.success('Tipo de vehiculo actualizado');
+            this.getVehicleTypes();
           } else {
             this.toast.error(
               'Error al intentar actualizar por favor intente de nuevo'
@@ -86,7 +84,7 @@ export class ModelComponent implements OnInit {
           }
         },
         (err) => {
-          console.error('Error al actualizar el modelo: ' + err);
+          console.error('Error al actualizar el tipo de vehiculo: ' + err);
         }
       );
   }
@@ -99,9 +97,9 @@ export class ModelComponent implements OnInit {
       .subscribe(
         (resp) => {
           if (resp['success'] === true) {
-            this.toast.success('Modelo eliminado');
+            this.toast.success('Tipo de vehiculo eliminado');
             this.onResetId();
-            this.getModels();
+            this.getVehicleTypes();
           } else {
             this.toast.error(
               'Error al intentar eliminar por favor intente de nuevo'
@@ -109,7 +107,7 @@ export class ModelComponent implements OnInit {
           }
         },
         (err) => {
-          console.error('Error al eliminar el modelo: ' + err);
+          console.error('Error al eliminar el tipo de vehiculo: ' + err);
         }
       );
   }
