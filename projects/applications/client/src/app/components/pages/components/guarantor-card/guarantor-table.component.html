@@ -1,24 +1,26 @@
 <div class="w-100 justify-content-center p-4">
   <div class="d-flex flex-wrap justify-content-center gap-2">
     <div
-    *ngFor="let prop of props"
+    *ngFor="let guarantor of guarantors"
     class="card cardStyle"
   >
     <div class="card-body pb-3 col"  
-    (click)="selectProp(prop)"
+    (click)="selectProp(guarantor)"
     >
-      <h3 class="card-title">{{ prop?.descripcion | limitString: 15 }}</h3>
-      <!-- <p class="card-text">{{prop?.nombrepropietario | limitString: 15 }}</p> -->
+      <h3 class="card-title">{{ guarantor?.nombre | limitString: 10 }} 
+        {{ guarantor?.apellidos}}</h3>
+      <p class="card-text">{{guarantor?.apodo | limitString: 15 }}</p>
       <div class="d-flex gap-1 justify-content-center">
-        <button
-          *ngIf="prop?._id === selection?._id"
+          <a
+          *ngIf="guarantor?._id === selection?._id"
           class="btn btn-primary col small-button"
-         (click)="goToUpdate()"
-        >
+          routerLinkActive="active" 
+          (click)="goToUpdate( guarantor?._id )"
+          >          
           Actualizar
-        </button>
+          </a>
         <button
-          *ngIf="prop?._id === selection?._id"
+          *ngIf="guarantor?._id === selection?._id"
           class="btn btn-danger col small-button"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
@@ -60,7 +62,7 @@
               type="button"
               class="btn btn-danger"
               data-bs-dismiss="modal"
-              (click)="onDeleteProp(selection?._id)"
+              (click)="onDeleteGuarantor(selection?._id)"
               >
               Confirmar
             </button>

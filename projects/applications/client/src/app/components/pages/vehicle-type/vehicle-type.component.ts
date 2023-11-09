@@ -35,7 +35,7 @@ export class VehicleTypeComponent implements OnInit {
       .subscribe((resp) => {
         if (resp['success'] === false) {
           this.isLoading = false;
-          console.log('Error al cargar los modelos');
+          console.log('Error al cargar los Tipos de Vehiculos');
         } else {
           this.isLoading = false;
           this.vehicleTypes = [...resp.data];
@@ -52,7 +52,8 @@ export class VehicleTypeComponent implements OnInit {
       .subscribe(
         (resp) => {
           if (resp['success'] === true) {
-            this.getVehicleTypes();
+            const res: VehicleType = { _id: resp.data._id, descripcion: vehicleType.descripcion }
+            this.vehicleTypes?.push(res)
             this.toast.success('Tipo de vehiculo agregado');
           } else {
             this.toast.error(
@@ -99,7 +100,8 @@ export class VehicleTypeComponent implements OnInit {
           if (resp['success'] === true) {
             this.toast.success('Tipo de vehiculo eliminado');
             this.onResetId();
-            this.getVehicleTypes();
+            const currentTypes = this.vehicleTypes?.filter((prof) => prof?._id !== id )
+            this.vehicleTypes = [ ...currentTypes ]
           } else {
             this.toast.error(
               'Error al intentar eliminar por favor intente de nuevo'

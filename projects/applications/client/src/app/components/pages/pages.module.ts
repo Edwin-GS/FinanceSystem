@@ -12,12 +12,20 @@ import { BrandComponent } from './brand/brand.component';
 import { CreateUpdateBrandComponent } from './brand/create-update-brand/create-update-brand.component';
 import { PropiedadesComponent } from './propiedades/propiedades.component';
 import { PropsTableComponent } from './components/prop-table/prop-table.component';
-import { CreateUpdatePropsComponent } from './propiedades/create-update-propiedades/create-update-propiedades.component';
+import { UpdatePropsComponent } from './propiedades/update-propiedades/update-propiedades.component';
 import { LimitStringPipe } from './pipes/limit-string.pipe';
 import { ClientComponent } from './client/client.component';
-import { CreateUpdateClientComponent } from './client/create-update-client/create-update-client.component';
+import { CreateClientComponent } from './client/create-client/create-client.component';
 import { ClientCardComponent } from './components/client-card/client-table.component';
 import { provideHotToastConfig } from '@ngneat/hot-toast';
+import { UpdateClientViewComponent } from './client/update-client-view/update-client-view.component';
+import { GuarantorComponent } from './guarantor/guarantor.component';
+import { GuarantorCardComponent } from './components/guarantor-card/guarantor-table.component';
+import { UpdateGuarantorViewComponent } from './guarantor/update-guarantor-view/update-guarantor-view.component';
+import { CreateGuarantorComponent } from './guarantor/create-guarantor/create-guarantor.component';
+import { SolicitudPrestamosComponent } from './solicitud-prestamos/solicitud-prestamos.component';
+import { ClientDetailsComponent } from './client-details/client-details.component';
+import { CreatePropertiesComponent } from './propiedades/create-properties/create-properties.component';
 import { ModelComponent } from './model/model.component';
 import { CreateUpdateModelComponent } from './model/create-update-model/create-update-model.component';
 import { VehicleTypeComponent } from './vehicle-type/vehicle-type.component';
@@ -33,14 +41,29 @@ import { CreateUpdateVehicleTypeComponent } from './vehicle-type/create-update-v
     ConfirmModalComponent,
     BrandComponent,
     CreateUpdateBrandComponent,
-    CreateUpdatePropsComponent,
-    CreateUpdateClientComponent,
+    
     PropiedadesComponent,
+    CreatePropertiesComponent,
+    UpdatePropsComponent,
     PropsTableComponent,
+
     LimitStringPipe,
+    
     ClientComponent,
     ClientCardComponent,
+    CreateClientComponent,
+    UpdateClientViewComponent,
+    ClientDetailsComponent,
+
+    GuarantorComponent,
+    GuarantorCardComponent,
+    CreateGuarantorComponent,
+    UpdateGuarantorViewComponent,
+    
+    SolicitudPrestamosComponent,
+
     ModelComponent,
+    
     CreateUpdateModelComponent,
     VehicleTypeComponent,
     CreateUpdateVehicleTypeComponent

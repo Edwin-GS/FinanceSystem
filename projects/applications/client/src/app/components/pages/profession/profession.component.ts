@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HotToastService } from '@ngneat/hot-toast';
 import { Profession } from 'projects/libraries/helpers/src/lib/models/profession.doc';
 import { HandlerService } from 'projects/libraries/helpers/src/lib/services/handler.service';
 import { UserService } from 'projects/libraries/helpers/src/lib/services/user.service';
@@ -13,9 +14,9 @@ export class ProfessionComponent {
 
   constructor(
     private readonly hs: HandlerService,
-    private usr: UserService,
     private readonly fb: FormBuilder,
-
+    private usr: UserService,
+    private toast: HotToastService,
   ){}
   
   userData = this.usr.getLocalStorage();
@@ -57,9 +58,11 @@ export class ProfessionComponent {
     this.hs.post(data, `entities/create/${this.baseUrl}`)
       .subscribe((res) => {
         if ( res['success'] == false ) {
-          this.showErrorMessage()
+          this.toast.error(
+            'Error al intentar registrar, por favor, intente de nuevo'
+          );
         } else {
-          this.showSucessMessage()
+          this.toast.success('Profesion registrado');
           const resp: Profession = { _id: res.data._id, nombre: nombre }
           this.professions?.push(resp)
         }
@@ -72,10 +75,11 @@ export class ProfessionComponent {
       .subscribe((resp) => {
         console.log(resp);
         if(resp["success"] == false ){
-          this.showErrorMessage()
+          this.toast.error(
+            'Error al intentar eliminar, por favor, intente de nuevo'
+          );
         } else{
-          this.showSucessMessage()
-
+          this.toast.success('Profesion eliminada');
           const currentProf = this.professions?.filter((prof) => prof?._id !== id )
           this.professions = [ ...currentProf ]
         }
@@ -86,12 +90,14 @@ export class ProfessionComponent {
     this.hs.put(profesion , `entities/update/${this.baseUrl}/${profesion?._id}`)
       .subscribe((resp: any) => {
         if ( resp['success'] == false ) {
-          this.showErrorMessage()
+          this.toast.error(
+            'Error al intentar actualizar, por favor, intente de nuevo'
+          );
         } else {
+          this.toast.success('Profesion eliminada');
           const currentProf = this.professions?.filter((items) => items?._id !== profesion?._id)
           this.professions = [ ...currentProf ]
           this.professions.unshift( profesion )
-          this.showSucessMessage()
         }
       })
   }
@@ -100,20 +106,6 @@ export class ProfessionComponent {
     this.registerForm = this.initForm()
     this.selection = profession
     this.action = 'Actualizar profesion'
-  }
-
-  showSucessMessage(): void{
-    this.success = true
-    setTimeout(() => {
-      this.success = false
-    }, 5000);
-  }
-
-  showErrorMessage(): void{
-    this.error = true
-    setTimeout(() => {
-      this.error = false
-    }, 5000);
   }
 
   clearValues(): void{

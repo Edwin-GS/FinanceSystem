@@ -1,17 +1,16 @@
-<div class="modal fade" id="modalCenter" data-bs-backdrop="static">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5 fw-semibold m-0">{{ action }}</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form class="row g-3" (ngSubmit)="onSubmit( this.registerForm.value )" [formGroup]="registerForm">
+<div class="d-flex justify-content-between align-items-center mb-3" >
+  <app-page-title [title]="pageTitle"></app-page-title>
+  
+  <a
+    class="btn btn-primary small-button"
+    routerLinkActive="active" 
+    (click)="goBack()"
+  >          
+    Atras
+  </a>
+</div>
+
+<form class="row g-3" (ngSubmit)="onSubmit( this.registerForm.value )" [formGroup]="registerForm">
           <div class="col-md-12">
             <!-- Direccion -->
             <div class="col-md-12 pb-1">
@@ -96,50 +95,15 @@
                 Este campo debe contener mas de {{registerForm.get('numerotitulo')?.errors?.['minlength'].requiredLength}} caracteres
               </div>
             </div>
-
-             <!-- Nombre propietario -->
-             <div class="col-md-12 pb-1">
-              <div class="form-floating">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nombrepropietario"
-                  name="nombrepropietario"
-                  formControlName="nombrepropietario"
-                  placeholder="BMW"
-                  value="{{this.selection?.nombrepropietario}}"
-                />
-                <label for="nombrepropietario">Nombre del propietario</label>
-              </div>
-              <div
-                *ngIf="registerForm.get('nombrepropietario')?.touched  && registerForm.get('nombrepropietario')?.errors?.['required']"
-                class="text-danger mt-2"
-              >
-                El nombre del propietario es requido
-              </div>
-              <div
-                *ngIf="registerForm.get('nombrepropietario')?.touched  && registerForm.get('nombrepropietario')?.errors?.['minlength']"
-                class="text-danger mt-2"
-              >
-                Este campo debe contener mas de {{registerForm.get('nombrepropietario')?.errors?.['minlength'].requiredLength}} caracteres
-              </div>
-            </div>
-
           </div>
         </form>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-          Cancelar
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="onSubmit( this.registerForm.value )"
-          [disabled]="registerForm.invalid"
-          >
-          Guardar
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="d-flex justify-content-end gap-2 p-2">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="onSubmit( this.registerForm.value )"
+            [disabled]="registerForm.invalid"
+            >
+            Guardar
+          </button>
+        </div>

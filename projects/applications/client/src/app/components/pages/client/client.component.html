@@ -4,9 +4,7 @@
   <app-page-title [title]="pageTitle"></app-page-title>
   <button
     class="btn btn-primary btn-bg-purple"
-    data-bs-toggle="modal"
-    data-bs-target="#modalCenter"
-    (click)="this.registerForm.reset()"
+    (click)="goToCreate()"
     >
     <i class="bi bi-plus-circle"></i>
       {{ " " }}Nueva
@@ -16,37 +14,7 @@
   
   <app-client-card
     [clients]="clients"
-    [action]="action"
     [selection]="selection"
     (selectedActionClientEmitter)="selectProp( $event )"
     (deleteClientEvent)="deleteClient( $event )"
   ></app-client-card>
-  
-  <app-create-update-client
-    [action]="action"
-    [selection]="selection"
-    [registerForm]="registerForm"
-    [professions]="professions"
-    (createClientEmitter)="createClient( $event )"
-    (updateClientEmitter)="updateClient( $event )"
-    ></app-create-update-client>
-  
-    <div class="fixed-bottom notifContainer">
-      <div
-        *ngIf="error"
-        class="alert alert-danger d-flex justify-content-center align-content-center fade-in show notificationMSG"
-      >
-        <i class="bi bi-x-circle-fill">
-          <span class="fw-normal fs-6 m-0">
-            No se pudo realizar esta operación
-          </span>
-        </i>
-      </div>
-      <div
-        *ngIf="success"
-        class="alert alert-success fade-in d-flex justify-content-center gap-2 align-content-center notificationMSG"
-      >
-        <i class="bi bi-check-circle-fill"></i>
-        <span class="fw-normal fs-6 m-0"> Operación realizada </span>
-      </div>
-    </div>

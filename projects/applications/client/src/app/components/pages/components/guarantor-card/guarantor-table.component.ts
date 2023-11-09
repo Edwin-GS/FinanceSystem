@@ -4,18 +4,20 @@ import { Client } from 'projects/libraries/helpers/src/lib/models/client.doc';
 import { UserService } from 'projects/libraries/helpers/src/lib/services/user.service';
 
 @Component({
-  selector: 'app-client-card',
-  templateUrl: './client-table.component.html',
-  styleUrls: ['./client-table.component.css'],
+  selector: 'app-guarantor-card',
+  templateUrl: './guarantor-table.component.html',
+  styleUrls: ['./guarantor-table.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClientCardComponent {
-  userData = this.usr.getLocalStorage();
-  @Input()  clients: (Client | undefined)[] = [];
+export class GuarantorCardComponent {
+  @Input()  guarantors: (Client | undefined)[] = [];
+  @Input()  action!: string
   @Input()  selection!: Client | undefined
   @Output() selectedActionClientEmitter = new EventEmitter<any>();
-  @Output() deleteClientEvent = new EventEmitter<string>();
-  
+  @Output() deleteGuarantorEvent = new EventEmitter<string>();
+  userData = this.usr.getLocalStorage();
+  baseUrl: string = `${this.userData?.userdata.name}/garantes/${this.userData?.app}`
+
   constructor( 
     private readonly router: Router,
     private usr: UserService,
@@ -27,16 +29,14 @@ export class ClientCardComponent {
     this.selectedActionClientEmitter.emit( clientOperation );
   }
 
-  onDeleteProp(id: string | undefined): void{
-    this.deleteClientEvent.emit( id )
+  onDeleteGuarantor(id: string | undefined): void{
+    this.deleteGuarantorEvent.emit( id )
   }
 
   goToUpdate( id: string | undefined ){
-    this.router.navigate([`/finance-system/users/${this.userData?.userdata.name}/
-    ${this.userData?.userdata.id}/clients`, id])
-  }
-  goToDetails( id: string | undefined ){
-    this.router.navigate([`/finance-system/users/${this.userData?.userdata.name}/
-    ${this.userData?.userdata.id}/clients/details`, id])
+    this.router.navigate([
+      `/finance-system/users/${this.userData?.userdata.name}/
+      ${this.userData?.userdata.id}/garantes`, id
+    ])
   }
 }
