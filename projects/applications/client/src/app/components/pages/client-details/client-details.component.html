@@ -98,6 +98,8 @@
             <thead>
               <tr>
                 <th scope="col">Propiedades</th>
+                <th></th>
+                <th></th>
                 <th scope="col">
                   <a
                   class="btn btn-primary col small-button"
@@ -111,12 +113,34 @@
               <tr>
                 <th scope="col">Num. Titulo</th>
                 <th scope="col">Direccion</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let propiedad of propiedades ">
                 <th scope="row"> {{ propiedad?.numerotitulo }}</th>
                 <td> {{ propiedad?.direccion | limitString: 10}} </td>
+                <!-- <td>
+                  <button
+                    type="button"
+                    class="btn btn-warning btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#vehicle-type-modal"
+                    (click)="goToPropUpdate( propiedad?._id )"
+                    >
+                    <i class="bi bi-pencil-square text-white"></i>
+                  </button>
+                  {{ "" }}
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#confirm-modal"
+                    (click)="idProp = propiedad?._id"
+                    >
+                    <i class="bi bi-x-octagon"></i>
+                  </button>
+                </td> -->
               </tr>
             </tbody>
           </table>
@@ -150,3 +174,8 @@
           </table>
         </div>
       </div>
+
+      <app-confirm-modal 
+        [id]="idProp" 
+        (deleteBrand)="onDeleteProperty($event)">
+      </app-confirm-modal>

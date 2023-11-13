@@ -18,13 +18,11 @@ export class PropiedadesComponent {
     private readonly hs: HandlerService,
     private readonly nv: Router,
     private toast: HotToastService,
-    private usr: UserService,
-    private fb: FormBuilder
+    private usr: UserService
   ){}
   
   pageTitle = 'Propiedades';
   formName: string = 'Profesion'
-  registerForm!: FormGroup
 
   userData = this.usr.getLocalStorage();
   baseUrl: string = `${this.userData?.userdata.name}/clientes/${this.userData?.app}`
@@ -40,16 +38,6 @@ export class PropiedadesComponent {
       this.id = params['id']
     })
     this.getProps()
-    this.registerForm = this.initForm()
-  }
-
-  initForm(): FormGroup{
-    return this.fb.group({
-      direccion: [this.selection?.direccion, [Validators.required, Validators.minLength(7)]],
-      descripcion: [this.selection?.descripcion, [Validators.required, Validators.minLength(7)]],
-      numerotitulo: [this.selection?.numerotitulo, [Validators.required, Validators.min(1)]],
-      clientes_id: [this.id, [Validators.required, Validators.minLength(3)]]
-    })
   }
 
   getProps(): void{
@@ -80,7 +68,6 @@ export class PropiedadesComponent {
   }
 
   selectProp(properties: any ): void {
-    this.registerForm = this.initForm()
     this.selection = properties.selection
     this.action = 'Actualizar propiedad'
   }
