@@ -13,9 +13,7 @@ export class BrandComponent implements OnInit {
   userData = this.usr.getLocalStorage();
   schemaName = 'marcas';
   brands: Brand[] = [];
-  selectedBrand!: Brand;
   _id!: string;
-  isCreating!: boolean;
   isLoading!: boolean;
 
   constructor(
@@ -45,11 +43,10 @@ export class BrandComponent implements OnInit {
       });
   }
 
-  onCreate(nombre: string) {
-    const data = { nombre: nombre };
+  onCreate(brand: Brand) {
     this.hs
       .post(
-        data,
+        brand,
         `entities/create/${this.userData?.userdata.name}/${this.schemaName}/${this.userData?.app}`
       )
       .subscribe(
@@ -67,15 +64,13 @@ export class BrandComponent implements OnInit {
           console.error('Error al agregar marca: ' + err);
         }
       );
-
-    console.log(data, 'Creating');
   }
 
   onUpdate(brand: Brand) {
     this.hs
       .put(
         brand,
-        `entities/update/${this.userData?.userdata.name}/${this.schemaName}/${this.userData?.app}/${brand._id}`
+        `entities/update/${this.userData?.userdata.name}/${this.schemaName}/${this.userData?.app}/${this._id}`
       )
       .subscribe(
         (resp) => {
@@ -114,5 +109,9 @@ export class BrandComponent implements OnInit {
           console.error('Error al eliminar marca: ' + err);
         }
       );
+  }
+
+  onResetId() {
+    this._id = '';
   }
 }

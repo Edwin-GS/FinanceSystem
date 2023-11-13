@@ -11,16 +11,15 @@ import { UserService } from 'projects/libraries/helpers/src/lib/services/user.se
 @Component({
   selector: 'app-client-details',
   templateUrl: './client-details.component.html',
-  styleUrls: ['./client-details.component.css']
+  styleUrls: ['./client-details.component.css'],
 })
-export class ClientDetailsComponent implements OnInit{
-
-  id!: string
+export class ClientDetailsComponent implements OnInit {
+  id!: string;
   userData = this.usr.getLocalStorage();
-  isLoading !: boolean
-  title: string = 'Detalle cliente'
-  client!: Client
-  baseUrl: string = `${this.userData?.userdata.name}/clientes/${this.userData?.app}`
+  isLoading!: boolean;
+  title: string = 'Detalle cliente';
+  client!: Client;
+  baseUrl: string = `${this.userData?.userdata.name}/clientes/${this.userData?.app}`;
 
   profession!: (Profession | undefined)
   profUrl: string = `${this.userData?.userdata.name}/profesiones/${this.userData?.app}`
@@ -33,57 +32,52 @@ export class ClientDetailsComponent implements OnInit{
 
   // Vehiculos 
   // garantiavehiculos!: (Properties | undefined)[]
-  
-  
-  constructor( 
+
+  constructor(
     private readonly router: ActivatedRoute,
     private readonly hs: HandlerService,
     private toast: HotToastService,
     private readonly nv: Router,
-    private usr: UserService,
-  ){}
+    private usr: UserService
+  ) {}
 
   ngOnInit(): void {
     this.router.params.subscribe((params) => {
-      this.id = params['id']
-    })
-    this.getClient( this.id )
+      this.id = params['id'];
+    });
+    this.getClient(this.id);
     // this.getProfession( this.client.profesiones_id )
   }
 
-  getClient( id: string ): void{
+  getClient(id: string): void {
     this.isLoading = true;
-    this.hs.get( `entities/${this.baseUrl}/${ id }` )
-    .subscribe((res) => {
-      if(!res.data){
+    this.hs.get(`entities/${this.baseUrl}/${id}`).subscribe((res) => {
+      if (!res.data) {
         this.isLoading = false;
         console.log('Hubo un error o no se encontraron datos');
-      }
-      else{
+      } else {
         this.isLoading = false;
-        this.client = res.data
-        this.getProfession( res.data.profesiones_id )
-        this.propiedades = res.data.propiedades
-        this.solicitudes = res.data.prestamosolicitudes
+        this.client = res.data;
+        this.getProfession(res.data.profesiones_id);
+        this.propiedades = res.data.propiedades;
+        this.solicitudes = res.data.prestamosolicitudes;
       }
       console.log('selection', res);
-   })
+    });
   }
 
-  getProfession( profesionID: string ): void{
+  getProfession(profesionID: string): void {
     this.isLoading = true;
-    this.hs.get( `entities/${this.profUrl}`, profesionID )
-    .subscribe((res) => {
-      if(!res.data) {
+    this.hs.get(`entities/${this.profUrl}`, profesionID).subscribe((res) => {
+      if (!res.data) {
         this.isLoading = false;
         console.log('Hubo un error o no se encontraron datos');
-      }
-      else{
+      } else {
         this.isLoading = false;
-        this.profession = res.data
+        this.profession = res.data;
       }
-      console.log( 'prof', this.profession );
-   })
+      console.log('prof', this.profession);
+    });
   }
 
   onDeleteProperty( id: string ){
@@ -103,14 +97,20 @@ export class ClientDetailsComponent implements OnInit{
       })
   }
 
-  goToSolicitud( id: string | undefined ){
-    this.nv.navigate([`/finance-system/users/${this.userData?.userdata.name}/
-        ${this.userData?.userdata.id}/solicitud-prestamos`, id])
+  goToWarrantyVehicle(id: string | undefined) {
+    this.nv.navigate([
+      `/finance-system/users/${this.userData?.userdata.name}/
+        ${this.userData?.userdata.id}/warranty-vehicle`,
+      id,
+    ]);
   }
 
-  goToProperties( id: string | undefined ){
-    this.nv.navigate([`/finance-system/users/${this.userData?.userdata.name}/
-        ${this.userData?.userdata.id}/properties`, id])
+  goToSolicitud(id: string | undefined) {
+    this.nv.navigate([
+      `/finance-system/users/${this.userData?.userdata.name}/
+        ${this.userData?.userdata.id}/solicitud-prestamos`,
+      id,
+    ]);
   }
 
   goToPropUpdate(id: string | undefined){
@@ -120,8 +120,18 @@ export class ClientDetailsComponent implements OnInit{
     ])
   }
 
-  goBack(){
-    this.nv.navigate([`/finance-system/users/${this.userData?.userdata.name}/
-        ${this.userData?.userdata.id}/clients`])
+  goToProperties(id: string | undefined) {
+    this.nv.navigate([
+      `/finance-system/users/${this.userData?.userdata.name}/
+        ${this.userData?.userdata.id}/properties`,
+      id,
+    ]);
+  }
+
+  goBack() {
+    this.nv.navigate([
+      `/finance-system/users/${this.userData?.userdata.name}/
+        ${this.userData?.userdata.id}/clients`,
+    ]);
   }
 }

@@ -17,6 +17,8 @@ import { CreatePropertiesComponent } from './propiedades/create-properties/creat
 import { UpdatePropsComponent } from './propiedades/update-propiedades/update-propiedades.component';
 import { ModelComponent } from './model/model.component';
 import { VehicleTypeComponent } from './vehicle-type/vehicle-type.component';
+import { WarrantyVehicleComponent } from './warranty-vehicle/warranty-vehicle.component';
+import { WarrantyVehicleDetailsComponent } from './warranty-vehicle/warranty-vehicle-details/warranty-vehicle-details.component';
 
 /**
  * Base route information
@@ -36,10 +38,7 @@ const UserRoutes: Routes = [
     path: '',
     component: ClassicComponent,
     children: [
-      { path: 'garantes', 
-        component: GuarantorComponent, 
-        title: 'Garante' 
-      },
+      { path: 'garantes', component: GuarantorComponent, title: 'Garante' },
       {
         path: 'garantes/create',
         component: CreateGuarantorComponent,
@@ -50,9 +49,7 @@ const UserRoutes: Routes = [
         component: UpdateGuarantorViewComponent,
         title: 'Actualizar garante',
       },
-      { path: 'clients', 
-        component: ClientComponent, 
-        title: 'Clientes' },
+      { path: 'clients', component: ClientComponent, title: 'Clientes' },
       {
         path: 'clients/create',
         component: CreateClientComponent,
@@ -68,10 +65,7 @@ const UserRoutes: Routes = [
         component: ClientDetailsComponent,
         title: 'Detalles del cliente',
       },
-      { path: 'brand', 
-        component: BrandComponent, 
-        title: 'Marca' 
-      },
+      { path: 'brand', component: BrandComponent, title: 'Marca' },
       {
         path: 'profession',
         component: ProfessionComponent,
@@ -88,6 +82,17 @@ const UserRoutes: Routes = [
         path: 'vehicle-types',
         component: VehicleTypeComponent,
         title: 'Vehicle Types',
+      },
+      {
+        path: 'warranty-vehicle/:clientId',
+        component: WarrantyVehicleComponent,
+        title: 'Vehicle under warranty',
+      },
+
+      {
+        path: 'warranty-vehicle-details/:clientId/:vehicleId',
+        component: WarrantyVehicleDetailsComponent,
+        title: 'Vehicle under warranty',
       },
 
       {
