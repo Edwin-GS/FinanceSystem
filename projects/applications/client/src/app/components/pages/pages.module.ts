@@ -30,6 +30,9 @@ import { ModelComponent } from './model/model.component';
 import { CreateUpdateModelComponent } from './model/create-update-model/create-update-model.component';
 import { VehicleTypeComponent } from './vehicle-type/vehicle-type.component';
 import { CreateUpdateVehicleTypeComponent } from './vehicle-type/create-update-vehicle-type/create-update-vehicle-type.component';
+import { WarrantyVehicleComponent } from './warranty-vehicle/warranty-vehicle.component';
+import { CreateUpdateWarrantyVehicleComponent } from './warranty-vehicle/create-update-warranty-vehicle/create-update-warranty-vehicle.component';
+import { WarrantyVehicleDetailsComponent } from './warranty-vehicle/warranty-vehicle-details/warranty-vehicle-details.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,10 @@ import { CreateUpdateVehicleTypeComponent } from './vehicle-type/create-update-v
     
     CreateUpdateModelComponent,
     VehicleTypeComponent,
-    CreateUpdateVehicleTypeComponent
+    CreateUpdateVehicleTypeComponent,
+    WarrantyVehicleComponent,
+    CreateUpdateWarrantyVehicleComponent,
+    WarrantyVehicleDetailsComponent
 
   ],
 
