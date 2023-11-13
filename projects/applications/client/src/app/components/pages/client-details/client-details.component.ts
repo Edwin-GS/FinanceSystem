@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
 import { Client } from 'projects/libraries/helpers/src/lib/models/client.doc';
 import { PrestamoSolicitudes } from 'projects/libraries/helpers/src/lib/models/prestamo-solicitudes';
 import { Profession } from 'projects/libraries/helpers/src/lib/models/profession.doc';
@@ -20,18 +21,22 @@ export class ClientDetailsComponent implements OnInit {
   client!: Client;
   baseUrl: string = `${this.userData?.userdata.name}/clientes/${this.userData?.app}`;
 
-  profession!: Profession | undefined;
-  profUrl: string = `${this.userData?.userdata.name}/profesiones/${this.userData?.app}`;
+  profession!: (Profession | undefined)
+  profUrl: string = `${this.userData?.userdata.name}/profesiones/${this.userData?.app}`
+  
+  solicitudes!: (PrestamoSolicitudes | undefined)[]
+  propiedades!: (Properties | undefined)[]
+  vehiculos: any
 
-  solicitudes!: (PrestamoSolicitudes | undefined)[];
-  propiedades!: (Properties | undefined)[];
-  vehiculos: any;
-  // Vehiculos
+  idProp!: string | undefined;
+
+  // Vehiculos 
   // garantiavehiculos!: (Properties | undefined)[]
 
   constructor(
     private readonly router: ActivatedRoute,
     private readonly hs: HandlerService,
+    private toast: HotToastService,
     private readonly nv: Router,
     private usr: UserService
   ) {}
@@ -75,6 +80,23 @@ export class ClientDetailsComponent implements OnInit {
     });
   }
 
+  onDeleteProperty( id: string ){
+    this.hs.delete(`entities/delete/${this.userData?.userdata.name}
+    /propiedades/${this.userData?.app}`, id)
+      .subscribe((resp) => {
+        if(resp["success"] == false ){
+          console.log('Error', resp);
+          this.toast.error(
+            'Error al intentar eliminar, por favor, intente de nuevo'
+          );
+        } else{
+          this.toast.success('Propiedad eliminada');
+          const currentProp = this.propiedades.filter( props => props?._id !== id)
+          this.propiedades = [...currentProp]
+        }
+      })
+  }
+
   goToWarrantyVehicle(id: string | undefined) {
     this.nv.navigate([
       `/finance-system/users/${this.userData?.userdata.name}/
@@ -89,6 +111,13 @@ export class ClientDetailsComponent implements OnInit {
         ${this.userData?.userdata.id}/solicitud-prestamos`,
       id,
     ]);
+  }
+
+  goToPropUpdate(id: string | undefined){
+    this.nv.navigate([
+      `/finance-system/users/${this.userData?.userdata.name}/
+      ${this.userData?.userdata.id}/properties/${this.id}/update/${ id }`
+    ])
   }
 
   goToProperties(id: string | undefined) {
