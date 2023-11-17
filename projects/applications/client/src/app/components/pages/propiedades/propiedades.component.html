@@ -2,50 +2,30 @@
   (click)="clearValues()"
   >
   <app-page-title [title]="pageTitle"></app-page-title>
-  <button
-    class="btn btn-primary btn-bg-purple"
-    data-bs-toggle="modal"
-    data-bs-target="#modalCenter"
-    (click)="this.registerForm.reset()"
-    >
-    <i class="bi bi-plus-circle"></i>
+  <div class="d-flex gap-2 flex-wrap">
+    <a
+    class="btn btn-primary small-button"
+    routerLinkActive="active" 
+    (click)="goBack()"
+    >          
+      Atras
+    </a>
+    <button
+      class="btn btn-primary btn-bg-purple"
+      (click)="goToCreate()"
+      >
+      <i class="bi bi-plus-circle"></i>
       {{ " " }}Nueva
     </button>
   </div>
-  
+</div>
   
   <app-propiedades-table 
     [props]="props"
     [action]="action"
     [selection]="selection"
+    [userData]="userData"
+    [id]="id"
     (selectedActionPropEmitter)="selectProp( $event )"
     (deletePropEvent)="deleteProp( $event )"
   ></app-propiedades-table>
-  
-  <app-create-update-propiedades 
-    [action]="action"
-    [selection]="selection"
-    [registerForm]="registerForm"
-    (createPropEmitter)="createProp( $event )"
-    (updatePropEmitter)="updateProp( $event )"
-    ></app-create-update-propiedades>
-  
-    <div class="fixed-bottom notifContainer">
-      <div
-        *ngIf="error"
-        class="alert alert-danger d-flex justify-content-center align-content-center fade-in show notificationMSG"
-      >
-        <i class="bi bi-x-circle-fill">
-          <span class="fw-normal fs-6 m-0">
-            No se pudo realizar esta operación
-          </span>
-        </i>
-      </div>
-      <div
-        *ngIf="success"
-        class="alert alert-success fade-in d-flex justify-content-center gap-2 align-content-center notificationMSG"
-      >
-        <i class="bi bi-check-circle-fill"></i>
-        <span class="fw-normal fs-6 m-0"> Operación realizada </span>
-      </div>
-    </div>

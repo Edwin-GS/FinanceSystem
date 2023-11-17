@@ -1,0 +1,84 @@
+<div class="modal fade" id="vehicle-type-modal" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 fw-semibold m-0">
+          {{ !id ? "Agregar Tipo de Vehiculo" : "Actualizar Tipo de Vehiculo" }}
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="onReset(); onResetId()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p *ngIf="loading">Obteniendo el tipo de vehiculo</p>
+        <form
+          *ngIf="!loading"
+          class="row g-3"
+          (ngSubmit)="
+            !id
+              ? onCreate(vehicleTypeForm.value)
+              : onUpdate(vehicleTypeForm.value)
+          "
+          [formGroup]="vehicleTypeForm"
+        >
+          <div class="col-md-12">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="descripcion"
+                formControlName="descripcion"
+                placeholder="M5"
+              />
+              <label for="descripcion">Tipo de vehiculo</label>
+            </div>
+            <div
+              *ngIf="vehicleTypeForm.get('descripcion')?.touched && vehicleTypeForm.get('descripcion')?.errors?.['required']"
+              class="text-danger my-2"
+            >
+              El tipo de vehiculo es requido
+            </div>
+            <div
+              *ngIf="vehicleTypeForm.get('descripcion')?.touched  && vehicleTypeForm.get('descripcion')?.errors?.['minlength']"
+              class="text-danger my-2"
+            >
+              El tipo de vehiculo debe tener minimo 3 caracteres
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-bs-dismiss="modal"
+                (click)="onReset(); onResetId()"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="vehicleTypeForm.invalid"
+                *ngIf="!id"
+              >
+                Guardar
+              </button>
+              <button
+                *ngIf="id"
+                type="submit"
+                [disabled]="vehicleTypeForm.invalid"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+              >
+                Guardar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

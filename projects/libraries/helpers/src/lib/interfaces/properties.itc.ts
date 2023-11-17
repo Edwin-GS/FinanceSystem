@@ -3,5 +3,5 @@ export interface IProperties {
     direccion: string,
     descripcion: string,
     numerotitulo: number,
-    nombrepropietario: string
+    clientes_id: string
 }

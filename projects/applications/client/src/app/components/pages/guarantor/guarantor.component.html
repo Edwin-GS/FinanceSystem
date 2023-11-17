@@ -1,6 +1,4 @@
-<div class="d-flex justify-content-between align-items-center mb-3" 
-  (click)="clearValues()"
-  >
+<div class="d-flex justify-content-between align-items-center mb-3">
   <app-page-title [title]="pageTitle"></app-page-title>
   <button
     class="btn btn-primary btn-bg-purple"
@@ -11,12 +9,8 @@
     </button>
   </div>
   
-  
-  <app-guarantor-card></app-guarantor-card>
-  
-  <!-- <app-create-update-guarantor
-    [action]="action"
-    [selection]="selection"
-    [registerForm]="registerForm"
-    [professions]="professions"
-    ></app-create-update-guarantor> -->
+  <app-guarantor-card 
+  [selection]="selection"
+  [guarantors]="guarantors"
+  (deleteGuarantorEvent)="deleteGuarantor( $event )"
+  ></app-guarantor-card>

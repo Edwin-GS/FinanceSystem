@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
 import { Client } from 'projects/libraries/helpers/src/lib/models/client.doc';
 import { Profession } from 'projects/libraries/helpers/src/lib/models/profession.doc';
 import { HandlerService } from 'projects/libraries/helpers/src/lib/services/handler.service';
@@ -19,6 +20,7 @@ export class GuarantorComponent {
     private usr: UserService,
     private fb: FormBuilder,
     private readonly router: Router,
+    private toast: HotToastService,
   ){}
   
   pageTitle = 'Garante';
@@ -94,9 +96,12 @@ export class GuarantorComponent {
     this.hs.post(data, `entities/create/${this.baseUrl}`)
       .subscribe((res) => {
         if ( res['success'] == false ) {
+          this.toast.error(
+            'Error al intentar crear por favor intente de nuevo'
+          );
           console.log('Error', res);
         } else {
-          console.log('OK');
+          this.toast.success('Cliente actualizado');
           const resp: Client = { 
             _id: res.data._id, 
             nombre: data.nombre,
@@ -116,28 +121,18 @@ export class GuarantorComponent {
   
   }
 
-  deleteClient(id: string): void{
+  deleteGuarantor(id: string): void{
     this.hs.delete(`entities/delete/${this.baseUrl}`, id)
       .subscribe((resp) => {
         if(resp["success"] == false ){
+          this.toast.error(
+            'Error al intentar eliminar, por favor, intente de nuevo'
+          );
           console.log('Error', resp);
         } else{
-          console.log('Ok', resp);
+          this.toast.success('Garante eliminado');
           const currentGuarantor = this.guarantors.filter( props => props?._id !== id)
           this.guarantors = [...currentGuarantor]
-        }
-      })
-  }
-
-  updateClient( Guarantor: Client | undefined ): void{
-    this.hs.put(Guarantor , `entities/update/${this.baseUrl}/${Guarantor?._id}`)
-      .subscribe((resp: any) => {
-        if ( resp['success'] == false ) {
-          console.log('resp', resp);
-        } else {
-          console.log('resp', resp);
-          const currentGuarantor = this.guarantors.filter((items) => items?._id !== Guarantor?._id)
-          this.guarantors = [...currentGuarantor, Guarantor]
         }
       })
   }
@@ -147,29 +142,6 @@ export class GuarantorComponent {
       `/finance-system/users/${this.userData?.userdata.name}/
       ${this.userData?.userdata.id}/garantes/create`
     ])
-  }
-
-  selectProp(Guarantor: any ): void {
-    this.registerForm = this.initForm()
-    this.selection = Guarantor.selection
-    this.action = 'Actualizar garante'
-  }
-
-  clearValues(): void{
-    this.selection = {
-      _id: '',
-      nombre: '',
-      apellidos: '',
-      tipodocumento: '',
-      numerodocumento: '',
-      apodo: '',
-      celular: '',
-      telefono: '',
-      direccionpersonal: '',
-      direccionfamiliar: '',
-      profesiones_id: '',
-    }
-    this.action = 'Registrar garante'
   }
 
 }

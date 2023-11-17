@@ -14,7 +14,7 @@ export class GuarantorCardComponent {
   @Input()  action!: string
   @Input()  selection!: Client | undefined
   @Output() selectedActionClientEmitter = new EventEmitter<any>();
-  @Output() deleteClientEvent = new EventEmitter<string>();
+  @Output() deleteGuarantorEvent = new EventEmitter<string>();
   userData = this.usr.getLocalStorage();
   baseUrl: string = `${this.userData?.userdata.name}/garantes/${this.userData?.app}`
 
@@ -29,16 +29,9 @@ export class GuarantorCardComponent {
     this.selectedActionClientEmitter.emit( clientOperation );
   }
 
-  onDeleteProp(id: string | undefined): void{
-    this.deleteClientEvent.emit( id )
+  onDeleteGuarantor(id: string | undefined): void{
+    this.deleteGuarantorEvent.emit( id )
   }
-
-  // goToCreate(){
-  //   this.router.navigate([
-  //     `/finance-system/users/${this.userData?.userdata.name}/
-  //     ${this.userData?.userdata._id}/garante`
-  //   ])
-  // }
 
   goToUpdate( id: string | undefined ){
     this.router.navigate([

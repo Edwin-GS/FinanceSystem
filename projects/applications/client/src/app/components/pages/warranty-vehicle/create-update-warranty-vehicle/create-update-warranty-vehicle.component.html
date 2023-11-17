@@ -1,0 +1,237 @@
+<div class="modal fade" id="warranty-vehicle-modal" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 fw-semibold m-0">
+          {{ !vehicleId ? "Agregar Vehiculo" : "Actualizar Vehiculo" }}
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p
+          *ngIf="loadingModels || loadingVehicleTypes || loadingWarrantyVehicle"
+        >
+          Obteniendo el vehiculo...
+        </p>
+        <form
+          *ngIf="
+            !loadingModels && !loadingVehicleTypes && !loadingWarrantyVehicle
+          "
+          class="row g-3"
+          (ngSubmit)="
+            !vehicleId
+              ? onCreate(warrantyVehicleForm.value)
+              : onUpdate(warrantyVehicleForm.value)
+          "
+          [formGroup]="warrantyVehicleForm"
+        >
+          <div class="col-md-12">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="clientes_id"
+                formControlName="clientes_id"
+                placeholder="M5"
+                [readOnly]="true"
+                [hidden]="true"
+              />
+              <!-- <label for="clientes_id">Cliente</label> -->
+            </div>
+
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="color"
+                formControlName="color"
+                placeholder="M5"
+                [ngClass]="isValidField('color') ? 'is-invalid' : ''"
+              />
+              <label for="color">Color</label>
+
+              <div
+                class="invalid-feedback"
+                *ngIf="warrantyVehicleForm.get('color')?.errors?.['required']"
+              >
+                El color es requirido
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="warrantyVehicleForm.get('color')?.errors?.['minlength']"
+              >
+                El color debe tener minimo 4 caracteres
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="chasis"
+                formControlName="chasis"
+                placeholder="M5"
+                [ngClass]="isValidField('chasis') ? 'is-invalid' : ''"
+              />
+              <label for="chasis">Chasis</label>
+
+              <div
+                class="invalid-feedback"
+                *ngIf="warrantyVehicleForm.get('chasis')?.errors?.['required']"
+              >
+                El numero de chasis es requirido
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="warrantyVehicleForm.get('chasis')?.errors?.['minlength']"
+              >
+                El numero de chasis debe tener minimo 17 caracteres
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="warrantyVehicleForm.get('chasis')?.errors?.['maxlength']"
+              >
+                El numero de chasis debe tener maximo 17 caracteres
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="placa"
+                formControlName="placa"
+                placeholder="M5"
+                [ngClass]="isValidField('placa') ? 'is-invalid' : ''"
+              />
+              <label for="placa">Placa</label>
+
+              <div
+                class="invalid-feedback"
+                *ngIf="warrantyVehicleForm.get('placa')?.errors?.['required']"
+              >
+                El numero de placa es requirido
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="warrantyVehicleForm.get('placa')?.errors?.['minlength']"
+              >
+                El numero de placa debe tener minimo 7 caracteres
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="warrantyVehicleForm.get('placa')?.errors?.['maxlength']"
+              >
+                El numero de placa debe tener maximo 7 caracteres
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="descripcion"
+                formControlName="descripcion"
+                placeholder="M5"
+                [ngClass]="isValidField('descripcion') ? 'is-invalid' : ''"
+              />
+              <label for="descripcion">Descripcion</label>
+
+              <div
+                class="invalid-feedback"
+                *ngIf="warrantyVehicleForm.get('descripcion')?.errors?.['required']"
+              >
+                La descripcion es requirida
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="warrantyVehicleForm.get('descripcion')?.errors?.['minlength']"
+              >
+                La descripcion debe tener minimo 10 caracteres
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <select
+                class="form-select"
+                id="modelos_id"
+                formControlName="modelos_id"
+                [ngClass]="isValidField('modelos_id') ? 'is-invalid' : ''"
+              >
+                <option *ngFor="let model of models" [value]="model._id">
+                  {{ model.descripcion }}
+                </option>
+              </select>
+              <label for="select-brand">Modelo</label>
+
+              <div
+                class="invalid-feedback"
+                *ngIf="warrantyVehicleForm.get('modelos_id')?.errors?.['required']"
+              >
+                El modelo del vehiculo es requirido
+              </div>
+            </div>
+
+            <div class="form-floating">
+              <select
+                class="form-select"
+                id="tiposvehiculos_id"
+                formControlName="tiposvehiculos_id"
+                [ngClass]="
+                  isValidField('tiposvehiculos_id') ? 'is-invalid' : ''
+                "
+              >
+                <option
+                  *ngFor="let vehicleType of vehicleTypes"
+                  [value]="vehicleType._id"
+                >
+                  {{ vehicleType.descripcion }}
+                </option>
+              </select>
+              <label for="select-brand">Tipo de vehiculo</label>
+
+              <div
+                class="invalid-feedback"
+                *ngIf="warrantyVehicleForm.get('tiposvehiculos_id')?.errors?.['required']"
+              >
+                El tipo de vehiculo es requerido
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="warrantyVehicleForm.invalid"
+              *ngIf="!vehicleId"
+            >
+              Guardar
+            </button>
+            <button
+              *ngIf="vehicleId"
+              type="submit"
+              [disabled]="warrantyVehicleForm.invalid"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

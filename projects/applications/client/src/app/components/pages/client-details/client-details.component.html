@@ -1,0 +1,181 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="pagetitle">{{ title }}</h1>
+
+  <a
+    class="btn btn-primary small-button"
+    routerLinkActive="active"
+    (click)="goBack()"
+  >
+    Atras
+  </a>
+</div>
+<table class="table">
+  <tbody>
+    <tr>
+      <th scope="row">Nombre</th>
+      <td>{{ client.nombre }}</td>
+    </tr>
+
+    <tr>
+      <th scope="row">Apellidos</th>
+      <td>{{ client.apellidos }}</td>
+    </tr>
+
+    <tr>
+      <th scope="row">Apodo</th>
+      <td>{{ client.apodo }}</td>
+    </tr>
+
+    <tr>
+      <th scope="row">Celular</th>
+      <td>{{ client.celular }}</td>
+    </tr>
+
+    <tr>
+      <th scope="row">Telefono</th>
+      <td>{{ client.telefono }}</td>
+    </tr>
+
+    <tr>
+      <th scope="row">Direccion Familiar</th>
+      <td>{{ client.direccionfamiliar }}</td>
+    </tr>
+
+    <tr>
+      <th scope="row">direccionpersonal</th>
+      <td>{{ client.direccionpersonal }}</td>
+    </tr>
+
+    <tr>
+      <th scope="row">Tipo documento</th>
+      <td>{{ client.tipodocumento }}</td>
+    </tr>
+
+    <tr>
+      <th scope="row">Numero doc.</th>
+      <td>{{ client.numerodocumento }}</td>
+    </tr>
+
+    <tr>
+      <th scope="row">Profesion</th>
+      <td>{{ profession?.nombre }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-around flex-wrap">
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Vehiculos</th>
+          <th scope="col">
+            <a
+              class="btn btn-primary col small-button"
+              routerLinkActive="active"
+              (click)="goToWarrantyVehicle(this.id)"
+            >
+              Ver vehiculos
+            </a>
+          </th>
+        </tr>
+        <tr>
+          <th scope="col">Cod</th>
+          <th scope="col">Aprobado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehiculo of vehiculos">
+          <th scope="row">{{ vehiculo?.placa }}</th>
+          <td>{{ vehiculo?.color }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Propiedades</th>
+          <th></th>
+          <th scope="col">
+            <a
+              class="btn btn-primary col small-button"
+              routerLinkActive="active"
+              (click)="goToProperties(this.id)"
+            >
+              Propiedades
+            </a>
+          </th>
+        </tr>
+        <tr>
+          <th scope="col">Num. Titulo</th>
+          <th scope="col">Direccion</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let propiedad of propiedades">
+          <th scope="row">{{ propiedad?.numerotitulo }}</th>
+          <td>{{ propiedad?.direccion | limitString : 10 }}</td>
+          <td>{{ propiedad?.direccion | limitString : 10 }}</td>
+                <!-- <td>
+                  <button
+                    type="button"
+                    class="btn btn-warning btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#vehicle-type-modal"
+                    (click)="goToPropUpdate( propiedad?._id )"
+                    >
+                    <i class="bi bi-pencil-square text-white"></i>
+                  </button>
+                  {{ "" }}
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#confirm-modal"
+                    (click)="idProp = propiedad?._id"
+                    >
+                    <i class="bi bi-x-octagon"></i>
+                  </button>
+                </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Solicitudes de prestamos</th>
+          <th scope="col">
+            <a
+              class="btn btn-primary col small-button"
+              routerLinkActive="active"
+              (click)="goToSolicitud(this.id)"
+            >
+              Ver Solicitudes
+            </a>
+          </th>
+        </tr>
+        <tr>
+          <th scope="col">Cod</th>
+          <th scope="col">Aprobado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let solicitud of solicitudes">
+          <th scope="row">{{ solicitud?.numerosolicitud }}</th>
+          <td>{{ solicitud?.aprobado }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+      <app-confirm-modal 
+        [id]="idProp" 
+        (deleteBrand)="onDeleteProperty($event)">
+      </app-confirm-modal>

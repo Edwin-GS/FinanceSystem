@@ -3,8 +3,8 @@
   <button
     class="btn btn-primary btn-bg-purple"
     data-bs-toggle="modal"
-    data-bs-target="#modalCenter"
-    (click)="isCreating = true"
+    data-bs-target="#brand-modal"
+    (click)="_id = ''"
     *ngIf="!isLoading"
   >
     <i class="bi bi-plus-circle"></i>
@@ -13,7 +13,7 @@
 </div>
 <div *ngIf="isLoading"><p>Cargando...</p></div>
 
-<div *ngIf="isLoading === false" class="card">
+<div *ngIf="isLoading === false && brands.length > 0" class="card">
   <div class="card-body">
     <table class="table">
       <thead>
@@ -31,9 +31,9 @@
             <button
               type="button"
               class="btn btn-warning btn-sm"
-              (click)="selectedBrand = brand; isCreating = false"
+              (click)="_id = brand._id"
               data-bs-toggle="modal"
-              data-bs-target="#modalCenter"
+              data-bs-target="#brand-modal"
             >
               <i class="bi bi-pencil-square text-white"></i>
             </button>
@@ -53,14 +53,15 @@
     </table>
   </div>
 </div>
+<div *ngIf="!isLoading && brands.length === 0">
+  <p>No hay marcas para mostrar</p>
+</div>
+
 <app-create-update-brand
-  [selectedBrand]="selectedBrand"
-  [isCreating]="isCreating"
+  [id]="_id"
   (addNewBrand)="onCreate($event)"
   (updateBrand)="onUpdate($event)"
-></app-create-update-brand>
+  (resetId)="onResetId()"
+/>
 
-<app-confirm-modal
-  [id]="_id"
-  (deleteBrand)="onDelete($event)"
-></app-confirm-modal>
+<app-confirm-modal [id]="_id" (deleteBrand)="onDelete($event)" />

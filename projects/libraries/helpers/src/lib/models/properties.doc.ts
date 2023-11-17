@@ -6,6 +6,6 @@ export class Properties implements IProperties {
         public direccion: '', 
         public descripcion: '', 
         public numerotitulo: 0, 
-        public nombrepropietario: ''   
+        public clientes_id: ''
     ){}
 }

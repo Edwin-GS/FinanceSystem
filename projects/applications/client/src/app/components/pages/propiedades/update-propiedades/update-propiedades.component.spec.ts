@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateUpdatePropsComponent } from './create-update-propiedades.component';
+import { CreateUpdatePropsComponent } from './update-propiedades.component';
 
 describe('CreateUpdatePropsComponent', () => {
   let component: CreateUpdatePropsComponent;

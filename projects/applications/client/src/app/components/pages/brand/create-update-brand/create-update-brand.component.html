@@ -1,18 +1,28 @@
-<div class="modal fade" id="modalCenter" data-bs-backdrop="static">
+<div class="modal fade" id="brand-modal" data-bs-backdrop="static">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5 fw-semibold m-0">Agregar Marca</h1>
+        <h1 class="modal-title fs-5 fw-semibold m-0">
+          {{ !id ? "Agregar Marca" : "Actualizar Marca" }}
+        </h1>
         <button
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
-          (click)="brandForm.reset()"
+          (click)="onReset(); onResetId()"
         ></button>
       </div>
       <div class="modal-body">
-        <form class="row g-3" [formGroup]="brandForm">
+        <p *ngIf="loading">Obteniendo marca...</p>
+        <form
+          *ngIf="!loading"
+          class="row g-3"
+          (ngSubmit)="
+            !id ? onCreate(brandForm.value) : onUpdate(brandForm.value)
+          "
+          [formGroup]="brandForm"
+        >
           <div class="col-md-12">
             <div class="form-floating">
               <input
@@ -22,7 +32,6 @@
                 name="nombre"
                 formControlName="nombre"
                 placeholder="BMW"
-                value="{{ this.selectedBrand?.nombre }}"
               />
               <label for="nombre">Marca</label>
             </div>
@@ -39,34 +48,35 @@
               La marca debe tener minimo 3 caracteres
             </div>
           </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              (click)="onReset(); onResetId()"
+            >
+              Cancelar
+            </button>
+            <button
+              *ngIf="!id"
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="brandForm.invalid"
+            >
+              Guardar
+            </button>
+            <button
+              *ngIf="id"
+              type="submit"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              [disabled]="brandForm.invalid"
+            >
+              Guardar
+            </button>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-danger"
-          data-bs-dismiss="modal"
-          (click)="brandForm.reset()"
-        >
-          Cancelar
-        </button>
-        <button
-          *ngIf="isCreating"
-          type="button"
-          class="btn btn-primary"
-          (click)="onAddNewBrand(this.brandForm.get('nombre')?.value)"
-        >
-          Guardar
-        </button>
-        <button
-          *ngIf="!isCreating"
-          type="button"
-          class="btn btn-primary"
-          data-bs-dismiss="modal"
-          (click)="onUpdateBrand(this.brandForm.get('nombre')?.value)"
-        >
-          Guardar
-        </button>
       </div>
     </div>
   </div>

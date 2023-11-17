@@ -63,11 +63,11 @@ export class CreateGuarantorComponent {
         if ( resp['success'] == false ) {
           console.log('resp', resp);
           this.toast.error(
-            'Error al intentar actualizar por favor intente de nuevo'
+            'Error al intentar crear por favor intente de nuevo'
           );
-
         } else {
           this.toast.success('Garante registrado');
+          this.goBack()
         }
       })
   }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
 import { Client } from 'projects/libraries/helpers/src/lib/models/client.doc';
 import { Profession } from 'projects/libraries/helpers/src/lib/models/profession.doc';
 import { HandlerService } from 'projects/libraries/helpers/src/lib/services/handler.service';
@@ -19,6 +20,7 @@ export class ClientComponent {
     private readonly router: Router,
     private usr: UserService,
     private fb: FormBuilder,
+    private toast: HotToastService,
   ){}
   
   pageTitle = 'Cliente';
@@ -95,8 +97,12 @@ export class ClientComponent {
       .subscribe((res) => {
         if ( res['success'] == false ) {
           console.log('Error', res);
+          this.toast.error(
+            'Error al intentar crear, por favor, intente de nuevo'
+          );
         } else {
           console.log('OK');
+          this.toast.success('Cliente registrado');
           const resp: Client = { 
             _id: res.data._id, 
             nombre: data.nombre,
@@ -122,8 +128,12 @@ export class ClientComponent {
       .subscribe((resp) => {
         if(resp["success"] == false ){
           console.log('Error', resp);
+          this.toast.error(
+            'Error al intentar eliminar, por favor, intente de nuevo'
+          );
         } else{
           console.log('Ok', resp);
+          this.toast.success('Cliente eliminado');
           const currentClient = this.clients.filter( props => props?._id !== id)
           this.clients = [...currentClient]
         }
@@ -144,9 +154,7 @@ export class ClientComponent {
   }
 
   selectProp(Client: any ): void {
-    this.registerForm = this.initForm()
     this.selection = Client.selection
-    this.action = 'Actualizar propiedad'
   }
 
   goToCreate(){
@@ -170,7 +178,6 @@ export class ClientComponent {
       direccionfamiliar: '',
       profesiones_id: '',
     }
-    this.action = 'Registrar cliente'
   }
 
 }
