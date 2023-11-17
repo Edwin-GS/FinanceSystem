@@ -7,6 +7,7 @@ import {AUTH_ROUTES} from "./auth.routes";
 import {HelpersModule} from "../../helpers.module";
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -15,7 +16,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     NotFoundComponent,
     LoginComponent,
     SignupComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    HomeComponent,
   ],
 
   imports: [

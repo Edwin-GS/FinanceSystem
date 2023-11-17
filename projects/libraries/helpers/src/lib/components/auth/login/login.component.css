@@ -1,6 +1,6 @@
 body{
     font-family: 'Poppins', sans-serif;
-    background: #cfcae2;
+    background: #ffff;
 }
 h1{
    
@@ -78,4 +78,7 @@ small{
   
 .form-check{
     font-size: 14px;
+}
+.mi-boton{
+ background-color: #00a2e8;
 }
