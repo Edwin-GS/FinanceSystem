@@ -19,6 +19,7 @@ import { ModelComponent } from './model/model.component';
 import { VehicleTypeComponent } from './vehicle-type/vehicle-type.component';
 import { WarrantyVehicleComponent } from './warranty-vehicle/warranty-vehicle.component';
 import { WarrantyVehicleDetailsComponent } from './warranty-vehicle/warranty-vehicle-details/warranty-vehicle-details.component';
+import { isnotloggedGuard } from '../guards/isnotlogged.guard';
 
 /**
  * Base route information
@@ -33,10 +34,16 @@ const UserRoutes: Routes = [
     component: UserComponent,
     title: 'Users',
   },
-  { path: 'my-apps', component: MiAppsComponent, title: 'My-apps' },
+  {
+    path: 'my-apps',
+    component: MiAppsComponent,
+    title: 'My-apps',
+    canActivate: [isnotloggedGuard],
+  },
   {
     path: '',
     component: ClassicComponent,
+    canActivateChild: [isnotloggedGuard],
     children: [
       { path: 'garantes', component: GuarantorComponent, title: 'Garante' },
       {

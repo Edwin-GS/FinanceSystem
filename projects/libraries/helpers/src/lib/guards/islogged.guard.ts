@@ -1,30 +1,23 @@
-import { CanActivateFn, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { inject } from '@angular/core';
 
-export const isloggedGuard: CanActivateFn = (route, state) => {
-  let dashboard = 'finance-system/client/:user/:user_id';
-  const router = new Router();
+export const isloggedGuard = () => {
+  let dashboard = '/finance-system/users/:user/:user_id';
+  const router = inject(Router);
+  const userString = inject(UserService).getLocalStorage();
 
-  const userString = new UserService(router).getLocalStorage();
-
-  if (
-    !localStorage.getItem('LEGOFT_SID_SITE') &&
-    !localStorage.getItem('USER') &&
-    !localStorage.getItem('USER')
-  ) {
-    return true;
-  }
-
-  if (userString) {
-    const username = userString.userdata.name;
-    const userId = userString.userdata.id;
+  if (localStorage.getItem('LEGOFT_SID_SITE') && localStorage.getItem('USER')) {
+    const username = userString?.userdata.name;
+    const userId = userString?.userdata.id;
 
     const updatedDashboard = dashboard
-      .replace(':user', userId)
-      .replace(':user_id', username);
+      .replace(':user', username)
+      .replace(':user_id', userId);
     // Redirigimos al usuario a su panel de control después de iniciar sesión
-    router.navigate([updatedDashboard, { username, userId }]);
+    router.navigate([updatedDashboard]);
+    return false;
   }
 
-  return false;
+  return true;
 };
