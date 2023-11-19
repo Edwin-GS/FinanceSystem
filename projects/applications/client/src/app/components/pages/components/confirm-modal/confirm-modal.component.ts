@@ -6,10 +6,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./confirm-modal.component.css'],
 })
 export class ConfirmModalComponent {
-  @Input() id!: string;
+  @Input() id!: string | undefined;
   @Output() deleteBrand = new EventEmitter<string>();
 
-  onDeleteBrand(id: string) {
+  onDeleteBrand(id: string | undefined) {
     this.deleteBrand.emit(id);
   }
 }
