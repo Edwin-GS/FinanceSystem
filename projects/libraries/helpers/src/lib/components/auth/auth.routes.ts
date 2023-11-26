@@ -4,8 +4,16 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { isloggedGuard } from '../../guards/islogged.guard';
+import { HomeComponent } from './home/home.component';
 
 const AuthRoutes: Routes = [
+
+  {
+    path: '',
+    title: 'Finance System',
+    component: HomeComponent,
+    
+  },
   {
     path: 'login',
     title: 'LogIn',

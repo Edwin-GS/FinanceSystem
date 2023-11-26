@@ -10,7 +10,7 @@
 
     <div
       class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
-      style="background: #314685"
+      style="background: #00a2e8"
     >
       <div class="feature-image mb-3">
         <img
@@ -170,7 +170,7 @@
         </form>
         <div *ngIf="signupForm.value.notifier" class="notifier-dialog">
           <div class="notifier-dialog-header">
-            <h2>Check your email</h2>
+            <h2>Verifique su Correo</h2>
           </div>
           <div class="notifier-dialog-body">
             <p>
@@ -183,7 +183,9 @@
             <button type="button" (click)="closeDialog()">Close</button>
           </div>
         </div>
-        <p>¿Ya tienes una cuenta? <a routerLink="/login">Login here</a></p>
+
+        <p>
+          ¿Ya tienes una cuenta? <a routerLink="/login">Ingrese aquí</a></p>
       </div>
     </div>
   </div>

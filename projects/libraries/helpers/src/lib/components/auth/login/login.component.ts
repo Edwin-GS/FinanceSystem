@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
         },
         (err) => {
           console.error('Error al iniciar sesión: ' + err); // Mensaje de error en la solicitud de inicio de sesión
-          //this.showAlert = true;
+          
         }
       );
     } else {
