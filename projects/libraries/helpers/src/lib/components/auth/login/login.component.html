@@ -63,15 +63,14 @@
             >
               Correo o nombre de usuario obligatorio.
             </div>
-            <div 
+            <div
               *ngIf="loginForm.get('user.userOrEmail')?.touched  && loginForm.get('user.userOrEmail')?.errors?.['minlength']"
               class="text-danger"
-              >
+            >
               El usuario debe tener al menos
               {{loginForm.get('user.userOrEmail')?.errors?.['minlength'].requiredLength}}
               caracteres.
-          </div>
-  
+            </div>
           </div>
 
           <div class="input-group mb-2" formGroupName="user">
@@ -121,11 +120,10 @@
                 class="btn btn-lg btn-primary w-100 fs-6 mi-boton"
                 [disabled]="loginForm.invalid"
               >
-                Ingresar
+                {{ loading ? "Ingresando..." : "Ingresar" }}
               </button>
             </div>
 
-            
             <!-- <div class="input-group mb-3">
               <button class="btn btn-lg btn-light w-100 fs-6"><img src="assets/google.png" style="width:20px"
                   class="me-2"><small>Ingresar con google</small></button>
@@ -133,7 +131,8 @@
 
             <div class="row">
               <small
-                >¿No tienes cuenta? <a href="/signup">Registrarse</a></small
+                >¿No tienes cuenta?
+                <a routerLink="/signup">Registrarse</a></small
               >
             </div>
           </div>

@@ -65,11 +65,12 @@
               Nombre usuario obligatorio.
             </div>
             <div
-            *ngIf="signupForm.get('user.user')?.touched  && signupForm.get('user.user')?.errors?.['pattern']"
-            class="text-danger"
-          >
-            El nombre de usuario debe incluir al menos 1 letra mayuscula y tener más de 5 caracteres
-          </div>
+              *ngIf="signupForm.get('user.user')?.touched  && signupForm.get('user.user')?.errors?.['pattern']"
+              class="text-danger"
+            >
+              El nombre de usuario debe incluir al menos 1 letra mayuscula y
+              tener más de 5 caracteres
+            </div>
           </div>
 
           <div class="input-group mb-2" formGroupName="user">
@@ -118,7 +119,7 @@
             >
               Contraseña obligatoria.
             </div>
-          
+
             <div
               *ngIf="signupForm.get('user.password')?.touched  && signupForm.get('user.password')?.errors?.['pattern']"
               class="text-danger"
@@ -148,12 +149,12 @@
             <button
               type="submit"
               class="btn btn-lg btn-primary w-100 fs-6 mi-boton"
+              [disabled]="signupForm.invalid"
             >
               Registrarse
             </button>
           </div>
 
-        
           <!-- <div class="input-group mb-3">
               <button class="btn btn-lg btn-light w-100 fs-6"><img src="assets/google.png" style="width:20px"
                   class="me-2"><small>Ingresar con google</small></button>
@@ -173,13 +174,16 @@
           </div>
           <div class="notifier-dialog-body">
             <p>
-              Porfavor, revise su correo electronico ({{ signupForm.value.user.email }}) para verificar su cuenta.
+              Porfavor, revise su correo electronico ({{
+                signupForm.value.user.email
+              }}) para verificar su cuenta.
             </p>
           </div>
           <div class="notifier-dialog-footer">
             <button type="button" (click)="closeDialog()">Close</button>
           </div>
         </div>
+
         <p>
           ¿Ya tienes una cuenta? <a routerLink="/login">Ingrese aquí</a></p>
       </div>

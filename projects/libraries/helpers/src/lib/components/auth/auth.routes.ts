@@ -16,19 +16,19 @@ const AuthRoutes: Routes = [
   },
   {
     path: 'login',
-    title: 'Finance System',
+    title: 'LogIn',
     component: LoginComponent,
-    //canActivate: [isloggedGuard],
+    canActivate: [isloggedGuard],
   },
   {
     path: 'signup',
-    title: 'Finance System',
+    title: 'Register',
     component: SignupComponent,
-    //canActivate: [isloggedGuard],
+    canActivate: [isloggedGuard],
   },
   {
     path: 'not-found',
-    title: 'Finance System',
+    title: 'Not found',
     component: NotFoundComponent,
   },
   {
