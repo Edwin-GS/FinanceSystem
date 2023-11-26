@@ -4,10 +4,8 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { isloggedGuard } from '../../guards/islogged.guard';
-import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const AuthRoutes: Routes = [
-  { path: '', component: LandingPageComponent },
   {
     path: 'login',
     title: 'LogIn',
