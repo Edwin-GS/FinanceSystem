@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <app-page-title [title]="'Solicitudes de Prestamos'"></app-page-title>
+  <button class="btn btn-primary btn-bg-purple" *ngIf="!isLoading">
+    <i class="bi bi-plus-circle"></i>
+    {{ " " }}Nueva
+  </button>
+</div>
+<div *ngIf="isLoading"><p>Cargando...</p></div>
+
+<div
+  class="d-flex col-lg-4 mb-3 gap-3"
+  *ngIf="!isLoading && loanRequests.length > 0"
+>
+  <div
+    class="card text-center"
+    role="button"
+    *ngFor="let loanRequest of loanRequests"
+  >
+    <a
+      class="text-decoration-none text-reset"
+      (click)="goToDetails(clientId, loanRequest._id)"
+    >
+      <div class="card-body">
+        <h5 class="card-title">{{ loanRequest.numerosolicitud }}</h5>
+        <p class="card-text">{{ loanRequest.fechaverificacion }}</p>
+        <p class="card-text">{{ loanRequest.aprobado }}</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div *ngIf="!isLoading && loanRequests.length === 0">
+  <p>No hay solicitudes de prestamos para mostrar</p>
+</div>
+
+<a class="" (click)="goToDetails(clientId, '1')"
+  >Link para probar vista detalles quitar luego
+</a>
