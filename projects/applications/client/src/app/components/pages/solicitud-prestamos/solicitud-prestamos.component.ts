@@ -6,12 +6,17 @@ import { PrestamoSolicitudes } from 'projects/libraries/helpers/src/lib/models/p
 import { Client } from 'projects/libraries/helpers/src/lib/models/client.doc';
 import { HandlerService } from 'projects/libraries/helpers/src/lib/services/handler.service';
 import { UserService } from 'projects/libraries/helpers/src/lib/services/user.service';
+import * as pdfMake from 'pdfmake/build/pdfmake'
+import * as pdfFonts from 'pdfmake/build/vfs_fonts'
+
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs
 
 @Component({
   selector: 'app-solicitud-prestamos',
   templateUrl: './solicitud-prestamos.component.html',
   styleUrls: ['./solicitud-prestamos.component.css'],
 })
+
 export class SolicitudPrestamosComponent implements OnInit {
   userData = this.usr.getLocalStorage();
   registerForm!: FormGroup;
@@ -23,6 +28,7 @@ export class SolicitudPrestamosComponent implements OnInit {
   clientUrl: string = `${this.userData?.userdata.name}/clientes/${this.userData?.app}`;
   schemaName = 'Solicitud de Prestamos';
   isLoading!: boolean;
+  selection!: Client;
 
   diaSemanaSolicitud: string = '';
   diaSemanaInicioPago: string = '';
@@ -48,8 +54,9 @@ export class SolicitudPrestamosComponent implements OnInit {
     this.subscribeToFormChanges();
     this.router.params.subscribe((params) => {
       this.id = params['id'];
-      console.log(this.id);
+      this.getClient( this.id )
     });
+    // console.log('form', this.registerForm.value);
   }
 
   onSubmit(changes: PrestamoSolicitudes): void {
@@ -286,5 +293,99 @@ export class SolicitudPrestamosComponent implements OnInit {
     const date = new Date(fecha);
     date.setMonth(date.getMonth() + meses);
     return date.toISOString().split('T')[0];
+  }
+
+  getClient( id: string ): void{
+    this.isLoading = true;
+    this.hs.get( `entities/${this.baseUrl}/${ id }` )
+    .subscribe((res) => {
+      if(!res.data){
+        this.isLoading = false;
+        console.log('Hubo un error o no se encontraron datos');
+      }
+      else{
+        this.isLoading = false;
+        this.selection = res.data
+      }
+      console.log('selection', this.selection);
+   })
+  }
+
+  generatePDF(){
+    let docDefinition: any = {
+      
+      content: [
+        {
+          text: 'Finance System',
+          style: 'Header'
+        },
+        {
+          text: `Solicitante: ${this.selection.nombre, this.selection.apellidos}`,
+          style: 'rows'
+        },
+        {
+          text: `Tipo documento: ${this.selection.tipodocumento}`,
+          style: 'rows'
+        },
+        {
+          text: `Numero documento: ${this.selection.numerodocumento}`,
+          style: 'rows'
+        },
+        {
+          text: `Fecha solicitud: ${this.registerForm.value.fechaSolicitud}`,
+          style: 'rows'
+        },
+        {
+          text: `Fecha solicitud: ${this.registerForm.value.fechaSolicitud}`,
+          style: 'rows'
+        },
+        {
+          text: `Fecha inicio pago: ${this.registerForm.value.fechaInicioPago}`,
+          style: 'rows'
+        },
+        {
+          text: `Fecha termino de pago: ${this.registerForm.value.fechaTerminacionPagos}`,
+          style: 'rows'
+        },
+        {
+          text: `Cantidad prestamo: ${this.registerForm.value.cantidadPrestamo}`,
+          style: 'rows'
+        },
+        {
+          text: `Cantidad de cuotas: ${this.registerForm.value.cantidadCuotas}`,
+          style: 'rows'
+        },
+        {
+          text: `Cantidad a ganar: ${this.registerForm.value.cantidadGanada}`,
+          style: 'rows'
+        },
+        {
+          text: `Interés: ${this.registerForm.value.porcentajeInteres}`,
+          style: 'rows'
+        },
+        {
+          text: `Propiedad cod: ${this.registerForm.value.propiedad_id}`,
+          style: 'rows'
+        },
+        {
+          text: `Vehiculo cod: ${this.registerForm.value.vehiculo_id}`,
+          style: 'rows'
+        },
+      ],
+
+      columnGap: 10,
+      styles: {
+        Header: {
+          fontSize: 22,
+          bold: true,
+        },
+        rows: {
+          fontSize: 12,
+          margin: [ 5, 5 ]
+        }
+      }
+    }
+
+    pdfMake.createPdf(docDefinition).open()
   }
 }

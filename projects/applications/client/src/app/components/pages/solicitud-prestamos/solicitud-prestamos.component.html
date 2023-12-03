@@ -1,5 +1,7 @@
-<h1>Formulario de Solicitud de Préstamo</h1>
-
+<div class="d-flex justify-content-around pb-2">
+  <h1>Formulario de Solicitud de Préstamo</h1>
+  <button class="btn btn-primary" (click)="generatePDF()"> Emitir Factura </button>
+</div>
 <form [formGroup]="registerForm">
   <div class="card">
     <div class="card-header">Información del solicitante</div>
