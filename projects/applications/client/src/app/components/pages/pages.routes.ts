@@ -11,7 +11,6 @@ import { GuarantorComponent } from './guarantor/guarantor.component';
 import { CreateGuarantorComponent } from './guarantor/create-guarantor/create-guarantor.component';
 import { UpdateGuarantorViewComponent } from './guarantor/update-guarantor-view/update-guarantor-view.component';
 import { CreateClientComponent } from './client/create-client/create-client.component';
-import { SolicitudPrestamosComponent } from './solicitud-prestamos/solicitud-prestamos.component';
 import { ClientDetailsComponent } from './client-details/client-details.component';
 import { CreatePropertiesComponent } from './propiedades/create-properties/create-properties.component';
 import { UpdatePropsComponent } from './propiedades/update-propiedades/update-propiedades.component';
@@ -20,6 +19,8 @@ import { VehicleTypeComponent } from './vehicle-type/vehicle-type.component';
 import { WarrantyVehicleComponent } from './warranty-vehicle/warranty-vehicle.component';
 import { WarrantyVehicleDetailsComponent } from './warranty-vehicle/warranty-vehicle-details/warranty-vehicle-details.component';
 import { isnotloggedGuard } from '../guards/isnotlogged.guard';
+import { LoanRequestComponent } from './loan-request/loan-request.component';
+import { LoanRequestDetailsComponent } from './loan-request/loan-request-details/loan-request-details.component';
 
 /**
  * Base route information
@@ -118,9 +119,14 @@ const UserRoutes: Routes = [
         title: 'Propiedades',
       },
       {
-        path: 'solicitud-prestamos/:id',
-        component: SolicitudPrestamosComponent,
-        title: 'Solicitud de Prestamos',
+        path: 'loan-request/:clientId',
+        component: LoanRequestComponent,
+        title: 'Loan request',
+      },
+      {
+        path: 'loan-request-details/:clientId/:loanRequestId',
+        component: LoanRequestDetailsComponent,
+        title: 'Loan request',
       },
     ],
   },

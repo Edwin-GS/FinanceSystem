@@ -21,16 +21,16 @@ export class ClientDetailsComponent implements OnInit {
   client!: Client;
   baseUrl: string = `${this.userData?.userdata.name}/clientes/${this.userData?.app}`;
 
-  profession!: (Profession | undefined)
-  profUrl: string = `${this.userData?.userdata.name}/profesiones/${this.userData?.app}`
-  
-  solicitudes!: (PrestamoSolicitudes | undefined)[]
-  propiedades!: (Properties | undefined)[]
-  vehiculos: any
+  profession!: Profession | undefined;
+  profUrl: string = `${this.userData?.userdata.name}/profesiones/${this.userData?.app}`;
+
+  solicitudes!: (PrestamoSolicitudes | undefined)[];
+  propiedades!: (Properties | undefined)[];
+  vehiculos: any;
 
   idProp!: string | undefined;
 
-  // Vehiculos 
+  // Vehiculos
   // garantiavehiculos!: (Properties | undefined)[]
 
   constructor(
@@ -80,21 +80,27 @@ export class ClientDetailsComponent implements OnInit {
     });
   }
 
-  onDeleteProperty( id: string ){
-    this.hs.delete(`entities/delete/${this.userData?.userdata.name}
-    /propiedades/${this.userData?.app}`, id)
+  onDeleteProperty(id: string) {
+    this.hs
+      .delete(
+        `entities/delete/${this.userData?.userdata.name}
+    /propiedades/${this.userData?.app}`,
+        id
+      )
       .subscribe((resp) => {
-        if(resp["success"] == false ){
+        if (resp['success'] == false) {
           console.log('Error', resp);
           this.toast.error(
             'Error al intentar eliminar, por favor, intente de nuevo'
           );
-        } else{
+        } else {
           this.toast.success('Propiedad eliminada');
-          const currentProp = this.propiedades.filter( props => props?._id !== id)
-          this.propiedades = [...currentProp]
+          const currentProp = this.propiedades.filter(
+            (props) => props?._id !== id
+          );
+          this.propiedades = [...currentProp];
         }
-      })
+      });
   }
 
   goToWarrantyVehicle(id: string | undefined) {
@@ -108,16 +114,16 @@ export class ClientDetailsComponent implements OnInit {
   goToSolicitud(id: string | undefined) {
     this.nv.navigate([
       `/finance-system/users/${this.userData?.userdata.name}/
-        ${this.userData?.userdata.id}/solicitud-prestamos`,
+        ${this.userData?.userdata.id}/loan-request`,
       id,
     ]);
   }
 
-  goToPropUpdate(id: string | undefined){
+  goToPropUpdate(id: string | undefined) {
     this.nv.navigate([
       `/finance-system/users/${this.userData?.userdata.name}/
-      ${this.userData?.userdata.id}/properties/${this.id}/update/${ id }`
-    ])
+      ${this.userData?.userdata.id}/properties/${this.id}/update/${id}`,
+    ]);
   }
 
   goToProperties(id: string | undefined) {

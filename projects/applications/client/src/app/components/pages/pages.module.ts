@@ -23,7 +23,6 @@ import { GuarantorComponent } from './guarantor/guarantor.component';
 import { GuarantorCardComponent } from './components/guarantor-card/guarantor-table.component';
 import { UpdateGuarantorViewComponent } from './guarantor/update-guarantor-view/update-guarantor-view.component';
 import { CreateGuarantorComponent } from './guarantor/create-guarantor/create-guarantor.component';
-import { SolicitudPrestamosComponent } from './solicitud-prestamos/solicitud-prestamos.component';
 import { ClientDetailsComponent } from './client-details/client-details.component';
 import { CreatePropertiesComponent } from './propiedades/create-properties/create-properties.component';
 import { ModelComponent } from './model/model.component';
@@ -33,6 +32,9 @@ import { CreateUpdateVehicleTypeComponent } from './vehicle-type/create-update-v
 import { WarrantyVehicleComponent } from './warranty-vehicle/warranty-vehicle.component';
 import { CreateUpdateWarrantyVehicleComponent } from './warranty-vehicle/create-update-warranty-vehicle/create-update-warranty-vehicle.component';
 import { WarrantyVehicleDetailsComponent } from './warranty-vehicle/warranty-vehicle-details/warranty-vehicle-details.component';
+import { LoanRequestComponent } from './loan-request/loan-request.component';
+import { LoanRequestDetailsComponent } from './loan-request/loan-request-details/loan-request-details.component';
+import { SolicitudPrestamosComponent } from './solicitud-prestamos/solicitud-prestamos.component';
 
 @NgModule({
   declarations: [
@@ -44,36 +46,30 @@ import { WarrantyVehicleDetailsComponent } from './warranty-vehicle/warranty-veh
     ConfirmModalComponent,
     BrandComponent,
     CreateUpdateBrandComponent,
-    
     PropiedadesComponent,
     CreatePropertiesComponent,
     UpdatePropsComponent,
     PropsTableComponent,
-
     LimitStringPipe,
-    
     ClientComponent,
     ClientCardComponent,
     CreateClientComponent,
     UpdateClientViewComponent,
     ClientDetailsComponent,
-
     GuarantorComponent,
     GuarantorCardComponent,
     CreateGuarantorComponent,
     UpdateGuarantorViewComponent,
-    
-    SolicitudPrestamosComponent,
-
     ModelComponent,
-    
     CreateUpdateModelComponent,
     VehicleTypeComponent,
     CreateUpdateVehicleTypeComponent,
     WarrantyVehicleComponent,
     CreateUpdateWarrantyVehicleComponent,
-    WarrantyVehicleDetailsComponent
-
+    WarrantyVehicleDetailsComponent,
+    LoanRequestComponent,
+    LoanRequestDetailsComponent,
+    SolicitudPrestamosComponent
   ],
 
   imports: [CommonModule, ReactiveFormsModule, USER_ROUTES],

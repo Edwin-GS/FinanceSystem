@@ -14,7 +14,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts'
 @Component({
   selector: 'app-solicitud-prestamos',
   templateUrl: './solicitud-prestamos.component.html',
-  styleUrls: ['./solicitud-prestamos.component.css'],
+  // styleUrls: ['./solicitud-prestamos.component.css'],
 })
 
 export class SolicitudPrestamosComponent implements OnInit {
