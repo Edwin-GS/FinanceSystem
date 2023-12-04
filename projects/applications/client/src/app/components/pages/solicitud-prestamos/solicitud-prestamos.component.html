@@ -6,7 +6,7 @@
   <div class="card">
     <div class="card-header">Información del solicitante</div>
     <div class="card-body">
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="numeroSolicitud">Número de la solicitud</label>
         <input
           type="number"
@@ -25,9 +25,14 @@
           id="nombresApellidos"
           required
         />
+      </div> -->
+
+      <div class="form-group">
+        <label for="nombresApellidos">Nombre: {{ this.selection.nombre}} {{ this.selection.apellidos }}</label>
       </div>
     </div>
   </div>
+
 
   <div class="card">
     <div class="card-header">Información del préstamo</div>
@@ -58,6 +63,24 @@
           required
         />
         <h4>Dia de la semana de inicio de pago: {{ diaSemanaInicioPago }}</h4>
+      </div>
+
+      <div class="form-group">
+        <label for="ingreso">Ingreso</label>
+        <input
+          type="number"
+          class="form-control"
+          id="ingreso"
+          formControlName="ingreso"
+          (change)="calcularPrestamo()"
+          required
+        />
+        <h4>
+          Ingreso del cliente:
+          {{
+            getFormattedCurrency(registerForm.get("ingreso")?.value)
+          }}
+        </h4>
       </div>
 
       <div class="form-group">
@@ -120,11 +143,11 @@
       </div>
 
       <div class="form-group">
-        <label for="formaPago">Forma de pago</label>
+        <label for="formaDePago">Forma de pago</label>
         <select
           class="form-control"
-          id="formaPago"
-          formControlName="formaPago"
+          id="formaDePago"
+          formControlName="formaDePago"
           (change)="calcularPrestamo()"
           required
         >
@@ -134,16 +157,16 @@
           <option value="Quincenal">Quincenal</option>
           <option value="Mensual">Mensual</option>
         </select>
-        <h4 *ngIf="registerForm.get('formaPago')?.value === 'Diario'">
+        <h4 *ngIf="registerForm.get('formaDePago')?.value === 'Diario'">
           El pago se debe hacer diario
         </h4>
-        <h4 *ngIf="registerForm.get('formaPago')?.value === 'Semanal'">
+        <h4 *ngIf="registerForm.get('formaDePago')?.value === 'Semanal'">
           El pago se debe hacer semanalmente
         </h4>
-        <h4 *ngIf="registerForm.get('formaPago')?.value === 'Quincenal'">
+        <h4 *ngIf="registerForm.get('formaDePago')?.value === 'Quincenal'">
           El pago se debe hacer quincenal
         </h4>
-        <h4 *ngIf="registerForm.get('formaPago')?.value === 'Mensual'">
+        <h4 *ngIf="registerForm.get('formaDePago')?.value === 'Mensual'">
           El pago se debe hacer mensualmente
         </h4>
       </div>
@@ -178,13 +201,62 @@
           (change)="calcularPrestamo()"
           required
         />
-      </div>
-      <h4>
+        <h4>
         Porcentaje de interés aplicado en mora:
         {{ registerForm.get("porcentajeRecargoMora")?.value }}%
       </h4>
+      </div>   
+    
+    <div class="form-group">
+      <label for="garante_id">Garante</label>
+      <select 
+        class="form-control"
+        name="garante_id" 
+        id="garante_id" 
+        formControlName="garante_id"
+        class="form-select form-select-sm"
+        placeholder="BMW"
+      >
+        <option selected value="{{'000000000000000000000000'}}">N/A</option>
+        <option *ngFor="let guarantor of guarantors" 
+        [value]="guarantor?._id"> {{guarantor?.nombre}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="propiedad_id">Propiedad</label>
+      <select 
+        class="form-control"
+        name="propiedad_id" 
+        id="propiedad_id" 
+        formControlName="propiedad_id"
+        class="form-select form-select-sm"
+        placeholder="BMW"
+        >
+        <option selected value="{{'000000000000000000000000'}}">N/A</option>
+        <option *ngFor="let propiedad of propiedades" 
+        [value]="propiedad?._id"> {{propiedad?.numerotitulo}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="vehiculo_id">Vehiculo</label>
+      <select 
+        class="form-control"
+        name="vehiculo_id" 
+        id="vehiculo_id" 
+        formControlName="vehiculo_id"
+        class="form-select form-select-sm"
+        placeholder="BMW"
+        >
+        <option selected value="{{'000000000000000000000000'}}">N/A</option>
+        <option *ngFor="let vehiculo of vehiculos" 
+        [value]="vehiculo?._id"> {{vehiculo?.placa}}</option>
+      </select>
     </div>
   </div>
-
-  <button type="submit" class="btn btn-primary">Enviar</button>
+</div>
+  <button type="submit" class="btn btn-primary"
+    (click)="createPrestamo(registerForm.value)"
+  >Enviar</button>
 </form>

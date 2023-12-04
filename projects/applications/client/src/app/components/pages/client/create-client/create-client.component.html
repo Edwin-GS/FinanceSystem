@@ -255,7 +255,7 @@
               <option *ngFor="let profession of professions" 
                 [value]="profession?._id"> {{profession?.nombre}}</option>
             </select>
-            <label for="profesiones_id">Tipo documento</label>
+            <label for="profesiones_id">Profesion</label>
           </div>
           <div
             *ngIf="registerForm.get('profesiones_id')?.touched  && registerForm.get('profesiones_id')?.errors?.['required']"

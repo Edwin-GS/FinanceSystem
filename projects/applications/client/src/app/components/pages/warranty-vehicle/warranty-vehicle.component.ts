@@ -42,6 +42,7 @@ export class WarrantyVehicleComponent implements OnInit {
         console.log('Hubo un error o no se encontraron datos');
       } else {
         this.warrantyVehicles = [...res.data.garantiavehiculos];
+        console.log('res.data', res.data);
         this.isLoading = false;
       }
     });
