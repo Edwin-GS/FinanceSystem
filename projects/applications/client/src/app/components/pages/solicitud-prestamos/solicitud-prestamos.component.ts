@@ -103,6 +103,7 @@ export class SolicitudPrestamosComponent implements OnInit {
           );
         } else {
           this.toast.success('Solicitud de prestamo actualizado');
+          this.generatePDF();
           this.goBack();
         }
       });
