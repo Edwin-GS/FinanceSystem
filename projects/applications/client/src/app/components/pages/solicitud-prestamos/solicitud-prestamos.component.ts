@@ -143,18 +143,20 @@ export class SolicitudPrestamosComponent implements OnInit {
       cantidadCuotas : Prestamo.cantidadCuotas,
       porcentajeInteres : Prestamo.porcentajeInteres,
       aprobado: false,
-      client_id: this.clientID,
-      garante_id: Prestamo.garante_id,
-      vehiculo_id: Prestamo.vehiculo_id,
-      propiedad_id: Prestamo.propiedad_id,
+      clientes_id: this.clientID,
+      garantes_id: Prestamo.garante_id,
+      garantiavehiculos_id: Prestamo.vehiculo_id,
+      propiedades_id: Prestamo.propiedad_id,
     }
     console.log('prestamo', data);
     
-    if(Prestamo.garante_id == '000000000000000000000000'){
-      this.toast.error(
-        'El garante no puede ser nulo'
-        );
-    } else if(
+    // if(Prestamo.garante_id == '000000000000000000000000'){
+    //   console.log('data', data);
+    //   this.toast.error(
+    //     'El garante no puede ser nulo'
+    //     );
+    // } else 
+    if(
       Prestamo.vehiculo_id == '000000000000000000000000' &&
       Prestamo.propiedad_id == '000000000000000000000000' 
     ){
@@ -169,7 +171,7 @@ export class SolicitudPrestamosComponent implements OnInit {
         if (resp['success'] == false) {
           console.log('resp', resp);
           this.toast.error(
-            'Error al intentar create, por favor intente de nuevo'
+            'Error al intentar crear, por favor intente de nuevo'
             );
           } else {
             this.toast.success('Solicitud de prestamo registrado');

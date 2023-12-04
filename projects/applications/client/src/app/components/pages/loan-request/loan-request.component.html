@@ -14,10 +14,12 @@
   *ngIf="!isLoading && loanRequests.length > 0"
 >
   <div
-    class="card text-center"
+    class="card text-center p-2"
     role="button"
     *ngFor="let loanRequest of loanRequests"
   >
+  <h4>{{loanRequest.fechaSolicitud}}</h4>
+  <h4> {{loanRequest._id}}</h4>
     <a
       class="text-decoration-none text-reset"
       (click)="goToDetails(clientId, loanRequest._id)"

@@ -14,7 +14,7 @@ export class LoanRequestComponent {
   baseUrl: string = `${this.userData?.userdata.name}/clientes/${this.userData?.app}`;
   isLoading!: boolean;
   clientId!: string;
-  loanRequests: PrestamoSolicitudes[] = [];
+  loanRequests: PrestamoSolicitudes[] | any = [];
 
   constructor(
     private readonly router: ActivatedRoute,
@@ -26,6 +26,7 @@ export class LoanRequestComponent {
   ngOnInit(): void {
     this.router.params.subscribe((params) => {
       this.clientId = params['clientId'];
+      console.log('clientid', this.clientId);
     });
     this.getClient(this.clientId);
   }
