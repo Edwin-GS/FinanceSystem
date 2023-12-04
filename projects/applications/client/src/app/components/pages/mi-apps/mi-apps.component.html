@@ -5,7 +5,8 @@
 </header>
 
 <section class="gallery">
-  <div class="container">
+  <p class="container" *ngIf="isLoading">Obteniendo aplicaciones...</p>
+  <div class="container" *ngIf="!isLoading && apps.length > 0">
     <div class="row">
       <div *ngFor="let app of apps" class="d-flex col-lg-4 mb-3">
         <div class="card my-3">
@@ -34,4 +35,7 @@
       </div>
     </div>
   </div>
+  <p *ngIf="!isLoading && apps.length === 0">
+    No se han encontrado aplicaciones
+  </p>
 </section>
