@@ -21,6 +21,7 @@ import { WarrantyVehicleDetailsComponent } from './warranty-vehicle/warranty-veh
 import { isnotloggedGuard } from '../guards/isnotlogged.guard';
 import { LoanRequestComponent } from './loan-request/loan-request.component';
 import { LoanRequestDetailsComponent } from './loan-request/loan-request-details/loan-request-details.component';
+import { SolicitudPrestamosComponent } from './solicitud-prestamos/solicitud-prestamos.component';
 
 /**
  * Base route information
@@ -122,6 +123,11 @@ const UserRoutes: Routes = [
         path: 'loan-request/:clientId',
         component: LoanRequestComponent,
         title: 'Loan request',
+      }, 
+      {
+        path: 'loan-request/:clientId/create',
+        component: SolicitudPrestamosComponent,
+        title: 'Create loan request',
       },
       {
         path: 'loan-request-details/:clientId/:loanRequestId',

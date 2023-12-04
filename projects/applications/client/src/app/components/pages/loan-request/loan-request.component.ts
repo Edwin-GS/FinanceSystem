@@ -43,6 +43,13 @@ export class LoanRequestComponent {
     });
   }
 
+  goToNew(){
+    this.nv.navigate([
+      `/finance-system/users/${this.userData?.userdata.name}/
+        ${this.userData?.userdata.id}/loan-request/${this.clientId}/create`
+    ]);
+  }
+
   goToDetails(clientId: string | undefined, loanRequestId: string | undefined) {
     this.nv.navigate([
       `/finance-system/users/${this.userData?.userdata.name}/
