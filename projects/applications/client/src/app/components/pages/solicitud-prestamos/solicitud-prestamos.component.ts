@@ -8,6 +8,7 @@ import { HandlerService } from 'projects/libraries/helpers/src/lib/services/hand
 import { UserService } from 'projects/libraries/helpers/src/lib/services/user.service';
 import * as pdfMake from 'pdfmake/build/pdfmake'
 import * as pdfFonts from 'pdfmake/build/vfs_fonts'
+import { Observable } from 'rxjs';
 
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs
 
@@ -40,6 +41,8 @@ export class SolicitudPrestamosComponent implements OnInit {
   cantidadGanada: number = 0;
   cuotasPagar: number = 1;
 
+  isUpdateMode: boolean = false;
+
   constructor(
     private readonly hs: HandlerService,
     private usr: UserService,
@@ -52,16 +55,50 @@ export class SolicitudPrestamosComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.initForm();
     this.subscribeToFormChanges();
+  
     this.router.params.subscribe((params) => {
       this.id = params['id'];
-      this.getClient( this.id )
+      if (this.id) {
+        this.isUpdateMode = true;
+        this.loadExistingData(this.id);
+      }
     });
-    // console.log('form', this.registerForm.value);
   }
+  
+  loadExistingData(id: string): void {
+    this.isLoading = true;
+    this.hs.get(`entities/${this.baseUrl}/${id}`).subscribe((res) => {
+      this.isLoading = false;
+      if (!res.data) {
+        console.log('Hubo un error o no se encontraron datos');
+      } else {
+        this.selection = res.data;
+        this.registerForm.patchValue({
+          // Complete the form with existing data
+        });
+      }
+    });
+  }
+  
 
   onSubmit(changes: PrestamoSolicitudes): void {
-    this.onCreatePrestamo(changes);
+    if (this.isUpdateMode) {
+      this.updatePrestamo(this.id, changes).subscribe((resp) => {
+        if (resp['success'] == false) {
+          console.log('resp', resp);
+          this.toast.error(
+            'Error al intentar actualizar por favor intente de nuevo'
+          );
+        } else {
+          this.toast.success('Solicitud de prestamo actualizado');
+          this.goBack();
+        }
+      });
+    } else {
+      this.onCreatePrestamo(changes);
+    }
   }
+  
 
   onCreatePrestamo(Prestamo: PrestamoSolicitudes): void {
     const data: PrestamoSolicitudes = {
@@ -98,9 +135,14 @@ export class SolicitudPrestamosComponent implements OnInit {
       });
   }
 
+  updatePrestamo(id: string, data: PrestamoSolicitudes): Observable<any> {
+    const url = `entities/update/${this.baseUrl}/${id}`;
+    return this.hs.put(data, url);
+  }
+  
+
   initForm(): FormGroup {
-    return this.fb.group({
-      // Constantes del formulario de solicitud de prestamos
+    const formControls = {
       numerosolicitud: ['', [Validators.required, Validators.minLength(1)]],
       empresadondetrabaja: ['', [Validators.required, Validators.minLength(1)]],
       puestocliente: ['', [Validators.required, Validators.minLength(1)]],
@@ -108,12 +150,10 @@ export class SolicitudPrestamosComponent implements OnInit {
       ingresosemanal: ['', [Validators.required, Validators.minLength(1)]],
       ingresomensual: ['', [Validators.required, Validators.minLength(1)]],
       fechaverificacion: ['', [Validators.required]],
-      // Informacion del solicitante
       client_id: ['', [Validators.required]],
       garante_id: ['', [Validators.required]],
       vehiculo_id: ['', [Validators.required]],
       propiedad_id: ['', [Validators.required]],
-      // Constantes de los campos de calculos
       fechaSolicitud: [new Date().toISOString().split('T')[0]],
       fechaInicioPago: [this.getTomorrowDate(), Validators.required],
       fechaTerminacionPagos: [''],
@@ -125,8 +165,19 @@ export class SolicitudPrestamosComponent implements OnInit {
       importeCuota: 0,
       porcentajeInteres: 0,
       porcentajeRecargoMora: 0,
-    });
+    };
+  
+    const form = this.fb.group(formControls);
+  
+    if (this.isUpdateMode) {
+      form.patchValue({
+        //Update the values needed
+      });
+    }
+  
+    return form;
   }
+  
 
   subscribeToFormChanges(): void {
     this.registerForm.get('cantidadPrestamo')?.valueChanges.subscribe(() => {
