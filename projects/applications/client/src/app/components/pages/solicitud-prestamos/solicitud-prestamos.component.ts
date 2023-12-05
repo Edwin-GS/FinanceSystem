@@ -34,7 +34,7 @@ export class SolicitudPrestamosComponent implements OnInit {
   
   selection!: any;
 
-  clientID!: string
+  clientID!: ''
 
   propiedades: (Properties | undefined)[] = []
   vehiculos:   (WarrantyVehicle | undefined)[] = []
@@ -65,14 +65,13 @@ export class SolicitudPrestamosComponent implements OnInit {
     this.subscribeToFormChanges();
   
     this.router.params.subscribe((params) => {
-      this.id = params['id'];
+      this.id = params['idSolicitud'];
       this.clientID = params['clientId']
       this.getClient( this.clientID )
       this.getGuarantors()
       if (this.id) {
         this.isUpdateMode = true;
         this.loadExistingData(this.id);
-        console.log('id', this.id);
       }
     });
   }
@@ -85,8 +84,22 @@ export class SolicitudPrestamosComponent implements OnInit {
         console.log('Hubo un error o no se encontraron datos');
       } else {
         this.selection = res.data;
+        console.log('res.data', res.data);
         this.registerForm.patchValue({
           // Complete the form with existing data
+            ingreso : this.selection.ingreso,
+            formaDePago : this.selection.formaDePago,
+            fechaSolicitud : this.selection.fechaSolicitud,
+            fechaInicioPago : this.selection.fechaInicioPago,
+            fechaTerminacionPagos : this.selection.fechaTerminacionPagos,
+            cantidadPrestamo : this.selection.cantidadPrestamo,
+            cantidadCuotas : this.selection.cantidadCuotas,
+            porcentajeInteres : this.selection.porcentajeInteres,
+            aprobado: false,
+            clientes_id: this.clientID,
+            garantes_id: this.selection.garantes_id,
+            garantiavehiculos_id: '000000000000000000000000',
+            propiedades_id: this.selection.propiedad_id,
         });
       }
     });
@@ -94,16 +107,35 @@ export class SolicitudPrestamosComponent implements OnInit {
   
 
   onSubmit(changes: PrestamoSolicitudes): void {
+    console.log('changes', changes);
     if (this.isUpdateMode) {
-      this.updatePrestamo(this.id, changes).subscribe((resp) => {
+
+      const data: PrestamoSolicitudes = {
+        // Complete the form with existing data
+          _id: changes._id,
+          ingreso : changes.ingreso,
+          formaDePago : changes.formaDePago,
+          fechaSolicitud : changes.fechaSolicitud,
+          fechaInicioPago : changes.fechaInicioPago,
+          fechaTerminacionPagos : changes.fechaTerminacionPagos,
+          cantidadPrestamo : changes.cantidadPrestamo,
+          cantidadCuotas : changes.cantidadCuotas,
+          porcentajeInteres : changes.porcentajeInteres,
+          aprobado: false,
+          clientes_id: this.clientID,
+          garantes_id: changes.garantes_id,
+          garantiavehiculos_id: changes.garantiavehiculos_id,
+          propiedades_id: changes.propiedades_id,
+      }
+      this.updatePrestamo(this.id, data).subscribe((resp) => {
         if (resp['success'] == false) {
           console.log('resp', resp);
           this.toast.error(
             'Error al intentar actualizar por favor intente de nuevo'
           );
         } else {
-          this.toast.success('Solicitud de prestamo actualizado');
           this.generatePDF();
+          this.toast.success('Solicitud de prestamo actualizado');
           this.goBack();
         }
       });
@@ -114,22 +146,6 @@ export class SolicitudPrestamosComponent implements OnInit {
   
 
   onCreatePrestamo(Prestamo: PrestamoSolicitudes | any): void {
-    // const data: PrestamoSolicitudes = {
-    //   // Constantes del formulario de solicitud de prestamos
-    //   _id: Prestamo?._id,
-    //   numerosolicitud: Prestamo?.numerosolicitud,
-    //   ingresodiario: Prestamo.ingresodiario,
-    //   ingresosemanal: Prestamo.ingresosemanal,
-    //   ingresomensual: Prestamo.ingresomensual,
-    //   fechaverificacion: Prestamo.fechaverificacion,
-    //   aprobado: Prestamo.aprobado,
-    //   // Informacion del solicitante
-    //   client_id: Prestamo.client_id,
-    //   garante_id: Prestamo.garante_id,
-    //   vehiculo_id: Prestamo.vehiculo_id,
-    //   propiedad_id: Prestamo.propiedad_id,
-    // };
-
     this.createPrestamo(Prestamo);
   }
 
@@ -145,19 +161,17 @@ export class SolicitudPrestamosComponent implements OnInit {
       porcentajeInteres : Prestamo.porcentajeInteres,
       aprobado: false,
       clientes_id: this.clientID,
-      garantes_id: Prestamo.garante_id,
-      garantiavehiculos_id: Prestamo.vehiculo_id,
+      garantes_id: Prestamo.garantes_id,
+      garantiavehiculos_id: Prestamo.garantiavehiculos_id,
       propiedades_id: Prestamo.propiedad_id,
     }
-    console.log('prestamo', data);
     
-    // if(Prestamo.garante_id == '000000000000000000000000'){
-    //   console.log('data', data);
-    //   this.toast.error(
-    //     'El garante no puede ser nulo'
-    //     );
-    // } else 
-    if(
+    if(Prestamo.garante_id == '000000000000000000000000'){
+      console.log('data', data);
+      this.toast.error(
+        'El garante no puede ser nulo'
+        );
+    } else if(
       Prestamo.vehiculo_id == '000000000000000000000000' &&
       Prestamo.propiedad_id == '000000000000000000000000' 
     ){
@@ -199,9 +213,9 @@ export class SolicitudPrestamosComponent implements OnInit {
       ingresomensual: ['', [Validators.required, Validators.minLength(1)]],
       fechaverificacion: ['', [Validators.required]],
       client_id: ['', [Validators.required]],
-      garante_id: ['', [Validators.required]],
-      vehiculo_id: ['', [Validators.required]],
-      propiedad_id: ['', [Validators.required]],
+      garantes_id: ['', [Validators.required]],
+      garantiavehiculos_id : ['', [Validators.required]],
+      propiedades_id: ['', [Validators.required]],
       fechaSolicitud: [new Date().toISOString().split('T')[0]],
       fechaInicioPago: [this.getTomorrowDate(), Validators.required],
       fechaTerminacionPagos: [''],
@@ -262,7 +276,7 @@ export class SolicitudPrestamosComponent implements OnInit {
 
   goBack() {
     this.nv.navigate([
-      `/finance-system/users/${this.userData?.userdata.name}/${this.userData?.userdata.id}/clients`,
+      `/finance-system/users/${this.userData?.userdata.name}/${this.userData?.userdata.id}/loan-request/${this.clientID}`,
     ]);
   }
 
@@ -425,14 +439,13 @@ export class SolicitudPrestamosComponent implements OnInit {
 
   generatePDF(){
     let docDefinition: any = {
-      
       content: [
         {
           text: 'Finance System',
           style: 'Header'
         },
         {
-          text: `Solicitante: ${this.selection.nombre, this.selection.apellidos}`,
+          text: `Solicitante: ${this.selection.nombre} ${this.selection.apellidos}`,
           style: 'rows'
         },
         {
@@ -490,6 +503,7 @@ export class SolicitudPrestamosComponent implements OnInit {
         Header: {
           fontSize: 22,
           bold: true,
+          alignment: 'center'
         },
         rows: {
           fontSize: 12,
@@ -498,6 +512,6 @@ export class SolicitudPrestamosComponent implements OnInit {
       }
     }
 
-    pdfMake.createPdf(docDefinition).open()
+    pdfMake.createPdf(docDefinition).download()
   }
 }

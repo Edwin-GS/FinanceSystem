@@ -208,12 +208,12 @@
       </div>   
     
     <div class="form-group">
-      <label for="garante_id">Garante</label>
+      <label for="garantes_id">Garante</label>
       <select 
         class="form-control"
-        name="garante_id" 
-        id="garante_id" 
-        formControlName="garante_id"
+        name="garantes_id" 
+        id="garantes_id" 
+        formControlName="garantes_id"
         class="form-select form-select-sm"
         placeholder="BMW"
       >
@@ -224,12 +224,12 @@
     </div>
 
     <div class="form-group">
-      <label for="propiedad_id">Propiedad</label>
+      <label for="propiedades_id">Propiedad</label>
       <select 
         class="form-control"
-        name="propiedad_id" 
-        id="propiedad_id" 
-        formControlName="propiedad_id"
+        name="propiedades_id" 
+        id="propiedades_id" 
+        formControlName="propiedades_id"
         class="form-select form-select-sm"
         placeholder="BMW"
         >
@@ -240,12 +240,12 @@
     </div>
 
     <div class="form-group">
-      <label for="vehiculo_id">Vehiculo</label>
+      <label for="garantiavehiculos_id ">Vehiculo</label>
       <select 
         class="form-control"
-        name="vehiculo_id" 
-        id="vehiculo_id" 
-        formControlName="vehiculo_id"
+        name="garantiavehiculos_id " 
+        id="garantiavehiculos_id " 
+        formControlName="garantiavehiculos_id "
         class="form-select form-select-sm"
         placeholder="BMW"
         >
@@ -257,6 +257,6 @@
   </div>
 </div>
   <button type="submit" class="btn btn-primary"
-    (click)="createPrestamo(registerForm.value)"
+    (click)="onSubmit(registerForm.value)"
   >Enviar</button>
 </form>

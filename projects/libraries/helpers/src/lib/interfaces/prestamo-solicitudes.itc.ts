@@ -1,13 +1,16 @@
 export interface IPrestamoSolicitudes {
   _id: string | undefined;
-  numerosolicitud: string | undefined;
-  ingresodiario: number;
-  ingresosemanal: number;
-  ingresomensual: number;
-  fechaverificacion: Date;
+  ingreso: number,
+  formaDePago: string,
+  fechaSolicitud: string,
+  fechaInicioPago: string,
+  fechaTerminacionPagos: string,
+  cantidadPrestamo: number,
+  cantidadCuotas: number,
+  porcentajeInteres: number, 
   aprobado: boolean,
-  client_id: string;
-  garante_id: string;
-  vehiculo_id: string;
-  propiedad_id: string;
+  clientes_id: string;
+  garantes_id: string;
+  garantiavehiculos_id: string;
+  propiedades_id: string;
 }

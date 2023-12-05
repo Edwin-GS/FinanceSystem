@@ -51,12 +51,19 @@ export class LoanRequestComponent {
     ]);
   }
 
-  goToDetails(clientId: string | undefined, loanRequestId: string | undefined) {
+  // goToDetails(clientId: string | undefined, loanRequestId: string | undefined) {
+  //   this.nv.navigate([
+  //     `/finance-system/users/${this.userData?.userdata.name}/
+  //       ${this.userData?.userdata.id}/loan-request-details`,
+  //     clientId,
+  //     loanRequestId,
+  //   ]);
+  // }
+
+  goToUpdate(clientId: string | undefined, loanRequestId: string | undefined) {
     this.nv.navigate([
       `/finance-system/users/${this.userData?.userdata.name}/
-        ${this.userData?.userdata.id}/loan-request-details`,
-      clientId,
-      loanRequestId,
+        ${this.userData?.userdata.id}/loan-request/${clientId}/${loanRequestId}`,
     ]);
   }
 }

@@ -20,9 +20,13 @@
   >
   <h4>{{loanRequest.fechaSolicitud}}</h4>
   <h4> {{loanRequest._id}}</h4>
-    <a
+    <!-- <a
       class="text-decoration-none text-reset"
       (click)="goToDetails(clientId, loanRequest._id)"
+    > -->
+    <a
+      class="text-decoration-none text-reset"
+      (click)="goToUpdate(clientId, loanRequest._id)"
     >
       <div class="card-body">
         <h5 class="card-title">{{ loanRequest.numerosolicitud }}</h5>
