@@ -69,7 +69,7 @@ export class SolicitudPrestamosComponent implements OnInit {
       this.clientID = params['clientId']
       this.getClient( this.clientID )
       this.getGuarantors()
-      if (this.id) {
+      if (this.id !== '0') {
         this.isUpdateMode = true;
         this.loadExistingData(this.id);
       }
@@ -107,7 +107,6 @@ export class SolicitudPrestamosComponent implements OnInit {
   
 
   onSubmit(changes: PrestamoSolicitudes): void {
-    console.log('changes', changes);
     if (this.isUpdateMode) {
 
       const data: PrestamoSolicitudes = {
@@ -127,6 +126,7 @@ export class SolicitudPrestamosComponent implements OnInit {
           garantiavehiculos_id: changes.garantiavehiculos_id,
           propiedades_id: changes.propiedades_id,
       }
+      console.log('changes', changes);
       this.updatePrestamo(this.id, data).subscribe((resp) => {
         if (resp['success'] == false) {
           console.log('resp', resp);
@@ -163,7 +163,7 @@ export class SolicitudPrestamosComponent implements OnInit {
       clientes_id: this.clientID,
       garantes_id: Prestamo.garantes_id,
       garantiavehiculos_id: Prestamo.garantiavehiculos_id,
-      propiedades_id: Prestamo.propiedad_id,
+      propiedades_id: Prestamo.propiedades_id,
     }
     
     if(Prestamo.garante_id == '000000000000000000000000'){
@@ -189,6 +189,7 @@ export class SolicitudPrestamosComponent implements OnInit {
             'Error al intentar crear, por favor intente de nuevo'
             );
           } else {
+            this.generatePDF();
             this.toast.success('Solicitud de prestamo registrado');
             this.goBack();
           }
@@ -473,6 +474,10 @@ export class SolicitudPrestamosComponent implements OnInit {
           style: 'rows'
         },
         {
+          text: `Ingreso del cliente: ${this.registerForm.value.ingreso}`,
+          style: 'rows'
+        },
+        {
           text: `Cantidad prestamo: ${this.registerForm.value.cantidadPrestamo}`,
           style: 'rows'
         },
@@ -481,19 +486,15 @@ export class SolicitudPrestamosComponent implements OnInit {
           style: 'rows'
         },
         {
-          text: `Cantidad a ganar: ${this.registerForm.value.cantidadGanada}`,
+          text: `Porcentaje de interes: ${this.registerForm.value.porcentajeInteres}`,
           style: 'rows'
         },
         {
-          text: `Interés: ${this.registerForm.value.porcentajeInteres}`,
+          text: `Propiedad cod: ${this.registerForm.value.propiedades_id}`,
           style: 'rows'
         },
         {
-          text: `Propiedad cod: ${this.registerForm.value.propiedad_id}`,
-          style: 'rows'
-        },
-        {
-          text: `Vehiculo cod: ${this.registerForm.value.vehiculo_id}`,
+          text: `Vehiculo cod: ${this.registerForm.value.garantiavehiculos_id}`,
           style: 'rows'
         },
       ],

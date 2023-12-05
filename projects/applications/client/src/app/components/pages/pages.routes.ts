@@ -127,7 +127,7 @@ const UserRoutes: Routes = [
       {
         path: 'loan-request/:clientId/:idSolicitud',
         component: SolicitudPrestamosComponent,
-        title: 'Create loan request',
+        title: 'Update loan request',
       },
       {
         path: 'loan-request-details/:clientId/:loanRequestId',

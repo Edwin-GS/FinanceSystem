@@ -233,7 +233,7 @@
         class="form-select form-select-sm"
         placeholder="BMW"
         >
-        <option selected value="{{'000000000000000000000000'}}">N/A</option>
+        <option selected [value]="'000000000000000000000000'">N/A</option>
         <option *ngFor="let propiedad of propiedades" 
         [value]="propiedad?._id"> {{propiedad?.numerotitulo}}</option>
       </select>
@@ -243,13 +243,13 @@
       <label for="garantiavehiculos_id ">Vehiculo</label>
       <select 
         class="form-control"
-        name="garantiavehiculos_id " 
-        id="garantiavehiculos_id " 
-        formControlName="garantiavehiculos_id "
+        name="garantiavehiculos_id" 
+        id="garantiavehiculos_id" 
+        formControlName="garantiavehiculos_id"
         class="form-select form-select-sm"
         placeholder="BMW"
         >
-        <option selected value="{{'000000000000000000000000'}}">N/A</option>
+        <option selected value="000000000000000000000000">N/A</option>
         <option *ngFor="let vehiculo of vehiculos" 
         [value]="vehiculo?._id"> {{vehiculo?.placa}}</option>
       </select>
