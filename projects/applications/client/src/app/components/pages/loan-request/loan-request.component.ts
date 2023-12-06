@@ -14,7 +14,7 @@ export class LoanRequestComponent {
   baseUrl: string = `${this.userData?.userdata.name}/clientes/${this.userData?.app}`;
   isLoading!: boolean;
   clientId!: string;
-  loanRequests: PrestamoSolicitudes[] = [];
+  loanRequests: PrestamoSolicitudes[] | any = [];
 
   constructor(
     private readonly router: ActivatedRoute,
@@ -26,6 +26,7 @@ export class LoanRequestComponent {
   ngOnInit(): void {
     this.router.params.subscribe((params) => {
       this.clientId = params['clientId'];
+      console.log('clientid', this.clientId);
     });
     this.getClient(this.clientId);
   }
@@ -43,12 +44,26 @@ export class LoanRequestComponent {
     });
   }
 
-  goToDetails(clientId: string | undefined, loanRequestId: string | undefined) {
+  goToNew(){
     this.nv.navigate([
       `/finance-system/users/${this.userData?.userdata.name}/
-        ${this.userData?.userdata.id}/loan-request-details`,
-      clientId,
-      loanRequestId,
+        ${this.userData?.userdata.id}/loan-request/${this.clientId}/0`
+    ]);
+  }
+
+  // goToDetails(clientId: string | undefined, loanRequestId: string | undefined) {
+  //   this.nv.navigate([
+  //     `/finance-system/users/${this.userData?.userdata.name}/
+  //       ${this.userData?.userdata.id}/loan-request-details`,
+  //     clientId,
+  //     loanRequestId,
+  //   ]);
+  // }
+
+  goToUpdate(clientId: string | undefined, loanRequestId: string | undefined) {
+    this.nv.navigate([
+      `/finance-system/users/${this.userData?.userdata.name}/
+        ${this.userData?.userdata.id}/loan-request/${clientId}/${loanRequestId}`,
     ]);
   }
 }

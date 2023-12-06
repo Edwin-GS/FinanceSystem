@@ -34,6 +34,7 @@ import { CreateUpdateWarrantyVehicleComponent } from './warranty-vehicle/create-
 import { WarrantyVehicleDetailsComponent } from './warranty-vehicle/warranty-vehicle-details/warranty-vehicle-details.component';
 import { LoanRequestComponent } from './loan-request/loan-request.component';
 import { LoanRequestDetailsComponent } from './loan-request/loan-request-details/loan-request-details.component';
+import { SolicitudPrestamosComponent } from './solicitud-prestamos/solicitud-prestamos.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { LoanRequestDetailsComponent } from './loan-request/loan-request-details
     WarrantyVehicleDetailsComponent,
     LoanRequestComponent,
     LoanRequestDetailsComponent,
+    SolicitudPrestamosComponent
   ],
 
   imports: [CommonModule, ReactiveFormsModule, USER_ROUTES],

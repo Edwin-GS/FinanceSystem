@@ -167,7 +167,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let solicitud of solicitudes">
-          <th scope="row">{{ solicitud?.numerosolicitud }}</th>
+          <th scope="row">{{ solicitud?._id }}</th>
           <td>{{ solicitud?.aprobado }}</td>
         </tr>
       </tbody>

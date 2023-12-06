@@ -3,15 +3,19 @@ import { IPrestamoSolicitudes } from '../interfaces/prestamo-solicitudes.itc';
 export class PrestamoSolicitudes implements IPrestamoSolicitudes {
   constructor(
     public _id: '' | undefined,
-    public numerosolicitud: '',
+    public ingreso: 0,
+    public formaDePago: '' ,
+    public fechaSolicitud: '' ,
+    public fechaInicioPago: '' ,
+    public fechaTerminacionPagos: '' ,
+    public cantidadPrestamo: 0,
+    public cantidadCuotas: 0,
+    public porcentajeInteres: 0,
+
     public aprobado: false,
-    public ingresodiario: 0,
-    public ingresosemanal: 0,
-    public ingresomensual: 0,
-    public fechaverificacion: Date,
-    public client_id: '',
-    public garante_id: '',
-    public vehiculo_id: '',
-    public propiedad_id: ''
+    public clientes_id: '',
+    public garantes_id: '',
+    public garantiavehiculos_id: '',
+    public propiedades_id: ''
   ) {}
 }
