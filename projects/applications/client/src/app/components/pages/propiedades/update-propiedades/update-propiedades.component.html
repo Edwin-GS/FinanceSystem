@@ -1,0 +1,109 @@
+<div class="d-flex justify-content-between align-items-center mb-3" >
+  <app-page-title [title]="pageTitle"></app-page-title>
+  
+  <a
+    class="btn btn-primary small-button"
+    routerLinkActive="active" 
+    (click)="goBack()"
+  >          
+    Atras
+  </a>
+</div>
+
+<form class="row g-3" (ngSubmit)="onSubmit( this.registerForm.value )" [formGroup]="registerForm">
+          <div class="col-md-12">
+            <!-- Direccion -->
+            <div class="col-md-12 pb-1">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="direccion"
+                  name="direccion"
+                  formControlName="direccion"
+                  placeholder="BMW"
+                  value="{{this.selection?.direccion}}"
+                />
+                <label for="direccion">Direccion</label>
+              </div>
+              <div
+                *ngIf="registerForm.get('direccion')?.touched  && registerForm.get('direccion')?.errors?.['required']"
+                class="text-danger mt-2"
+              >
+                La direccion es requida
+              </div>
+              <div
+                *ngIf="registerForm.get('direccion')?.touched  && registerForm.get('direccion')?.errors?.['minlength']"
+                class="text-danger mt-2"
+              >
+                Este campo debe contener mas de {{registerForm.get('direccion')?.errors?.['minlength'].requiredLength}} caracteres
+              </div>
+            </div>
+
+            <!-- Descripcion -->
+            <div class="col-md-12 pb-1">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="descripcion"
+                  name="descripcion"
+                  formControlName="descripcion"
+                  placeholder="BMW"
+                  value="{{this.selection?.descripcion}}"
+                />
+                <label for="descripcion">Descripcion</label>
+              </div>
+              <div
+                *ngIf="registerForm.get('descripcion')?.touched  && registerForm.get('descripcion')?.errors?.['required']"
+                class="text-danger mt-2"
+              >
+                La descripcion es requida
+              </div>
+              <div
+                *ngIf="registerForm.get('descripcion')?.touched  && registerForm.get('descripcion')?.errors?.['minlength']"
+                class="text-danger mt-2"
+              >
+                Este campo debe contener mas de {{registerForm.get('descripcion')?.errors?.['minlength'].requiredLength}} caracteres
+              </div>
+            </div>
+
+            <!-- Numero titulo -->
+            <div class="col-md-12 pb-1">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="numerotitulo"
+                  name="numerotitulo"
+                  formControlName="numerotitulo"
+                  placeholder="BMW"
+                  value="{{this.selection?.numerotitulo}}"
+                />
+                <label for="numerotitulo">Numero titulo</label>
+              </div>
+              <div
+                *ngIf="registerForm.get('numerotitulo')?.touched  && registerForm.get('numerotitulo')?.errors?.['required']"
+                class="text-danger mt-2"
+              >
+                El numero del titulo es requido
+              </div>
+              <div
+                *ngIf="registerForm.get('numerotitulo')?.touched  && registerForm.get('numerotitulo')?.errors?.['minlength']"
+                class="text-danger mt-2"
+              >
+                Este campo debe contener mas de {{registerForm.get('numerotitulo')?.errors?.['minlength'].requiredLength}} caracteres
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="d-flex justify-content-end gap-2 p-2">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="onSubmit( this.registerForm.value )"
+            [disabled]="registerForm.invalid"
+            >
+            Guardar
+          </button>
+        </div>

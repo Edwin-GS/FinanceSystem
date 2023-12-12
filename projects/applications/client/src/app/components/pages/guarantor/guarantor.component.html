@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <app-page-title [title]="pageTitle"></app-page-title>
+  <button
+    class="btn btn-primary btn-bg-purple"
+    (click)="goToCreate()"
+    >
+    <i class="bi bi-plus-circle"></i>
+      {{ " " }}Nueva
+    </button>
+  </div>
+  
+  <app-guarantor-card 
+  [selection]="selection"
+  [guarantors]="guarantors"
+  (deleteGuarantorEvent)="deleteGuarantor( $event )"
+  ></app-guarantor-card>

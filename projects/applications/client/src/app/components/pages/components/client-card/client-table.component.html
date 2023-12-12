@@ -1,0 +1,87 @@
+<div class="w-100 justify-content-center p-4">
+  <div class="d-flex flex-wrap justify-content-center gap-2">
+    <div
+      *ngFor="let client of clients"
+      class="card cardStyle"
+    >
+      <div class="card-body pb-3 col"  
+      (click)="selectProp(client)"
+      >
+        <h3 class="card-title">{{ client?.nombre | limitString: 10 }} 
+          {{ client?.apellidos}}
+        </h3>
+        <p class="card-text">{{client?.apodo | limitString: 15 }}</p>
+        <div class="d-flex gap-1 justify-content-center">
+        <!-- <div class="btn-group"> -->
+          <div class="btn-group-vertical btn-group-lg" role="group" aria-label="Vertical button group">
+          <a
+          *ngIf="client?._id === selection?._id"
+          class="btn btn-primary col small-button"
+          routerLinkActive="active" 
+          (click)="goToUpdate( client?._id )"
+          >          
+          Actualizar
+          </a>
+          <button
+            *ngIf="client?._id === selection?._id"
+            class="btn btn-danger col small-button"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Eliminar
+          </button>
+          <a
+          *ngIf="client?._id === selection?._id"
+          class="btn btn-primary col small-button"
+          routerLinkActive="active" 
+          (click)="goToDetails( client?._id )"
+          >          
+          Detalles
+          </a>
+        </div>
+      </div>
+      </div>
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                <!-- ¿Desea eliminar? -->
+                ¿Desea eliminar {{ selection?.nombre }}?
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-footer d-flex justify-content-end">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cerrar
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-bs-dismiss="modal"
+                (click)="onDeleteProp(selection?._id)"
+                >
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

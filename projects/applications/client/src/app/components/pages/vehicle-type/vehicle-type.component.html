@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <app-page-title [title]="'Tipos de Vehiculos'"></app-page-title>
+  <button
+    class="btn btn-primary btn-bg-purple"
+    data-bs-toggle="modal"
+    data-bs-target="#vehicle-type-modal"
+    *ngIf="!isLoading"
+    (click)="id = ''"
+  >
+    <i class="bi bi-plus-circle"></i>
+    {{ " " }}Nuevo
+  </button>
+</div>
+<div *ngIf="isLoading"><p>Cargando...</p></div>
+
+<div class="card" *ngIf="vehicleTypes.length > 0 && !isLoading">
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="align-middle" *ngFor="let vehicleType of vehicleTypes">
+          <th scope="row">#</th>
+          <td>{{ vehicleType.descripcion }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-warning btn-sm"
+              data-bs-toggle="modal"
+              data-bs-target="#vehicle-type-modal"
+              (click)="id = vehicleType._id"
+            >
+              <i class="bi bi-pencil-square text-white"></i>
+            </button>
+            {{ "" }}
+            <button
+              type="button"
+              class="btn btn-danger btn-sm"
+              data-bs-toggle="modal"
+              data-bs-target="#confirm-modal"
+              (click)="id = vehicleType._id"
+            >
+              <i class="bi bi-x-octagon"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="vehicleTypes.length === 0 && !isLoading">
+  <p>No hay tipos de vehiculos para mostrar</p>
+</div>
+
+<app-create-update-vehicle-type
+  [id]="id"
+  (addNewVehicleType)="onCreate($event)"
+  (updateVehicleType)="onUpdate($event)"
+  (resetId)="onResetId()"
+/>
+<app-confirm-modal [id]="id" (deleteBrand)="onDelete($event)" />

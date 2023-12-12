@@ -1,0 +1,101 @@
+.fixed-bottom {
+  bottom: 0;
+  z-index: 1000;
+}
+
+  .container-shadow{
+  box-shadow: 0px -5px 20px rgba(1, 42, 112, 0.07) inset
+}
+
+.alert {
+  width: 250px;
+}
+
+.w-25{
+    width: 25%
+}
+  .h-10{
+    height: 10%
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+	animation-duration: 5s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+  10% {
+    opacity: 10;
+  }
+	45% {
+		opacity: 1;
+	}
+    100%{
+        opacity: 0;
+    }
+}
+
+
+.content{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-around;
+}
+
+.rep{
+  display: grid;
+  grid-template-columns: repeat(
+    minmax( 150px, 1fr)
+  );
+}
+
+.notifContainer{
+  width: 0;
+}
+
+@media (max-width: 340px) { 
+  .cardStyle {
+    width: 18rem;
+    height: 8rem;
+  }
+
+  .notificationMSG {
+    width: 10rem;
+  }
+
+  .small-button{
+    padding: .3rem;
+  }
+
+  .notifContainer {
+    left: 1.5rem;
+  }
+
+  .container-shadow{
+    margin: 0px 1rem;
+  }
+}
+
+@media (min-width: 330px) { 
+  .cardStyle {
+    width: 13rem;
+    height: 7rem;
+  }
+  
+  .notifContainer {
+    left: 3rem;
+  }
+  
+}
+
+@media (min-width: 398px) { 
+  .h1-m{
+    margin: 0;
+  }
+}

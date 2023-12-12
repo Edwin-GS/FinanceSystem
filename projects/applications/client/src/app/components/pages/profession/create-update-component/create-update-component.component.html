@@ -1,0 +1,52 @@
+<div class="modal fade" (close)="this.confirmReset()" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{ action }}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="pt-3" (ngSubmit)="onSubmit( this.registerForm.get('nombre')?.value )" [formGroup]="registerForm">
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nombre"
+                      name="nombre"
+                      formControlName="nombre"
+                      placeholder="BMW"
+                      value="{{this.selection?.nombre}}"
+                    />
+                    <label for="nombre">Profesion</label>
+                  </div>
+                  <div
+                    *ngIf="registerForm.get('nombre')?.touched  && registerForm.get('nombre')?.errors?.['required']"
+                    class="text-danger mt-2"
+                  >
+                    La profesion es requida
+                  </div>
+                  <div
+                    *ngIf="registerForm.get('nombre')?.touched  && registerForm.get('nombre')?.errors?.['minlength']"
+                    class="text-danger mt-2"
+                  >
+                    El nombre debe contener mas de {{registerForm.get('nombre')?.errors?.['minlength'].requiredLength}} caracteres
+                  </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="registerForm.reset()" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary"
+            (click)="onSubmit( 
+              this.registerForm.get('nombre')?.value 
+            )" 
+            [disabled]="registerForm.invalid" 
+            data-bs-dismiss="modal"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
