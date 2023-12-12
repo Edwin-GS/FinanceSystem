@@ -1,0 +1,84 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    background: #ffff;
+}
+h1{
+   
+    font-size: 25px;
+}
+/*------------ Main container------------*/
+
+
+
+/*------------ Login Container------------*/
+
+.box-area {
+    width: 930px ;
+}
+
+
+/*-------------Lef box------------------------------ */
+
+
+/*-------------Right BoX-----------------------------*/
+.right-box{
+    
+    padding: 40px 30px 40px 40px;}
+
+
+    /*------------ Custom Placeholder ------------*/
+::placeholder{
+    font-size: 16px;
+}
+.rounded-4{
+    border-radius: 20px;
+}
+.rounded-5{
+    border-radius: 30px;
+}
+.form-check{
+    margin: 10px;
+    
+}
+.forgot{
+    margin: 10px;
+}
+.eyeicon {
+    position: absolute;
+    right: -15px;
+    top: 10px;
+    cursor: pointer;
+}
+
+/*------------ For small screens------------*/
+@media only screen and (max-width: 768px){
+     .box-area{
+        margin: 0 10px;
+     }
+     .left-box{
+        height: 100px;
+        overflow: hidden;
+     }
+     .right-box{
+        padding: 20px;
+     }
+}
+
+
+/*------------ Control de estado------------*/
+/* .ng-valid:not(form).ng-touched {
+    border-left: 5px solid #43A948; 
+}
+.ng-invalid:not(form).ng-touched  {
+    border-left: 5px solid #a94442; } */
+
+small{
+    font-size: 14px;
+}
+  
+.form-check{
+    font-size: 14px;
+}
+.mi-boton{
+ background-color: #00a2e8;
+}

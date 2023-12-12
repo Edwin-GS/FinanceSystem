@@ -1,0 +1,41 @@
+<header
+  class="d-flex align-items-center justify-content-center bg-body-secondary p-4 mb-3"
+>
+  <h1 style="letter-spacing: 2px" class="fs-1 m-0 fw-bolder">MIS APPS</h1>
+</header>
+
+<section class="gallery">
+  <p class="container" *ngIf="isLoading">Obteniendo aplicaciones...</p>
+  <div class="container" *ngIf="!isLoading && apps.length > 0">
+    <div class="row">
+      <div *ngFor="let app of apps" class="d-flex col-lg-4 mb-3">
+        <div class="card my-3">
+          <div class="img-container p-3">
+            <img
+              src="../../../../assets/MP-logo.png"
+              alt=""
+              class="image card-img-top rounded mx-auto d-block"
+            />
+            <div class="overlay">
+              <button
+                (click)="onSelectedApp(app._id)"
+                class="btn btn-outline-secondary btn-sm"
+              >
+                ir
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title fs-3 fw-bolder mb-3">{{ app.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted text-md fw-normal fs-6">
+              {{ app.description }}
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p *ngIf="!isLoading && apps.length === 0">
+    No se han encontrado aplicaciones
+  </p>
+</section>

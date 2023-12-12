@@ -1,0 +1,35 @@
+<p *ngIf="isLoading">Obteniendo la solicitud...</p>
+
+<div class="card" *ngIf="!isLoading">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="card-title mb-0">Detalles de la solicitud</h5>
+      <button
+        class="btn btn-primary btn-bg-purple"
+        (click)="goToDetails(clientId)"
+      >
+        <i class="bi bi-arrow-left"></i>
+      </button>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        Solicitud No.: {{ loanRequest.fechaSolicitud }}
+      </li>
+      <!-- <li class="list-group-item">
+        Verificado: {{ loanRequest.fechaverificacion }}
+      </li> -->
+      <li class="list-group-item">Estado: {{ loanRequest.aprobado }}</li>
+    </ul>
+    <div class="d-flex justify-content-end">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-warning text-white fw-semibold">
+          Editar
+        </button>
+        <button type="button" class="btn btn-danger fw-semibold">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

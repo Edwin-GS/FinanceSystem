@@ -1,0 +1,51 @@
+<p *ngIf="isLoading">Obteniendo el vehiculo...</p>
+
+<div class="card" *ngIf="!isLoading">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="card-title mb-0">Detalles del vehiculo en garantia</h5>
+      <button
+        class="btn btn-primary btn-bg-purple"
+        (click)="goToDetails(clientId)"
+      >
+        <i class="bi bi-arrow-left"></i>
+      </button>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Placa: {{ warrantyVehicle.placa }}</li>
+      <li class="list-group-item">Chasis: {{ warrantyVehicle.chasis }}</li>
+      <li class="list-group-item">Color: {{ warrantyVehicle.color }}</li>
+      <li class="list-group-item">
+        Descripcion: {{ warrantyVehicle.descripcion }}
+      </li>
+    </ul>
+    <div class="d-flex justify-content-end">
+      <div class="btn-group" role="group">
+        <button
+          type="button"
+          class="btn btn-warning text-white fw-semibold"
+          data-bs-toggle="modal"
+          data-bs-target="#warranty-vehicle-modal"
+        >
+          Editar
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger fw-semibold"
+          data-bs-toggle="modal"
+          data-bs-target="#confirm-modal"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-create-update-warranty-vehicle
+  (updateVehicle)="onUpdate($event)"
+  [vehicleId]="vehicleId"
+  [clientId]="clientId"
+/>
+<app-confirm-modal [id]="vehicleId" (deleteBrand)="onDelete($event)" />
